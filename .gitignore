@@ -1,0 +1,31 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.Python
+.venv/
+venv/
+env/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Pesos do modelo (grandes; usar Git LFS se quiser versionar)
+adapters/*.safetensors
+adapters/*.bin
+
+# Saídas regeneráveis a partir dos scripts
+analises/graficos/
+
+# Claude Code — configurações locais por máquina
+.claude/settings.local.json
+
+# Editores
+.idea/
+.vscode/
+*.swp
+*~
