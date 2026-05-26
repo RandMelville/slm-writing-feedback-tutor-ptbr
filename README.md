@@ -106,7 +106,7 @@ report/     Self-contained interactive HTML report
                Socratic Tutoring in Brazilian Portuguese: A Study on Structural
                and Pedagogical Adherence under Public-School Infrastructure
                Constraints},
-  author    = {Reb{\'o}u{\c{c}}as, Randerson Oliveira Melville and Foohs, Marcelo Magalh{\~a}es},
+  author    = {Reb{\'o}u{\c{c}}as, Randerson Oliveira Melville and Foohs, Marcelo Magalh{\~a}es and Vicari, Rosa Maria},
   year      = {2026},
   doi       = {10.5281/zenodo.20388847},
   url       = {https://doi.org/10.5281/zenodo.20388847},
@@ -129,10 +129,9 @@ dataset, generated artifacts, and interactive report are released under
 
 **Randerson Oliveira Melville Rebouças** — `randerson.melville@gmail.com`
 **Marcelo Magalhães Foohs** — `mmfoohs@gmail.com`
+**Rosa Maria Vicari**
 
 Graduate Program in Informatics in Education (PPGIE), Federal University of
 Rio Grande do Sul (UFRGS), Porto Alegre, Brazil.
-
-Co-advisor: Profa. Dra. Rosa Maria Vicari (PPGIE/UFRGS).
 
 This work was conducted with institutional support from PPGIE/UFRGS.

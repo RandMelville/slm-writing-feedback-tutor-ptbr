@@ -12,6 +12,10 @@ Graduate Program in Informatics in Education (PPGIE)
 Federal University of Rio Grande do Sul (UFRGS) — Porto Alegre, RS, Brazil
 `mmfoohs@gmail.com`
 
+**Rosa Maria Vicari**
+Graduate Program in Informatics in Education (PPGIE)
+Federal University of Rio Grande do Sul (UFRGS) — Porto Alegre, RS, Brazil
+
 DOI: [10.5281/zenodo.20388847](https://doi.org/10.5281/zenodo.20388847)
 Code and data: [github.com/RandMelville/slm-socratic-tutor-ptbr](https://github.com/RandMelville/slm-socratic-tutor-ptbr)
 
@@ -49,7 +53,7 @@ The intersection of these three fronts — educational application, local viabil
 
 ## 3. Methodology
 
-This section describes, with a level of detail directed at integral reproducibility, the experimental protocol adopted. The subsequent subsections document, in order: (i) the local *offline* inference stack that emulates the school computational ceiling; (ii) the corpus of canonical scenarios and the metalinguistic rubric that anchors it; (iii) the sample matrix and HTTP hyperparameters transmitted on each call; (iv) the algorithmic architecture of the deterministic structural-conformance validator; (v) the inferential statistical framework applied to categorical comparisons; (vi) the criteria for metalinguistic pedagogical adherence; (vii) canonical examples of inputs and outputs observed in the corpus; (viii) the secondary falsification protocol; and (ix) reproducibility guarantees.
+This section describes, with a level of detail directed at integral reproducibility, the experimental protocol adopted. The subsequent subsections document, in order: (i) the local *offline* inference stack that emulates the school computational ceiling; (ii) the corpus of canonical scenarios and the metalinguistic rubric that anchors it; (iii) the sample matrix and HTTP hyperparameters transmitted on each call; (iv) the deterministic structural-conformance validator; (v) the inferential statistical framework applied to categorical comparisons; (vi) the criteria for metalinguistic pedagogical adherence; (vii) canonical examples of inputs and outputs observed in the corpus; (viii) the secondary falsification protocol; and (ix) reproducibility guarantees. The full statistical rationale, the complete inference payload sent to the server, and the source code of the structural validator are reported, respectively, in Appendices A and B, in conformance with the convention that separates scientific argument in the body from implementation documentation in the appendices.
 
 ### 3.1 Computational Environment and Local Offline Inference Stack
 
@@ -75,70 +79,17 @@ The sample matrix comprised **eight distinct language models**, distributed acro
 
 Each model × scenario pair was submitted to **three independent repetitions** (n = 3), totaling 8 × 13 × 3 = **312 inference calls**. Triple replication enables estimation of standard deviation and coefficient of variation (CV = σ/μ) intra-model — indispensable metrics to distinguish expected stochastic variability, deriving from the sampling parameter `temperature`, from systemic instruction instability.
 
-**HTTP payload sent to Ollama.** The entirety of the calls transported to the server a JSON payload structured in rigorously uniform fashion across models, described schematically below:
+The HTTP payload sent to the server was rigorously uniform across all calls, transporting the canonical *system prompt*, the scenario text in the `user` slot, and an options block configuring `temperature = 0.2`, `stream = false`, `format = "json"`, and a client-side `timeout = 120` seconds. The choice of `temperature = 0.2` establishes a compromise between contract adherence and the micro-variability necessary for meaningful CV estimation across repetitions; `stream = false` ensures a single, well-defined termination point for *wall-clock* latency measurement; and `format = "json"` activates Ollama's native syntactic nudging toward parseable JSON output without enforcing any field-typology or key-cardinality schema — a deliberate decision aimed at gauging each model's **native adherence** to the structural contract specified in natural language, under conditions representative of realistic school deployment. The complete payload and per-hyperparameter methodological rationale are reported in Appendix B.
 
-```python
-payload = {
-    "model": <model identifier>,
-    "messages": [
-        {"role": "system", "content": SYSTEM_PROMPT},
-        {"role": "user",   "content": <scenario text>},
-    ],
-    "stream":  False,
-    "format":  "json",
-    "options": {"temperature": 0.2},
-}
-```
+### 3.4 Structural Validation: Deterministic Conformance Criteria
 
-Each hyperparameter was selected by explicit methodological motivation and acts on a distinct dimension of the generation process's stochasticity:
+The binary conformance classification of each response was performed by a deterministic validator that decides, over the raw content returned by the model, whether the response integrally satisfies the contract declared in the *system prompt*. The validator operates through four disjoint criteria, applied in sequence, in which the violation of any one suffices for divergence classification. **C1 — JSON syntax**: the returned string must constitute a valid JSON document per the ECMA-404 specification, ensuring the decoder respected the syntactic regime induced by Ollama's `format = "json"` parameter. **C2 — Root is object**: the outer structure must be a JSON object (nominal *mapping*), since the declared contract prescribes two named keys; the typical violation at this level is the return of an *array* at the root, a pattern inherited from tabular output regimes and incompatible with the individual tutoring interface. **C3 — `pontos_fortes` is monolithic non-empty string**: the canonical schema exemplifies this field as continuous prose, oriented to Socratic welcoming through recognition of textual merits; substituting prose with enumeration shifts the register from welcoming feedback to corrective evaluation, in direct violation of the "do not act as grammar police" directive. **C4 — `perguntas_reflexivas` is non-empty list of strings**: the contract explicitly declares the `array` of `string` type with a minimum pair of items; the validator adopts the permissive cardinality criterion ≥ 1, with divergences at this level invariably manifesting as the appearance of types other than `string` (nested objects, `null` values).
 
-1. **`temperature = 0.2`.** The parameter scales logits prior to *softmax* sampling and governs the concentration of the probability distribution over the vocabulary. Values close to 0 collapse the distribution into a near-deterministic regime (quasi-greedy prediction); values above 1 flatten it, favoring lexical diversity. The choice of 0.2 establishes a compromise: rigorous enough to induce adherence to the structural contract declared in natural language by the *system prompt*, without suppressing the micro-variability necessary for meaningful estimation of intra-model CV across repetitions. Values near 0 would render infeasible the differentiation of systemic versus stochastic variance — the central axis of the instruction-stability analysis.
-2. **`stream = false`.** Deactivates the progressive *token-by-token* transmission regime (*server-sent events*) and imposes synchronous mode, in which the server retains the entire response until stopping and returns it in a single HTTP body. The justification is metrological: the *wall-clock* latency meter based on `time.time()` requires well-defined start and end points, and reception in a single chunk eliminates ambiguity about the inference termination moment. The synchronous mode is also the regime expected in real school usage, in which the student awaits the complete response before proceeding.
-3. **`format = "json"`.** Signals to Ollama the intent of JSON output. Operationally, the server restricts the decoder to a logit mask compatible with tokens structurally valid for JSON, exerting probabilistic *nudging* over the generation. Critical methodological decision: this parameter **does not enforce a schema** — it merely guarantees that the output will be syntactically parseable as JSON, but **imposes nothing on field typology, presence of required keys, or list cardinality**. The choice to keep it active, without complementation by strict grammatical coercion (BNF grammars, regex validation, or *constrained decoding*), reflects the intent to gauge the model's **native adherence** to the structural contract specified in natural language, under conditions representative of the realistic school-deployment scenario — in which there are no engineering resources to implement layers of syntactic coercion over every inference.
-4. **`timeout = 120` seconds.** Client-side waiting limit, dimensioned to accommodate even the most prolonged generations of verbose models without masking genuine server failures.
-
-### 3.4 Structural Validation Architecture: The `divergente()` Algorithm
-
-The binary conformance classification of each response was performed by a deterministic function — operationalized in `mine_benchmark.py` — that decides, over the raw content returned in `message.content`, whether the response integrally satisfies the contract declared in the *system prompt*. The classifier logic is reproduced in pseudocode below, in the exact order of execution adopted over the corpus:
-
-```python
-def divergente(raw_response: str) -> bool:
-    # C1 — JSON syntax
-    try:
-        parsed = json.loads(raw_response)
-    except json.JSONDecodeError:
-        return True
-
-    # C2 — Root type
-    if not isinstance(parsed, dict):
-        return True
-
-    # C3 — Type and cardinality of `pontos_fortes`
-    pf = parsed.get("pontos_fortes")
-    if not (isinstance(pf, str) and pf.strip()):
-        return True
-
-    # C4 — Type and cardinality of `perguntas_reflexivas`
-    pr = parsed.get("perguntas_reflexivas")
-    if not isinstance(pr, list) or len(pr) == 0 \
-       or any(not isinstance(x, str) for x in pr):
-        return True
-
-    return False
-```
-
-The four deterministic conditions operate as disjoint filters — violation of any one suffices for the divergence classification. The typological rationale of each condition is detailed below:
-
-- **C1 — JSON syntax.** The first barrier ensures the returned string constitutes a valid JSON document per the ECMA-404 specification. Failures at this level indicate that the model's decoder did not respect even the tokenized regime induced by Ollama's `format = "json"` parameter — a rare occurrence, but registered in extreme cases.
-- **C2 — Root is object.** Restricts the outer structure to a nominal *mapping* (JSON object). The declared contract prescribes an object with two named keys, and the typical violation at this level would occur via return of an *array* at the root (list of objects), a pattern inherited from tabular or batch output regimes — incompatible with the individual tutoring interface.
-- **C3 — `pontos_fortes` is monolithic non-empty string.** The canonical schema declared in the *system prompt* exemplifies `pontos_fortes` as continuous prose, oriented to Socratic welcoming of the student through recognition of the merits of the text produced. Any typological deviation — particularly return as a *bullet* list — is flagged as divergent. The pedagogical rationale is direct: substituting prose with enumeration shifts the register from welcoming feedback to corrective evaluation, transforming the tutor into a test grader, in direct violation of the "do not act as grammar police" directive.
-- **C4 — `perguntas_reflexivas` is non-empty list of strings.** The contract explicitly declares the `array` of `string` type and exemplifies a minimum pair of items. The implemented validator adopts the permissive criterion of cardinality ≥ 1, granting the benefit of the doubt to the model in cases of degeneration to a single item; in all cases where divergence manifested here, it involved the appearance of a type distinct from `string` (nested objects, `null` values), rather than merely the count of elements.
-
-The function operates on the raw content preserved in `resposta_ia`, an attribute of each of the 312 records of the collection corpus. The choice for a deterministic classifier, rather than evaluation by a judge model, was deliberate: structural conformance is a syntactic-typological property decidable in finite time by type inspection, with no room for interpretive subjectivity, and delegation to an LLM judge would introduce undesired variance precisely on the dimension where the study seeks maximal objectivity.
+The choice for a deterministic classifier, rather than evaluation by a judge model, was deliberate: structural conformance is a syntactic-typological property decidable in finite time by type inspection, with no room for interpretive subjectivity, and delegation to an LLM judge would introduce undesired variance precisely on the dimension where the study seeks maximal objectivity. The full source code of the `divergente()` function, in the exact order of execution applied over the 312-record corpus, is reported in Appendix B.
 
 ### 3.5 Inferential Statistical Framework
 
-To support the categorical claims of the paper — that conformance rates differ from a reference model, and that one-shot demonstration reverses the Llama 3.2 family bias — comparisons are operationalized through **Fisher's exact test** on 2×2 contingency tables, complemented by **Wilson 95 % confidence intervals** for each observed proportion. Fisher's exact test is selected for four converging reasons: (i) the structural-conformance data is intrinsically binary (conformant vs. divergent); (ii) cells with extreme proportions (0/39 and 39/39) are observed, in which the asymptotic χ² approximation is invalid (expected frequency below 5 in at least one cell); (iii) the test produces exact two-sided *p*-values by combinatorial enumeration of more extreme tables, with no distributional assumption; and (iv) when a cell of the contingency table is zero, the conditional maximum-likelihood odds ratio is not finitely estimable, but the *p*-value derived from the exact hypergeometric distribution remains valid as the reportable effect, in line with standard practice for categorical comparisons under extreme proportion regimes. Wilson 95 % CIs supplement each rate with its uncertainty band, computed analytically without assuming normality of the proportion. All inferential computations were performed with `scipy.stats.fisher_exact`. Significance is reported in APA-style: *p* < 0.001 \`**`*, *p* < 0.01 \`**`, *p* < 0.05 \`*`, *p* ≥ 0.05 n.s. Latency data, by contrast, are reported descriptively only (Section 4), as the empirical separation between model classes is evident at the order-of-magnitude scale and does not require inferential support for interpretation.
+Categorical comparisons supporting the structural-conformance claims of this paper were operationalized through **Fisher's exact test** on 2×2 contingency tables, complemented by **Wilson 95 % confidence intervals** for each observed proportion; the full statistical rationale — including the four converging reasons for the choice of Fisher's exact test, the treatment of the odds ratio under zero-cell contingencies, and the APA-style significance thresholds — is detailed in Appendix A. Latency data, by contrast, are reported descriptively only (Section 4), as the empirical separation between model classes is evident at the order-of-magnitude scale and does not require inferential support for interpretation.
 
 ### 3.6 Analysis Criteria: Efficiency and Metalinguistic Pedagogical Adherence
 
@@ -154,9 +105,9 @@ To expose the nature of the contracts evaluated, this subsection illustrates, wi
 
 > Resenha sobre A Cartomante: A cartomante falou pro Camilo que tava tudo bem. A cartomante leu as cartas. A cartomante sorriu pra ele. A cartomante deu certeza pra ele. Depois o Camilo foi pra casa do Vilela e morreu. A cartomante tinha errado tudo.
 
-*English gloss (provided for non-Lusophone readers; not part of the experiment):* Review of "The Fortune-Teller": The fortune-teller told Camilo everything was fine. The fortune-teller read the cards. The fortune-teller smiled at him. The fortune-teller gave him certainty. Then Camilo went to Vilela's house and died. The fortune-teller had got it all wrong.
-
 The embedded target phenomenon is the lexical repetition of the noun phrase *"a cartomante"* in four consecutive clauses — a paradigmatic case of referential cohesion through repetition, in which the tutor would be expected to induce the student toward substitution by pronominal pro-form or hypernym, leading them to reflect on the referential chain without providing the corrected form outright.
+
+*Translation note for non-Lusophone readers (not part of the experiment): "Review of 'The Fortune-Teller'. The fortune-teller told Camilo everything was fine. The fortune-teller read the cards. The fortune-teller smiled at him. The fortune-teller gave him certainty. Then Camilo went to Vilela's house and died. The fortune-teller had got it all wrong."*
 
 **Conformant output — `qwen2.5:3b-instruct`, repetition 1.** The model strictly respects the typology declared in the *system prompt*: `pontos_fortes` is returned as continuous prose and `perguntas_reflexivas` as a pair of questions in a list of *strings*.
 
@@ -359,7 +310,7 @@ The simultaneous persistence of these two failure regimes — across models from
 
 ## Acknowledgments
 
-The authors thank Profa. Dra. Rosa Maria Vicari (PPGIE/UFRGS) for her role as co-advisor in this investigation, and the Graduate Program in Informatics in Education (PPGIE) of the Federal University of Rio Grande do Sul (UFRGS) for institutional support.
+The authors thank the Graduate Program in Informatics in Education (PPGIE) of the Federal University of Rio Grande do Sul (UFRGS) for institutional support.
 
 ---
 
@@ -400,3 +351,67 @@ Wu, M., & Aji, A. F. (2023). *Style over substance: Evaluation biases for large 
 Yang, A., Yang, B., Hui, B., Zheng, B., Yu, B., Zhou, C., Li, C., Li, C., Liu, D., Huang, F., et al. (2024). *Qwen2.5 technical report*. arXiv:2412.15115. https://arxiv.org/abs/2412.15115
 
 Zheng, L., Chiang, W.-L., Sheng, Y., Zhuang, S., Wu, Z., Zhuang, Y., Lin, Z., Li, Z., Li, D., Xing, E. P., Zhang, H., Gonzalez, J. E., & Stoica, I. (2023). Judging LLM-as-a-judge with MT-bench and Chatbot Arena. In *Advances in Neural Information Processing Systems 36 (NeurIPS 2023)*.
+
+---
+
+## Appendix A — Statistical Rationale
+
+This appendix details the inferential framework summarized in Subsection 3.5. Categorical comparisons supporting the structural-conformance claims of the paper — that conformance rates differ from a reference model and that *one-shot* demonstration reverses the Llama 3.2 family bias — were operationalized through **Fisher's exact test** on 2×2 contingency tables, complemented by **Wilson 95 % confidence intervals** for each observed proportion. Fisher's exact test was selected for four converging reasons: (i) the structural-conformance data is intrinsically binary (conformant vs. divergent); (ii) cells with extreme proportions (0/39 and 39/39) are observed, in which the asymptotic χ² approximation is invalid (expected frequency below 5 in at least one cell); (iii) the test produces exact two-sided *p*-values by combinatorial enumeration of more extreme tables, with no distributional assumption; and (iv) when a cell of the contingency table is zero, the conditional maximum-likelihood odds ratio is not finitely estimable, but the *p*-value derived from the exact hypergeometric distribution remains valid as the reportable effect, in line with standard practice for categorical comparisons under extreme proportion regimes.
+
+Wilson 95 % CIs supplement each rate with its uncertainty band, computed analytically without assuming normality of the proportion — a property especially relevant near the extremes of the unit interval, where the normal approximation underlying the Wald interval would produce bounds outside [0, 1]. All inferential computations were performed with `scipy.stats.fisher_exact` (two-sided alternative) and a closed-form Wilson interval implementation, both reported in `src/inferential_statistics.py`. Significance is reported in APA-style notation throughout the paper: *p* < 0.001 ``***``, *p* < 0.01 ``**``, *p* < 0.05 ``*``, *p* ≥ 0.05 n.s., with α = 0.05 as the conventional rejection threshold.
+
+## Appendix B — Implementation Details
+
+This appendix documents the implementation artifacts referenced in Subsections 3.3 and 3.4. The materials are provided to support integral reproducibility of the study; the executable form, together with the raw inference corpus, is available in the public repository indicated in Section 3.9.
+
+**B.1 — HTTP payload sent to Ollama.** All 312 main-protocol calls and the 80 falsification-protocol calls transported to the server a JSON payload structured in rigorously uniform fashion across models, schematically reproduced below:
+
+```python
+payload = {
+    "model": <model identifier>,
+    "messages": [
+        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "user",   "content": <scenario text>},
+    ],
+    "stream":  False,
+    "format":  "json",
+    "options": {"temperature": 0.2},
+}
+```
+
+Each hyperparameter was selected by explicit methodological motivation and acts on a distinct dimension of the generation process's stochasticity:
+
+1. **`temperature = 0.2`.** The parameter scales logits prior to *softmax* sampling and governs the concentration of the probability distribution over the vocabulary. Values close to 0 collapse the distribution into a near-deterministic regime (quasi-greedy prediction); values above 1 flatten it, favoring lexical diversity. The choice of 0.2 establishes a compromise: rigorous enough to induce adherence to the structural contract declared in natural language by the *system prompt*, without suppressing the micro-variability necessary for meaningful estimation of intra-model CV across repetitions. Values near 0 would render infeasible the differentiation of systemic versus stochastic variance — the central axis of the instruction-stability analysis.
+2. **`stream = false`.** Deactivates the progressive *token-by-token* transmission regime (*server-sent events*) and imposes synchronous mode, in which the server retains the entire response until stopping and returns it in a single HTTP body. The justification is metrological: the *wall-clock* latency meter based on `time.time()` requires well-defined start and end points, and reception in a single chunk eliminates ambiguity about the inference termination moment. The synchronous mode is also the regime expected in real school usage, in which the student awaits the complete response before proceeding.
+3. **`format = "json"`.** Signals to Ollama the intent of JSON output. Operationally, the server restricts the decoder to a logit mask compatible with tokens structurally valid for JSON, exerting probabilistic *nudging* over the generation. Critical methodological decision: this parameter **does not enforce a schema** — it merely guarantees that the output will be syntactically parseable as JSON, but **imposes nothing on field typology, presence of required keys, or list cardinality**. The choice to keep it active, without complementation by strict grammatical coercion (BNF grammars, regex validation, or *constrained decoding*), reflects the intent to gauge the model's **native adherence** to the structural contract specified in natural language, under conditions representative of the realistic school-deployment scenario — in which there are no engineering resources to implement layers of syntactic coercion over every inference.
+4. **`timeout = 120` seconds.** Client-side waiting limit, dimensioned to accommodate even the most prolonged generations of verbose models without masking genuine server failures.
+
+**B.2 — Source code of the `divergente()` structural validator.** The binary conformance classification of each response was performed by the deterministic function below — operationalized in `src/mine_benchmark.py` — that decides, over the raw content returned in `message.content`, whether the response integrally satisfies the contract declared in the *system prompt*. The classifier logic is reproduced in pseudocode, in the exact order of execution adopted over the 312-record corpus:
+
+```python
+def divergente(raw_response: str) -> bool:
+    # C1 — JSON syntax
+    try:
+        parsed = json.loads(raw_response)
+    except json.JSONDecodeError:
+        return True
+
+    # C2 — Root type
+    if not isinstance(parsed, dict):
+        return True
+
+    # C3 — Type and cardinality of `pontos_fortes`
+    pf = parsed.get("pontos_fortes")
+    if not (isinstance(pf, str) and pf.strip()):
+        return True
+
+    # C4 — Type and cardinality of `perguntas_reflexivas`
+    pr = parsed.get("perguntas_reflexivas")
+    if not isinstance(pr, list) or len(pr) == 0 \
+       or any(not isinstance(x, str) for x in pr):
+        return True
+
+    return False
+```
+
+The function operates on the raw content preserved in the `resposta_ia` attribute of each of the 312 records of the collection corpus. The four conditions (C1–C4) are documented in narrative form in Subsection 3.4.
