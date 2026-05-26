@@ -1,6 +1,13 @@
 cff-version: 1.2.0
 message: "If you use this benchmark, dataset, or methodology, please cite the work as below."
 title: "A Diagnostic Evaluation of Small Language Models for Offline Socratic Tutoring in Brazilian Portuguese: A Study on Structural and Pedagogical Adherence under Public-School Infrastructure Constraints"
+doi: "10.5281/zenodo.20388847"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.20388847"
+    description: "Concept DOI (always resolves to the latest archived release on Zenodo)"
+url: "https://doi.org/10.5281/zenodo.20388847"
+repository-code: "https://github.com/RandMelville/slm-socratic-tutor-ptbr"
 abstract: >-
   Diagnostic benchmark of eight open Small Language Models (≤3.8B parameters)
   for Socratic tutoring of writing in Brazilian Portuguese, evaluated strictly

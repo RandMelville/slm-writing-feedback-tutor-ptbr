@@ -12,6 +12,9 @@ Graduate Program in Informatics in Education (PPGIE)
 Federal University of Rio Grande do Sul (UFRGS) — Porto Alegre, RS, Brazil
 `mmfoohs@gmail.com`
 
+DOI: [10.5281/zenodo.20388847](https://doi.org/10.5281/zenodo.20388847)
+Code and data: [github.com/RandMelville/slm-socratic-tutor-ptbr](https://github.com/RandMelville/slm-socratic-tutor-ptbr)
+
 ---
 
 ## Abstract

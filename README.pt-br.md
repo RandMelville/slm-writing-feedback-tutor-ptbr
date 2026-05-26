@@ -1,5 +1,6 @@
 # Avaliação Diagnóstica de Modelos de Linguagem de Pequeno Porte para Tutoria Socrática Offline em Língua Portuguesa: um Estudo de Aderência Estrutural e Pedagógica sob Restrições de Infraestrutura Escolar Pública
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20388847.svg)](https://doi.org/10.5281/zenodo.20388847)
 [![Paper](https://img.shields.io/badge/paper-PDF-blue)](paper/artigo_benchmark_slm.pdf)
 [![Relatório](https://img.shields.io/badge/relat%C3%B3rio-interativo-purple)](https://randmelville.github.io/slm-socratic-tutor-ptbr/report/)
 [![Python](https://img.shields.io/badge/python-3.11+-blue)](https://www.python.org)
@@ -101,15 +102,20 @@ report/     Relatório HTML interativo auto-contido
 
 ```bibtex
 @article{reboucas2026slmsocratic,
-  title   = {A Diagnostic Evaluation of Small Language Models for Offline
-             Socratic Tutoring in Brazilian Portuguese: A Study on Structural
-             and Pedagogical Adherence under Public-School Infrastructure
-             Constraints},
-  author  = {Reb{\'o}u{\c{c}}as, Randerson Oliveira Melville and Foohs, Marcelo Magalh{\~a}es},
-  year    = {2026},
-  note    = {Disponível em https://github.com/RandMelville/slm-socratic-tutor-ptbr}
+  title     = {A Diagnostic Evaluation of Small Language Models for Offline
+               Socratic Tutoring in Brazilian Portuguese: A Study on Structural
+               and Pedagogical Adherence under Public-School Infrastructure
+               Constraints},
+  author    = {Reb{\'o}u{\c{c}}as, Randerson Oliveira Melville and Foohs, Marcelo Magalh{\~a}es},
+  year      = {2026},
+  doi       = {10.5281/zenodo.20388847},
+  url       = {https://doi.org/10.5281/zenodo.20388847},
+  publisher = {Zenodo}
 }
 ```
+
+O DOI [`10.5281/zenodo.20388847`](https://doi.org/10.5281/zenodo.20388847)
+aponta para um arquivo permanente e citável desta release no Zenodo.
 
 Um arquivo de citação legível por máquina está disponível em
 [`CITATION.cff`](CITATION.cff).
