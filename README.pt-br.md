@@ -243,10 +243,10 @@ Um arquivo de citação legível por máquina está disponível em [`CITATION.cf
 **Randerson Oliveira Melville Rebouças** — Doutorando
 Programa de Pós-Graduação em Informática na Educação ([PPGIE](https://www.ufrgs.br/ppgie/))
 Universidade Federal do Rio Grande do Sul (UFRGS) — Porto Alegre, Brasil
-`randerson.melville@gmail.com`
+`randerson.melville@gmail.com` · [ORCID: 0009-0005-3056-5074](https://orcid.org/0009-0005-3056-5074)
 
-Orientador: **Prof. Dr. Marcelo Magalhães Foohs** (PPGIE/UFRGS)
-Coorientadora: **Profa. Dra. Rosa Maria Vicari** (PPGIE/UFRGS)
+Orientador: **Prof. Dr. Marcelo Magalhães Foohs** (PPGIE/UFRGS) · [ORCID: 0000-0002-4735-0732](https://orcid.org/0000-0002-4735-0732)
+Coorientadora: **Profa. Dra. Rosa Maria Vicari** (PPGIE/UFRGS) · [ORCID: 0000-0002-6909-6405](https://orcid.org/0000-0002-6909-6405)
 
 Este trabalho foi conduzido com apoio institucional do PPGIE/UFRGS e financiamento
 de bolsa de doutorado da CAPES.

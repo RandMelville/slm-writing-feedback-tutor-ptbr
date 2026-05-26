@@ -241,10 +241,10 @@ A machine-readable citation file is provided in [`CITATION.cff`](CITATION.cff).
 **Randerson Oliveira Melville Rebouças** — PhD Candidate
 Graduate Program in Informatics in Education ([PPGIE](https://www.ufrgs.br/ppgie/))
 Federal University of Rio Grande do Sul (UFRGS) — Porto Alegre, Brazil
-`randerson.melville@gmail.com`
+`randerson.melville@gmail.com` · [ORCID: 0009-0005-3056-5074](https://orcid.org/0009-0005-3056-5074)
 
-Advisor: **Prof. Dr. Marcelo Magalhães Foohs** (PPGIE/UFRGS)
-Co-advisor: **Profa. Dra. Rosa Maria Vicari** (PPGIE/UFRGS)
+Advisor: **Prof. Dr. Marcelo Magalhães Foohs** (PPGIE/UFRGS) · [ORCID: 0000-0002-4735-0732](https://orcid.org/0000-0002-4735-0732)
+Co-advisor: **Profa. Dra. Rosa Maria Vicari** (PPGIE/UFRGS) · [ORCID: 0000-0002-6909-6405](https://orcid.org/0000-0002-6909-6405)
 
 This work was conducted with institutional support from PPGIE/UFRGS and doctoral
 funding from CAPES.

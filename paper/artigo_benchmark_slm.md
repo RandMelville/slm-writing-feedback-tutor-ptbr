@@ -2,14 +2,14 @@
 
 ---
 
-**Randerson Oliveira Melville Rebouças**
+**Randerson Oliveira Melville Rebouças** [ORCID: 0009-0005-3056-5074](https://orcid.org/0009-0005-3056-5074)
 
 PhD Candidate, Graduate Program in Informatics in Education (PPGIE)
 Federal University of Rio Grande do Sul (UFRGS) — Porto Alegre, RS, Brazil
 `randerson.melville@gmail.com`
 
-Advisor: Prof. Dr. Marcelo Magalhães Foohs (PPGIE/UFRGS)
-Co-advisor: Profa. Dra. Rosa Maria Vicari (PPGIE/UFRGS)
+Advisor: Prof. Dr. Marcelo Magalhães Foohs (PPGIE/UFRGS) [ORCID: 0000-0002-4735-0732](https://orcid.org/0000-0002-4735-0732)
+Co-advisor: Profa. Dra. Rosa Maria Vicari (PPGIE/UFRGS) [ORCID: 0000-0002-6909-6405](https://orcid.org/0000-0002-6909-6405)
 
 ---
 
