@@ -11,8 +11,13 @@ authors:
   - family-names: "Rebouças"
     given-names: "Randerson Oliveira Melville"
     email: "randerson.melville@gmail.com"
-    affiliation: "PhD Candidate, Graduate Program in Informatics in Education (PPGIE), Federal University of Rio Grande do Sul (UFRGS)"
+    affiliation: "Graduate Program in Informatics in Education (PPGIE), Federal University of Rio Grande do Sul (UFRGS)"
     orcid: "https://orcid.org/0009-0005-3056-5074"
+  - family-names: "Foohs"
+    given-names: "Marcelo Magalhães"
+    email: "mmfoohs@gmail.com"
+    affiliation: "Graduate Program in Informatics in Education (PPGIE), Federal University of Rio Grande do Sul (UFRGS)"
+    orcid: "https://orcid.org/0000-0002-4735-0732"
 type: article
 year: 2026
 keywords:

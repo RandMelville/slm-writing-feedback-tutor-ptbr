@@ -1,121 +1,169 @@
-[
-  {
-    "label": "F1: Llama 3.2 1B vs Qwen 2.5 1.5B",
-    "A_conformant": "0/39",
-    "B_conformant": "38/39",
-    "table": [
-      [
-        0,
-        39
-      ],
-      [
-        38,
-        1
-      ]
-    ],
-    "odds_ratio": 0.0,
-    "p_value": 2.93933777765373e-21
-  },
-  {
-    "label": "F2: Llama 3.2 3B vs Qwen 2.5 3B",
-    "A_conformant": "0/39",
-    "B_conformant": "39/39",
-    "table": [
-      [
-        0,
-        39
-      ],
-      [
-        39,
-        0
-      ]
-    ],
-    "odds_ratio": 0.0,
-    "p_value": 7.348344444134326e-23
-  },
-  {
-    "label": "F3: Llama 3.2 3B vs Gemma 2 2B",
-    "A_conformant": "0/39",
-    "B_conformant": "38/39",
-    "table": [
-      [
-        0,
-        39
-      ],
-      [
-        38,
-        1
-      ]
-    ],
-    "odds_ratio": 0.0,
-    "p_value": 2.93933777765373e-21
-  },
-  {
-    "label": "F4: Phi-3 mini vs Qwen 2.5 3B",
-    "A_conformant": "0/39",
-    "B_conformant": "39/39",
-    "table": [
-      [
-        0,
-        39
-      ],
-      [
-        39,
-        0
-      ]
-    ],
-    "odds_ratio": 0.0,
-    "p_value": 7.348344444134326e-23
-  },
-  {
-    "label": "F5: Phi-3 mini vs Llama 3 8B",
-    "A_conformant": "0/39",
-    "B_conformant": "39/39",
-    "table": [
-      [
-        0,
-        39
-      ],
-      [
-        39,
-        0
-      ]
-    ],
-    "odds_ratio": 0.0,
-    "p_value": 7.348344444134326e-23
-  },
-  {
-    "label": "F6: Llama 3.2 1B  zero-shot vs one-shot (E2)",
-    "A_conformant": "0/39",
-    "B_conformant": "11/11",
-    "table": [
-      [
-        0,
-        39
-      ],
-      [
-        11,
-        0
-      ]
-    ],
-    "odds_ratio": 0.0,
-    "p_value": 2.6771081881634835e-11
-  },
-  {
-    "label": "F7: Llama 3.2 3B  zero-shot vs one-shot (E2)",
-    "A_conformant": "0/39",
-    "B_conformant": "12/12",
-    "table": [
-      [
-        0,
-        39
-      ],
-      [
-        12,
-        0
-      ]
-    ],
-    "odds_ratio": 0.0,
-    "p_value": 6.299078089796432e-12
+{
+  "reference_model": "qwen2.5:3b-instruct",
+  "table2_conformance": [
+    {
+      "model": "qwen2.5:3b-instruct",
+      "k": 39,
+      "n": 39,
+      "rate_pct": 100.0,
+      "ci95_low": 91.0,
+      "ci95_high": 100.0,
+      "tier": "deployable",
+      "fisher_vs_ref": "reference",
+      "p_value": null
+    },
+    {
+      "model": "gemma2:9b",
+      "k": 39,
+      "n": 39,
+      "rate_pct": 100.0,
+      "ci95_low": 91.0,
+      "ci95_high": 100.0,
+      "tier": "ceiling",
+      "fisher_vs_ref": "p = 1.000 n.s.",
+      "p_value": 1.0
+    },
+    {
+      "model": "llama3:8b",
+      "k": 39,
+      "n": 39,
+      "rate_pct": 100.0,
+      "ci95_low": 91.0,
+      "ci95_high": 100.0,
+      "tier": "ceiling",
+      "fisher_vs_ref": "p = 1.000 n.s.",
+      "p_value": 1.0
+    },
+    {
+      "model": "qwen2.5:1.5b-instruct",
+      "k": 38,
+      "n": 39,
+      "rate_pct": 97.4,
+      "ci95_low": 86.8,
+      "ci95_high": 99.5,
+      "tier": "deployable",
+      "fisher_vs_ref": "p = 1.000 n.s.",
+      "p_value": 1.0
+    },
+    {
+      "model": "gemma2:2b",
+      "k": 38,
+      "n": 39,
+      "rate_pct": 97.4,
+      "ci95_low": 86.8,
+      "ci95_high": 99.5,
+      "tier": "deployable",
+      "fisher_vs_ref": "p = 1.000 n.s.",
+      "p_value": 1.0
+    },
+    {
+      "model": "llama3.2:1b",
+      "k": 0,
+      "n": 39,
+      "rate_pct": 0.0,
+      "ci95_low": 0.0,
+      "ci95_high": 9.0,
+      "tier": "deployable",
+      "fisher_vs_ref": "p < 0.001 ***",
+      "p_value": 7.348344444134326e-23
+    },
+    {
+      "model": "llama3.2:3b",
+      "k": 0,
+      "n": 39,
+      "rate_pct": 0.0,
+      "ci95_low": 0.0,
+      "ci95_high": 9.0,
+      "tier": "deployable",
+      "fisher_vs_ref": "p < 0.001 ***",
+      "p_value": 7.348344444134326e-23
+    },
+    {
+      "model": "phi3:mini",
+      "k": 0,
+      "n": 39,
+      "rate_pct": 0.0,
+      "ci95_low": 0.0,
+      "ci95_high": 9.0,
+      "tier": "deployable",
+      "fisher_vs_ref": "p < 0.001 ***",
+      "p_value": 7.348344444134326e-23
+    }
+  ],
+  "table3_counter_experiment": [
+    {
+      "isolation": "E1 (zero-shot, t=0.0)",
+      "experiment": "E1_temp0",
+      "llama_1b": {
+        "k": 0,
+        "n": 13,
+        "timeouts": 0,
+        "rate_pct": 0.0,
+        "fisher_vs_baseline": "p = 1.000 n.s.",
+        "p_value": 1.0
+      },
+      "llama_3b": {
+        "k": 0,
+        "n": 13,
+        "timeouts": 0,
+        "rate_pct": 0.0,
+        "ci95_low": 0.0,
+        "ci95_high": 22.8,
+        "fisher_vs_baseline": "p = 1.000 n.s.",
+        "p_value": 1.0
+      }
+    },
+    {
+      "isolation": "E2 (one-shot, t=0.2)",
+      "experiment": "E2_fewshot",
+      "llama_1b": {
+        "k": 11,
+        "n": 12,
+        "timeouts": 1,
+        "rate_pct": 91.7,
+        "fisher_vs_baseline": "p < 0.001 ***",
+        "p_value": 2.5196312359185724e-10
+      },
+      "llama_3b": {
+        "k": 12,
+        "n": 12,
+        "timeouts": 0,
+        "rate_pct": 100.0,
+        "ci95_low": 75.8,
+        "ci95_high": 100.0,
+        "fisher_vs_baseline": "p < 0.001 ***",
+        "p_value": 6.299078089796432e-12
+      }
+    },
+    {
+      "isolation": "E2b (one-shot, t=0.0)",
+      "experiment": "E2b_fewshot_temp0",
+      "llama_1b": {
+        "k": 9,
+        "n": 12,
+        "timeouts": 3,
+        "rate_pct": 75.0,
+        "fisher_vs_baseline": "p < 0.001 ***",
+        "p_value": 7.231341647086304e-08
+      },
+      "llama_3b": {
+        "k": 12,
+        "n": 12,
+        "timeouts": 0,
+        "rate_pct": 100.0,
+        "ci95_low": 75.8,
+        "ci95_high": 100.0,
+        "fisher_vs_baseline": "p < 0.001 ***",
+        "p_value": 6.299078089796432e-12
+      }
+    }
+  ],
+  "table4_metalinguistic_adherence": {
+    "model": "qwen2.5:3b-instruct",
+    "scenarios_with_koch_terms": 6,
+    "total_scenarios": 13,
+    "rate_pct": 46.2,
+    "ci95_low": 23.2,
+    "ci95_high": 70.9
   }
-]
+}

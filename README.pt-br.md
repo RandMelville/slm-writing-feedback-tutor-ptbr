@@ -220,7 +220,7 @@ Se você usar este benchmark, dataset ou metodologia, por favor cite:
   title   = {A Diagnostic Evaluation of Small Language Models for Offline
              Socratic Tutoring in Brazilian Portuguese: A Study on Structural
              and Pedagogical Adherence under Public-School Infrastructure Constraints},
-  author  = {Reb{\'o}u{\c{c}}as, Randerson Oliveira Melville},
+  author  = {Reb{\'o}u{\c{c}}as, Randerson Oliveira Melville and Foohs, Marcelo Magalh{\~a}es},
   journal = {Preprint},
   year    = {2026},
   note    = {Disponível em: https://github.com/RandMelville/slm-socratic-tutor-ptbr}
@@ -238,14 +238,18 @@ Um arquivo de citação legível por máquina está disponível em [`CITATION.cf
 
 ---
 
-## Autor
+## Autores
 
 **Randerson Oliveira Melville Rebouças** — Doutorando
 Programa de Pós-Graduação em Informática na Educação ([PPGIE](https://www.ufrgs.br/ppgie/))
 Universidade Federal do Rio Grande do Sul (UFRGS) — Porto Alegre, Brasil
 `randerson.melville@gmail.com` · [ORCID: 0009-0005-3056-5074](https://orcid.org/0009-0005-3056-5074)
 
-Orientador: **Prof. Dr. Marcelo Magalhães Foohs** (PPGIE/UFRGS) · [ORCID: 0000-0002-4735-0732](https://orcid.org/0000-0002-4735-0732)
+**Prof. Dr. Marcelo Magalhães Foohs**
+Programa de Pós-Graduação em Informática na Educação ([PPGIE](https://www.ufrgs.br/ppgie/))
+Universidade Federal do Rio Grande do Sul (UFRGS) — Porto Alegre, Brasil
+`mmfoohs@gmail.com` · [ORCID: 0000-0002-4735-0732](https://orcid.org/0000-0002-4735-0732)
+
 Coorientadora: **Profa. Dra. Rosa Maria Vicari** (PPGIE/UFRGS) · [ORCID: 0000-0002-6909-6405](https://orcid.org/0000-0002-6909-6405)
 
 Este trabalho foi conduzido com apoio institucional do PPGIE/UFRGS e financiamento

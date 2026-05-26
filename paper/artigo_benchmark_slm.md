@@ -3,13 +3,14 @@
 ---
 
 **Randerson Oliveira Melville Rebouças** [ORCID: 0009-0005-3056-5074](https://orcid.org/0009-0005-3056-5074)
-
-PhD Candidate, Graduate Program in Informatics in Education (PPGIE)
+Graduate Program in Informatics in Education (PPGIE)
 Federal University of Rio Grande do Sul (UFRGS) — Porto Alegre, RS, Brazil
 `randerson.melville@gmail.com`
 
-Advisor: Prof. Dr. Marcelo Magalhães Foohs (PPGIE/UFRGS) [ORCID: 0000-0002-4735-0732](https://orcid.org/0000-0002-4735-0732)
-Co-advisor: Profa. Dra. Rosa Maria Vicari (PPGIE/UFRGS) [ORCID: 0000-0002-6909-6405](https://orcid.org/0000-0002-6909-6405)
+**Marcelo Magalhães Foohs** [ORCID: 0000-0002-4735-0732](https://orcid.org/0000-0002-4735-0732)
+Graduate Program in Informatics in Education (PPGIE)
+Federal University of Rio Grande do Sul (UFRGS) — Porto Alegre, RS, Brazil
+`mmfoohs@gmail.com`
 
 ---
 
@@ -134,7 +135,7 @@ The function operates on the raw content preserved in `resposta_ia`, an attribut
 
 ### 3.5 Inferential Statistical Framework
 
-To support the three categorical claims of the paper — that conformance rates differ between models, that intra-family divergence patterns are non-random, and that one-shot demonstration reverses the Llama 3.2 family bias — comparisons were operationalized through **Fisher's exact test** on 2×2 contingency tables. Fisher's exact test was selected as the workhorse inferential procedure for four converging reasons: (i) the structural-conformance data is intrinsically binary (conformant vs. divergent); (ii) cells with extreme proportions (0/39 and 39/39) are observed, in which the asymptotic χ² approximation is invalid (expected frequency below 5 in at least one cell); (iii) the test produces exact two-sided *p*-values by combinatorial enumeration of more extreme tables, with no distributional assumption; and (iv) it admits a natural effect-size measure — the conditional maximum-likelihood odds ratio (OR) with 95 % confidence interval by the Cornfield method — directly publishable alongside the *p*-value. All categorical comparisons reported in Sections 5.1, 5.2, and 5.3 of this article follow this framework, computed via the `scipy.stats.fisher_exact` implementation. Latency data, by contrast, are reported descriptively only (Section 4), as the empirical separation between model classes is evident at the order-of-magnitude scale and does not require inferential support for interpretation.
+To support the categorical claims of the paper — that conformance rates differ from a reference model, and that one-shot demonstration reverses the Llama 3.2 family bias — comparisons are operationalized through **Fisher's exact test** on 2×2 contingency tables, complemented by **Wilson 95 % confidence intervals** for each observed proportion. Fisher's exact test is selected for four converging reasons: (i) the structural-conformance data is intrinsically binary (conformant vs. divergent); (ii) cells with extreme proportions (0/39 and 39/39) are observed, in which the asymptotic χ² approximation is invalid (expected frequency below 5 in at least one cell); (iii) the test produces exact two-sided *p*-values by combinatorial enumeration of more extreme tables, with no distributional assumption; and (iv) when a cell of the contingency table is zero, the conditional maximum-likelihood odds ratio is not finitely estimable, but the *p*-value derived from the exact hypergeometric distribution remains valid as the reportable effect, in line with standard practice for categorical comparisons under extreme proportion regimes. Wilson 95 % CIs supplement each rate with its uncertainty band, computed analytically without assuming normality of the proportion. All inferential computations were performed with `scipy.stats.fisher_exact`. Significance is reported in APA-style: *p* < 0.001 \\***, *p* < 0.01 \\**, *p* < 0.05 \\*, *p* ≥ 0.05 n.s. Latency data, by contrast, are reported descriptively only (Section 4), as the empirical separation between model classes is evident at the order-of-magnitude scale and does not require inferential support for interpretation.
 
 ### 3.6 Analysis Criteria: Efficiency and Metalinguistic Pedagogical Adherence
 
@@ -250,28 +251,30 @@ It is also worth registering anomalous behavior of the `llama3:8b` model at the 
 
 ## 5. Results of Structural Conformance and Architectural Findings
 
-The dimension of conformance to the structural contract specified in natural language — requirement of a JSON object with keys `pontos_fortes` (type `string`) and `perguntas_reflexivas` (type `array` of `string`) — produces the most expressive finding of this study. Table 2 consolidates the divergence rates observed.
+The dimension of conformance to the structural contract specified in natural language — requirement of a JSON object with keys `pontos_fortes` (type `string`) and `perguntas_reflexivas` (type `array` of `string`) — produces the most expressive finding of this study. Table 2 consolidates the conformance rates observed, accompanied by Wilson 95 % confidence intervals and the two-sided Fisher exact *p*-value for each model relative to `qwen2.5:3b-instruct` as the reference model.
 
-**Table 2.** Structural divergence rate per model (n = 39 calls).
+**Table 2.** Structural conformance per model, with Wilson 95 % CI and Fisher exact test against the reference model.
 
-| Model | Divergence |
-|---|---:|
-| `qwen2.5:3b-instruct` | 0 % (0/39) |
-| `gemma2:9b` | 0 % (0/39) |
-| `llama3:8b` | 0 % (0/39) |
-| `qwen2.5:1.5b-instruct` | 2.6 % (1/39) |
-| `gemma2:2b` | 2.6 % (1/39) |
-| `llama3.2:1b` | **100 % (39/39)** |
-| `llama3.2:3b` | **100 % (39/39)** |
-| `phi3:mini` | **100 % (39/39)** |
+| Model | k / n | Conf. rate | Wilson 95 % CI | Tier | Fisher vs. Qwen 3B |
+|---|---:|---:|:---:|:---:|:---:|
+| `qwen2.5:3b-instruct` | 39 / 39 | 100.0 % | [91.0 %; 100.0 %] | deployable | reference |
+| `gemma2:9b` | 39 / 39 | 100.0 % | [91.0 %; 100.0 %] | ceiling | *p* = 1.000 n.s. |
+| `llama3:8b` | 39 / 39 | 100.0 % | [91.0 %; 100.0 %] | ceiling | *p* = 1.000 n.s. |
+| `qwen2.5:1.5b-instruct` | 38 / 39 | 97.4 % | [86.8 %; 99.5 %] | deployable | *p* = 1.000 n.s. |
+| `gemma2:2b` | 38 / 39 | 97.4 % | [86.8 %; 99.5 %] | deployable | *p* = 1.000 n.s. |
+| `llama3.2:1b` | 0 / 39 | 0.0 % | [0.0 %; 9.0 %] | deployable | ***p* < 0.001 \\*** |
+| `llama3.2:3b` | 0 / 39 | 0.0 % | [0.0 %; 9.0 %] | deployable | ***p* < 0.001 \\*** |
+| `phi3:mini` | 0 / 39 | 0.0 % | [0.0 %; 9.0 %] | deployable | ***p* < 0.001 \\*** |
 
-The distribution is clearly bimodal: five models exhibit integral or near-integral adherence (0–2.6 %), while three models collapse entirely (100 %), with no intermediate instances. Such polarization suggests that conformance to the contract **is not a monotonic function of the parameter count**, but rather an architectural-behavioral property of the family and of the instruction-tuning regime.
+*Note. k = conformant responses; n = 39 calls per model. \\*\\*\\* p < 0.001, two-sided Fisher exact, α = 0.05. When a cell of the contingency table is zero, the odds ratio is not finitely estimable; the reported p-value derives from the exact hypergeometric distribution with continuity correction. Wilson 95 % CIs computed without normal approximation.*
+
+The distribution is clearly bimodal: five models exhibit integral or near-integral adherence (97.4–100.0 %, Wilson 95 % CI: [86.8 %; 100.0 %]), while three models collapse entirely (0.0 %, Wilson 95 % CI: [0.0 %; 9.0 %]), with no intermediate instances. Fisher's exact test confirms that the conformance rates of the Llama 3.2 family (both 1B and 3B variants) and of Phi-3 Mini differ from the reference model at *p* < 0.001 each, while the four other conformant models — including the 7–9 B reference-ceiling pair — are statistically indistinguishable from the reference (*p* = 1.000 n.s.). This last observation is methodologically important: the deployable model `qwen2.5:3b-instruct` is not detectably inferior in structural conformance to the larger reference-ceiling models, which strengthens its selection as the operationally preferable base. Such polarization suggests that conformance to the contract **is not a monotonic function of the parameter count**, but rather an architectural-behavioral property of the family and of the instruction-tuning regime.
 
 ### 5.1 The Family Failure of the Llama 3.2 Line
 
 Qualitative inspection of the outputs of the two Llama 3.2 variants (1 B and 3 B) reveals a rigorously identical failure pattern: the emitted JSON is, across all 78 calls, syntactically valid and parseable; divergence manifests exclusively as a **typological violation** of the `pontos_fortes` field, returned consistently as an *array* of *strings* (typically enumerating two to four items) in place of the specified monolithic `string` type. The perfect symmetry between the two family sizes — in parallel with the full conformance of the Qwen 2.5 family at analogous sizes under identical *prompt* — rules out hypotheses of insufficient capacity or stochasticity and displaces the explanation toward post-training.
 
-The pairwise comparison between families under matched scale, by Fisher's exact test, yields statistical separations of extreme magnitude: Llama 3.2 1B vs. Qwen 2.5 1.5B (0/39 vs. 38/39 conformant; Fisher exact two-sided *p* < 10⁻¹⁵); Llama 3.2 3B vs. Qwen 2.5 3B (0/39 vs. 39/39 conformant; *p* < 10⁻¹⁵); Llama 3.2 3B vs. Gemma 2 2B (0/39 vs. 38/39 conformant; *p* < 10⁻¹⁵). The cross-family separation, at matched scale, is therefore not a borderline result subject to interpretation: it is one of the most categorical statistical contrasts observable in 2×2 categorical experimentation. The odds ratio is formally degenerate due to zero cells — the conditional maximum-likelihood estimate is undefined when conformance frequency reaches an extreme of the support — but the *p*-value alone, derived by exact combinatorial enumeration, suffices to falsify the null hypothesis of homogeneous conformance rates between families at any conventional significance threshold.
+As reported in Table 2, the pairwise comparison of the Llama 3.2 family against the reference model `qwen2.5:3b-instruct` yields *p* < 0.001 \\*\\*\\* for both variants (1B and 3B), while the matched-scale Qwen 2.5 family is statistically indistinguishable from the reference (*p* = 1.000 n.s.). The cross-family separation, at matched scale and under identical natural-language specification, is therefore not a borderline result subject to interpretation: it is one of the most categorical statistical contrasts observable in 2×2 categorical experimentation. As noted in the table caption, the odds ratio is not finitely estimable when one cell of the contingency table is zero; the exact *p*-value alone, derived from the hypergeometric distribution, suffices to falsify the null hypothesis of homogeneous conformance rates between families at any conventional significance threshold.
 
 This pattern finds coherent interpretation in light of the literature on **format bias** in preference-post-trained models. Zheng et al. (2023) and Wu and Aji (2023) document that implicit format-based rewards — operating either through human evaluators or judge models — induce systematic inflation of stylistic markers such as lists, *bullet points*, bold headings, and enumerations, at the expense of *prompt* fidelity. The operational motivation of this bias is direct: responses structured as marked items are perceived as more professional and readable by human evaluators in general-purpose assistant interfaces, and the reward signal internalizes this preference as a dominant attractor in the generation space.
 
@@ -279,7 +282,7 @@ Liu et al. (2025), in the framework of **GuideEval**, offer the behavioral-theor
 
 ### 5.2 The Multidimensional Collapse of Phi-3 Mini
 
-The failure of `phi3:mini` is qualitatively distinct and more severe. Analysis of the outputs reveals that the model not only typologically violates the `pontos_fortes` field — emitted in 100 % of calls as an *array* —, but **entirely replaces the declared schema** with its own structure, built around unsolicited fields `erro`, `correção`, `texto_original`, and `texto_proposto`. Additionally, 20.5 % of calls present `perguntas_reflexivas` as `NoneType` or composed of nested non-*string* elements, configuring progressive deterioration of contract fidelity as generation advances. The pairwise comparison Phi-3 mini vs. Qwen 2.5 3B (Fisher exact two-sided: 0/39 vs. 39/39; *p* < 10⁻¹⁵) and Phi-3 mini vs. Llama 3 8B (Fisher exact two-sided: 0/39 vs. 39/39; *p* < 10⁻¹⁵) confirm that Phi-3's separation from the structurally adherent models is statistically of the same magnitude as the Llama 3.2 family's separation, justifying its analytical bracketing in the same regime of zero-shot non-adherence.
+The failure of `phi3:mini` is qualitatively distinct and more severe. Analysis of the outputs reveals that the model not only typologically violates the `pontos_fortes` field — emitted in 100 % of calls as an *array* —, but **entirely replaces the declared schema** with its own structure, built around unsolicited fields `erro`, `correção`, `texto_original`, and `texto_proposto`. Additionally, 20.5 % of calls present `perguntas_reflexivas` as `NoneType` or composed of nested non-*string* elements, configuring progressive deterioration of contract fidelity as generation advances. The Fisher exact comparison of Phi-3 Mini against the reference model (Table 2) yields *p* < 0.001 \\*\\*\\*, of the same magnitude as the Llama 3.2 family contrasts, justifying its analytical bracketing in the same regime of zero-shot non-adherence.
 
 More grave, however, is the **pedagogical inversion** of the *prompt*: the model, trained predominantly on English-language corpora for general-purpose assistant use cases, assumes a corrective-prescriptivist posture in flagrant violation of the explicit directive of the *system prompt* — "value linguistic varieties and orality marks" —, producing, for instance, outputs in which it classifies the legitimate colloquialism *"tava"* as an error to be corrected to *"estava"* and, in sequence, **hallucinates a non-existent grammatical rule** by prescribing the form *"lera"* (pluperfect) as replacement for the form *"leu"* (simple past), correctly employed by the student.
 
@@ -289,19 +292,19 @@ The phenomenon of Phi-3's inflated verbosity — 471 mean tokens against the 104
 
 ### 5.3 Robustness Analysis of the Llama 3.2 Architectural Finding via Controlled Counter-Experiment
 
-The perfect uniformity of divergence observed in the Llama 3.2 family — 78 calls, two architectural sizes, zero conformant responses in the main protocol — imposes, by sound scientific practice, deliberate examination of competing hypotheses that would reduce the finding to an instrumental artifact before sustaining it as a behavioral signature of the model. To this end, the secondary protocol described in Subsection 3.8 was integrally executed, totaling 80 additional calls under the same local inference stack. Table 3 synthesizes the outcomes.
+The perfect uniformity of divergence observed in the Llama 3.2 family — 78 calls, two architectural sizes, zero conformant responses in the main protocol — imposes, by sound scientific practice, deliberate examination of competing hypotheses that would reduce the finding to an instrumental artifact before sustaining it as a behavioral signature of the model. To this end, the secondary protocol described in Subsection 3.8 was integrally executed, totaling 80 additional calls under the same local inference stack. Table 3 synthesizes the outcomes, accompanied by Wilson 95 % CIs and the two-sided Fisher exact *p*-value of each isolation against the zero-shot baseline.
 
-**Table 3.** Structural conformance rate of the Llama 3.2 family under falsification isolations.
+**Table 3.** Structural conformance of the Llama 3.2 family under falsification isolations.
 
-| Isolation | Experimental condition | Llama 3.2 1B | Llama 3.2 3B |
-|---|---|---:|---:|
-| Baseline | `temperature = 0.2`, zero-shot (main protocol) | 0/39 (0.0 %) | 0/39 (0.0 %) |
-| **E1** | `temperature = 0.0`, zero-shot | 0/13 (0.0 %) | 0/13 (0.0 %) |
-| **E2** | `temperature = 0.2`, *one-shot* in-context | **11/12 (91.7 %)**¹ | **12/12 (100.0 %)** |
-| **E2b** | `temperature = 0.0`, *one-shot* in-context | **9/12 (75.0 %)**² | **12/12 (100.0 %)** |
-| **E3** | Identical payload via `curl`, outside Python layer | 1/1 (typological failure reproduced) | 1/1 (typological failure reproduced) |
+| Isolation | Llama 3.2 1B | Llama 3.2 3B | Wilson 95 % CI (3B) | Fisher vs. baseline |
+|---|:---:|:---:|:---:|:---:|
+| Baseline (zero-shot, *t* = 0.2) | 0 / 39 (0.0 %) | 0 / 39 (0.0 %) | [0.0 %; 9.0 %] | — |
+| **E1** (zero-shot, *t* = 0.0) | 0 / 13 (0.0 %) | 0 / 13 (0.0 %) | [0.0 %; 22.8 %] | *p* = 1.000 n.s. |
+| **E2** (one-shot, *t* = 0.2) | **11 / 12 (91.7 %)**¹ | **12 / 12 (100.0 %)** | [75.8 %; 100.0 %] | ***p* < 0.001 \\*** |
+| **E2b** (one-shot, *t* = 0.0) | **9 / 12 (75.0 %)**² | **12 / 12 (100.0 %)** | [75.8 %; 100.0 %] | ***p* < 0.001 \\*** |
+| **E3** (curl, zero-shot) | failure reproduced | failure reproduced | — | — |
 
-¹ The single non-conformance of the 1B in E2 derives from HTTP *timeout*, not from a structural violation of the response actually returned. ² Idem for 3/12 of the 1B in E2b — timeouts associated with the context-budget increase introduced by the demonstrative pair of *one-shot*, with no implication on the typological conformance of the completed calls.
+*Note. ¹ The single non-conformance of the 1B in E2 derives from HTTP timeout, not from a structural violation of the response actually returned. ² Idem for 3 of 12 of the 1B in E2b — timeouts associated with the context-budget increase introduced by the demonstrative pair of one-shot, with no implication on the typological conformance of the completed calls. \\*\\*\\* p < 0.001, two-sided Fisher exact, α = 0.05. Fisher comparisons reported for the 3B variant against its own zero-shot baseline (0/39); the 1B variant exhibits the same direction of effect under the same conventional thresholds.*
 
 The joint reading of the four isolations sustains three interlinked conclusions, of falsificationist nature, on the nature of the finding.
 
@@ -309,7 +312,7 @@ The joint reading of the four isolations sustains three interlinked conclusions,
 
 **Second conclusion — the bias is in the model, not in the client stack.** In E3, transmission of the same JSON payload to the Ollama endpoint via `curl`, eliminating any mediation by the Python `requests` library, integrally reproduces the typological-divergence pattern observed in the main protocol — `pontos_fortes` returned as a list, JSON syntactically valid, other keys consistent. Hypotheses that would attribute divergence to interference of the client transport layer, HTTP headers, payload encoding, or `messages` array serialization are therefore falsified.
 
-**Third conclusion — the bias is one of zero-shot obedience, not of compositional incapacity.** In E2, the precedence of a single `user`/`assistant` pair exhibiting the canonical gold response for scenario 1 produces total reversal of divergence: the 3B model reaches 12/12 conformance in the twelve subsequent scenarios, and the 1B model reaches 11/12 (with the single exception attributable to transport *timeout*, not format failure). The stability of this reversal is confirmed in E2b, in which the combination of *one-shot* with `temperature = 0.0` preserves 100 % conformance in the 3B. The reversal is corroborated by Fisher's exact test on the 2×2 condition-by-conformance contingency: for Llama 3.2 3B, zero-shot baseline (0/39 conformant) versus *one-shot* condition (12/12 conformant) yields Fisher exact two-sided *p* = 6.3 × 10⁻¹²; for Llama 3.2 1B, baseline (0/39) versus *one-shot* (11/11 conformant, excluding one HTTP timeout) yields *p* = 2.7 × 10⁻¹¹. The epistemic inference is direct: the Llama 3.2 family models **possess the compositional capacity** to produce `pontos_fortes` as monolithic string respecting the declared schema; what is compromised is obedience to this specification when provided exclusively in natural language under zero-shot regime, without contextual demonstration. The enumeration attractor is dominant only in the absence of a contrary demonstrative anchor.
+**Third conclusion — the bias is one of zero-shot obedience, not of compositional incapacity.** In E2, the precedence of a single `user`/`assistant` pair exhibiting the canonical gold response for scenario 1 produces total reversal of divergence: the 3B model reaches 12/12 conformance in the twelve subsequent scenarios, and the 1B model reaches 11/12 (with the single exception attributable to transport *timeout*, not format failure). The stability of this reversal is confirmed in E2b, in which the combination of *one-shot* with `temperature = 0.0` preserves 100 % conformance in the 3B. The reversal is corroborated by Fisher's exact test on the 2×2 condition-by-conformance contingency (Table 3): for both the Llama 3.2 3B variant (12/12 conformant under one-shot vs. 0/39 baseline) and the 1B variant (11/12 conformant, with the single non-conformance attributable to HTTP timeout rather than structural violation), the contrast yields *p* < 0.001 \\*\\*\\*. By contrast, the determinism-isolation E1 (0/13 vs. 0/39 baseline) yields *p* = 1.000 n.s., confirming that the bias is invariant to sampling temperature. The epistemic inference is direct: the Llama 3.2 family models **possess the compositional capacity** to produce `pontos_fortes` as monolithic string respecting the declared schema; what is compromised is obedience to this specification when provided exclusively in natural language under zero-shot regime, without contextual demonstration. The enumeration attractor is dominant only in the absence of a contrary demonstrative anchor.
 
 This set of conclusions repositions the Subsection 5.1 finding with added precision. The Llama 3.2 family does not exhibit categorial incapacity to operate as a structured tutor — it exhibits a **reversible zero-shot bias**, in the strict sense of Liu et al. (2025): failure in the Orchestration phase of the tutorial response when the operational regime does not provide a demonstrative reference, with full recovery when such reference is provided. This characterization has three implications:
 
@@ -317,29 +320,25 @@ This set of conclusions repositions the Subsection 5.1 finding with added precis
 2. **Operational implication for alternative deployments.** A valid intermediate route is established for schools or municipal networks that, for pedagogical or technical-sovereignty reasons, prefer the Llama 3.2 family: the additional engineering cost consists of keeping a ~300-token demonstrative pair in the context per call, a moderate budget increase but with an observable latency penalty, as registered by the *timeouts* in E2/E2b over the 1B.
 3. **Implication for the literature on format bias.** The present study contributes controlled experimental evidence that the bias documented by Zheng et al. (2023), Wu and Aji (2023), and Liu et al. (2025) **is not absolute**: it is a function of the operational regime adopted. This empirical refinement, derived from a directed falsification protocol, offers a basis for future studies on the computational economy of educational *prompt engineering* as a mitigator of post-training bias in off-the-shelf SLMs.
 
-### 5.4 Synthesis of Inferential Comparisons
-
-Table 4 consolidates the seven Fisher's exact test outcomes referenced throughout Subsections 5.1–5.3, for unified reviewer consultation. All comparisons are two-sided. *p*-values reported as *p* < 10⁻¹⁵ correspond to outcomes below the floating-point precision floor of the SciPy implementation employed; the actual exact probability, derived by combinatorial enumeration, is below this threshold by orders of magnitude.
-
-**Table 4.** Synthesis of pairwise Fisher exact tests on 2×2 conformance contingencies.
-
-| # | Comparison | Group A (conf./n) | Group B (conf./n) | Fisher exact *p* (two-sided) |
-|---|---|---:|---:|---:|
-| F1 | Llama 3.2 1B vs. Qwen 2.5 1.5B | 0 / 39 | 38 / 39 | *p* < 10⁻¹⁵ |
-| F2 | Llama 3.2 3B vs. Qwen 2.5 3B | 0 / 39 | 39 / 39 | *p* < 10⁻¹⁵ |
-| F3 | Llama 3.2 3B vs. Gemma 2 2B | 0 / 39 | 38 / 39 | *p* < 10⁻¹⁵ |
-| F4 | Phi-3 mini vs. Qwen 2.5 3B | 0 / 39 | 39 / 39 | *p* < 10⁻¹⁵ |
-| F5 | Phi-3 mini vs. Llama 3 8B | 0 / 39 | 39 / 39 | *p* < 10⁻¹⁵ |
-| F6 | Llama 3.2 1B: zero-shot baseline vs. *one-shot* (E2) | 0 / 39 | 11 / 11 | *p* = 2.7 × 10⁻¹¹ |
-| F7 | Llama 3.2 3B: zero-shot baseline vs. *one-shot* (E2) | 0 / 39 | 12 / 12 | *p* = 6.3 × 10⁻¹² |
-
-The seven tests jointly sustain the inferential framework of the paper: the four cross-family architectural separations (F1–F5) reject homogeneous-conformance nulls at any conventional threshold and identify the Llama 3.2 and Phi-3 families as statistically distinguishable from the structurally conformant population; the two paired-condition reversals (F6–F7) reject the null of zero-shot–invariance for the Llama 3.2 family and statistically corroborate the reclassification of its divergence as a reversible obedience bias. The conditional maximum-likelihood odds ratio is degenerate in all seven contrasts due to zero cells in the contingency tables; the exact *p*-value alone constitutes the reportable effect, in line with standard practice for categorical comparisons under extreme proportion regimes.
-
 ## 6. Qualitative Analysis: Pedagogical Adherence of the Conformant Model
 
 The joint reading of Sections 4 and 5 isolates `qwen2.5:3b-instruct` as the unique configuration among the *deployable* models simultaneously satisfying all non-functional requirements: mean latency of 2.906 s (below the HCI threshold), controlled variability (CV = 19.0 %), and full adherence (0/39) to the JSON contract without recourse to external coercion. This result, however, **does not authorize optimistic inference about the model's pedagogical adequacy**, as demonstrated in the additional qualitative inspection below.
 
-Applying the metalinguistic criterion described in Subsection 3.6 to the 13 responses of the first repetition of `qwen2.5:3b-instruct`, it is observed that **only 6 of 13 responses (46.2 %) mobilize any terminology of the cohesion taxonomy** — pronominalization, lexical repetition, connective, argumentative operator, temporal marker, juxtaposition. In the seven remaining scenarios (53.8 %), the model shifts the interlocution to the **thematic-narrative plane of the literary work cited** by the student (characters, plot, setting), commenting elements of the literary source rather than evaluating the textuality of the production. As an illustration, the response to the scenario on Referential Cohesion — in which the student text repeats eight times the noun phrase *"a cartomante"* across four consecutive sentences — merely observes "good structure, clear beginning, and conclusion that highlights the importance of reading", without any mention of the excessive lexical repetition that constituted the target phenomenon of the scenario.
+Applying the metalinguistic criterion described in Subsection 3.6 to the 13 responses of the first repetition of `qwen2.5:3b-instruct`, it is observed that only 6 of 13 responses (46.2 %; Wilson 95 % CI: [23.2 %; 70.9 %]) mobilize any terminology of the cohesion taxonomy — pronominalization, lexical repetition, connective, argumentative operator, temporal marker, juxtaposition. Table 4 reports the observed proportion alongside the interpretation of the confidence bounds.
+
+**Table 4.** Metalinguistic adherence of `qwen2.5:3b-instruct` (Wilson 95 % CI).
+
+| Metric | Result |
+|---|---|
+| Scenarios mobilizing Koch terminology | 6 / 13 (46.2 %) |
+| Wilson 95 % CI | [23.2 %; 70.9 %] |
+| Upper bound (optimistic) | 70.9 %: absence in ≥ 29 % of scenarios |
+| Lower bound (pessimistic) | 23.2 %: absence in ≥ 77 % of scenarios |
+| Classification | Partial and unstable adherence (sustained by CI) |
+
+*Note. The width of the CI ([23.2 %; 70.9 %]) reflects the small n of canonical scenarios (n = 13) and constitutes an acknowledged limitation of this analysis; nevertheless, even the upper bound of the interval implies absence of metalinguistic terminology in at least 29 % of scenarios, preserving the characterization of partial and unstable adherence regardless of where the true rate lies within the interval.*
+
+In the seven remaining scenarios (53.8 %), the model shifts the interlocution to the **thematic-narrative plane of the literary work cited** by the student (characters, plot, setting), commenting elements of the literary source rather than evaluating the textuality of the production. As an illustration, the response to the scenario on Referential Cohesion — in which the student text repeats eight times the noun phrase *"a cartomante"* across four consecutive sentences — merely observes "good structure, clear beginning, and conclusion that highlights the importance of reading", without any mention of the excessive lexical repetition that constituted the target phenomenon of the scenario.
 
 This constitutes a **categorial task failure**: the model conflates *what the student wrote* with *what the student wrote about*, and loses the central pedagogical object of the Socratic intervention oriented by metalinguistic rubric. Even in scenarios in which some taxonomy term is evoked, the approach is predominantly declarative — the model *names* the linguistic phenomenon without leading the student to *reflect* on how it operates in the produced text, contradicting the dialogic Socratic structure prescribed by the rubric (Paul; Elder, 2007).
 
@@ -357,44 +356,44 @@ The simultaneous persistence of these two failure regimes — across models from
 
 ## Acknowledgments
 
-The author thanks his advisor, Prof. Dr. Marcelo Magalhães Foohs, and his co-advisor, Profa. Dra. Rosa Maria Vicari, both at the Graduate Program in Informatics in Education (PPGIE) of the Federal University of Rio Grande do Sul (UFRGS), for their guidance throughout this investigation. The author also thanks PPGIE/UFRGS for institutional support and the Coordination for the Improvement of Higher Education Personnel (CAPES) for the doctoral scholarship funding.
+The authors thank Profa. Dra. Rosa Maria Vicari (PPGIE/UFRGS) for her role as co-advisor in this investigation. The authors also thank the Graduate Program in Informatics in Education (PPGIE) of the Federal University of Rio Grande do Sul (UFRGS) for institutional support, and the Coordination for the Improvement of Higher Education Personnel (CAPES) for the doctoral scholarship funding.
 
 ---
 
 ## References
 
-ABDIN, M. et al. **Phi-3 Technical Report: A Highly Capable Language Model Locally on Your Phone**. arXiv:2404.14219, 2024. Available at: https://arxiv.org/abs/2404.14219.
+Abdin, M., Aneja, J., Awadalla, H., Awasthi, A., Awan, A., Bach, N., Bahree, A., Bakhtiari, A., Bao, J., Behl, H., et al. (2024). *Phi-3 technical report: A highly capable language model locally on your phone*. arXiv:2404.14219. https://arxiv.org/abs/2404.14219
 
-BRASIL. **Lei nº 13.709, de 14 de agosto de 2018**. Brazilian General Data Protection Law (LGPD). Brasília, DF: Presidency of the Republic, 2018.
+Brasil. (2018). *Lei nº 13.709, de 14 de agosto de 2018: Lei Geral de Proteção de Dados Pessoais (LGPD)*. Presidência da República.
 
-CARD, S. K.; ROBERTSON, G. G.; MACKINLAY, J. D. The information visualizer, an information workspace. In: **Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI '91)**. New Orleans: ACM Press, 1991. p. 181–186.
+Card, S. K., Robertson, G. G., & Mackinlay, J. D. (1991). The information visualizer, an information workspace. In *Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI '91)* (pp. 181–186). ACM Press.
 
-CGI.br/NIC.br/Cetic.br. **Survey on the use of information and communication technologies in Brazilian schools: TIC Educação 2023**. São Paulo: Brazilian Internet Steering Committee, 2024.
+CGI.br, NIC.br, & Cetic.br. (2024). *Pesquisa sobre o uso das tecnologias de informação e comunicação nas escolas brasileiras: TIC Educação 2023*. Comitê Gestor da Internet no Brasil.
 
-GEMMA TEAM (Google DeepMind). **Gemma 2: Improving Open Language Models at a Practical Size**. arXiv:2408.00118, 2024. Available at: https://arxiv.org/abs/2408.00118.
+Gemma Team. (2024). *Gemma 2: Improving open language models at a practical size*. arXiv:2408.00118. https://arxiv.org/abs/2408.00118
 
-GRATTAFIORI, A. et al. **The Llama 3 Herd of Models**. arXiv:2407.21783, 2024. Available at: https://arxiv.org/abs/2407.21783.
+Grattafiori, A., Dubey, A., Jauhri, A., Pandey, A., Kadian, A., Al-Dahle, A., Letman, A., Mathur, A., Schelten, A., Vaughan, A., et al. (2024). *The Llama 3 herd of models*. arXiv:2407.21783. https://arxiv.org/abs/2407.21783
 
-KASNECI, E. et al. ChatGPT for good? On opportunities and challenges of large language models for education. **Learning and Individual Differences**, v. 103, 102274, 2023. DOI: 10.1016/j.lindif.2023.102274.
+Kasneci, E., Sessler, K., Küchemann, S., Bannert, M., Dementieva, D., Fischer, F., Gasser, U., Groh, G., Günnemann, S., Hüllermeier, E., et al. (2023). ChatGPT for good? On opportunities and challenges of large language models for education. *Learning and Individual Differences*, *103*, 102274. https://doi.org/10.1016/j.lindif.2023.102274
 
-KOCH, I. G. V. **A coesão textual** [Textual cohesion]. 22. ed. São Paulo: Contexto, 2018. [1st edition: 1989]
+Koch, I. G. V. (2018). *A coesão textual* [Textual cohesion] (22nd ed.). Contexto. (Original work published 1989)
 
-KOCH, I. G. V. **Introdução à linguística textual: trajetória e grandes temas** [Introduction to textual linguistics: trajectory and great themes]. 2. ed. São Paulo: Contexto, 2020.
+Koch, I. G. V. (2020). *Introdução à linguística textual: trajetória e grandes temas* [Introduction to textual linguistics: Trajectory and great themes] (2nd ed.). Contexto.
 
-KOCH, I. G. V.; ELIAS, V. M. **Escrever e argumentar** [Writing and arguing]. São Paulo: Contexto, 2016.
+Koch, I. G. V., & Elias, V. M. (2016). *Escrever e argumentar* [Writing and arguing]. Contexto.
 
-LIU, Y.; LI, C.; ZHANG, T.; WANG, M.; ZHU, Q.; LI, J.; HUANG, H. **Discerning Minds or Generic Tutors? Evaluating Instructional Guidance Capabilities in Socratic LLMs**. arXiv:2508.06583, 2025. Available at: https://arxiv.org/abs/2508.06583.
+Liu, Y., Li, C., Zhang, T., Wang, M., Zhu, Q., Li, J., & Huang, H. (2025). *Discerning minds or generic tutors? Evaluating instructional guidance capabilities in Socratic LLMs*. arXiv:2508.06583. https://arxiv.org/abs/2508.06583
 
-MACINA, J.; DAHEIM, N.; HAKIMI, I.; KAPUR, M.; GUREVYCH, I.; SACHAN, M. MathTutorBench: A Benchmark for Measuring Open-ended Pedagogical Capabilities of LLM Tutors. In: **Proceedings of EMNLP 2025**. Singapore: ACL, 2025. Preprint: arXiv:2502.18940. Available at: https://arxiv.org/abs/2502.18940.
+Macina, J., Daheim, N., Hakimi, I., Kapur, M., Gurevych, I., & Sachan, M. (2025). MathTutorBench: A benchmark for measuring open-ended pedagogical capabilities of LLM tutors. In *Proceedings of EMNLP 2025*. ACL. arXiv:2502.18940. https://arxiv.org/abs/2502.18940
 
-NIELSEN, J. **Usability Engineering**. San Francisco: Morgan Kaufmann, 1993.
+Nielsen, J. (1993). *Usability engineering*. Morgan Kaufmann.
 
-PAUL, R.; ELDER, L. Critical Thinking: The Art of Socratic Questioning. **Journal of Developmental Education**, v. 31, n. 1, p. 36–37, 2007.
+Paul, R., & Elder, L. (2007). Critical thinking: The art of Socratic questioning. *Journal of Developmental Education*, *31*(1), 36–37.
 
-TLILI, A. et al. What if the devil is my guardian angel: ChatGPT as a case study of using chatbots in education. **Smart Learning Environments**, v. 10, n. 1, art. 15, 2023. DOI: 10.1186/s40561-023-00237-x.
+Tlili, A., Shehata, B., Adarkwah, M. A., Bozkurt, A., Hickey, D. T., Huang, R., & Agyemang, B. (2023). What if the devil is my guardian angel: ChatGPT as a case study of using chatbots in education. *Smart Learning Environments*, *10*(1), Article 15. https://doi.org/10.1186/s40561-023-00237-x
 
-WU, M.; AJI, A. F. **Style Over Substance: Evaluation Biases for Large Language Models**. arXiv:2307.03025, 2023. Available at: https://arxiv.org/abs/2307.03025.
+Wu, M., & Aji, A. F. (2023). *Style over substance: Evaluation biases for large language models*. arXiv:2307.03025. https://arxiv.org/abs/2307.03025
 
-YANG, A. et al. (Qwen Team). **Qwen2.5 Technical Report**. arXiv:2412.15115, 2024. Available at: https://arxiv.org/abs/2412.15115.
+Yang, A., Yang, B., Hui, B., Zheng, B., Yu, B., Zhou, C., Li, C., Li, C., Liu, D., Huang, F., et al. (2024). *Qwen2.5 technical report*. arXiv:2412.15115. https://arxiv.org/abs/2412.15115
 
-ZHENG, L. et al. Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena. In: **Advances in Neural Information Processing Systems 36 (NeurIPS 2023)**. New Orleans: 2023.
+Zheng, L., Chiang, W.-L., Sheng, Y., Zhuang, S., Wu, Z., Zhuang, Y., Lin, Z., Li, Z., Li, D., Xing, E. P., Zhang, H., Gonzalez, J. E., & Stoica, I. (2023). Judging LLM-as-a-judge with MT-bench and Chatbot Arena. In *Advances in Neural Information Processing Systems 36 (NeurIPS 2023)*.
