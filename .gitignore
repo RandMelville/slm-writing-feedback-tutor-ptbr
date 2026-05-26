@@ -17,6 +17,9 @@ env/
 # Private artifacts of the planned fine-tuned model (NOT part of this benchmark)
 _privado_modelo_futuro/
 
+# Local DOCX drafts (not for public versioning unless explicitly added)
+benchmark_slm_reboucas_foohs_v*.docx
+
 # Claude Code — local per-machine settings
 .claude/settings.local.json
 
