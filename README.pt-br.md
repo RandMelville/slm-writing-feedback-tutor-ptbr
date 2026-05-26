@@ -1,6 +1,7 @@
 # Avaliação Diagnóstica de Modelos de Linguagem de Pequeno Porte para Tutoria Socrática Offline em Língua Portuguesa: um Estudo de Aderência Estrutural e Pedagógica sob Restrições de Infraestrutura Escolar Pública
 
 [![Paper](https://img.shields.io/badge/paper-PDF-blue)](paper/artigo_benchmark_slm.pdf)
+[![Relatório](https://img.shields.io/badge/relat%C3%B3rio-interativo-purple)](https://randmelville.github.io/slm-socratic-tutor-ptbr/report/)
 [![Python](https://img.shields.io/badge/python-3.11+-blue)](https://www.python.org)
 [![Código](https://img.shields.io/badge/c%C3%B3digo-MIT-green)](LICENSE)
 [![Dados](https://img.shields.io/badge/dados-CC--BY%204.0-green)](LICENSE-DATA)
@@ -33,7 +34,10 @@ Três achados:
 Metodologia, tabelas e referências completas em
 [`paper/artigo_benchmark_slm.pdf`](paper/artigo_benchmark_slm.pdf) (também
 disponível em [`DOCX`](paper/artigo_benchmark_slm.docx) e
-[`Markdown`](paper/artigo_benchmark_slm.md)).
+[`Markdown`](paper/artigo_benchmark_slm.md)). Um
+[relatório HTML interativo](https://randmelville.github.io/slm-socratic-tutor-ptbr/report/)
+também está disponível, com os resultados por modelo e o protocolo de
+falsificação em formato navegável.
 
 ## Requisitos
 

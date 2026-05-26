@@ -1,6 +1,7 @@
 # A Diagnostic Evaluation of Small Language Models for Offline Socratic Tutoring in Brazilian Portuguese: A Study on Structural and Pedagogical Adherence under Public-School Infrastructure Constraints
 
 [![Paper](https://img.shields.io/badge/paper-PDF-blue)](paper/artigo_benchmark_slm.pdf)
+[![Report](https://img.shields.io/badge/interactive-report-purple)](https://randmelville.github.io/slm-socratic-tutor-ptbr/report/)
 [![Python](https://img.shields.io/badge/python-3.11+-blue)](https://www.python.org)
 [![Code](https://img.shields.io/badge/code-MIT-green)](LICENSE)
 [![Data](https://img.shields.io/badge/data-CC--BY%204.0-green)](LICENSE-DATA)
@@ -33,7 +34,10 @@ Three findings:
 Full methodology, tables, and references are in
 [`paper/artigo_benchmark_slm.pdf`](paper/artigo_benchmark_slm.pdf) (also
 available as [`DOCX`](paper/artigo_benchmark_slm.docx) and
-[`Markdown`](paper/artigo_benchmark_slm.md)).
+[`Markdown`](paper/artigo_benchmark_slm.md)). An
+[interactive HTML report](https://randmelville.github.io/slm-socratic-tutor-ptbr/report/)
+is also available with the per-model results and the falsification protocol
+in browsable form.
 
 ## Requirements
 
