@@ -1,0 +1,32 @@
+# Final Benchmark Report
+
+Models tested: **8**  |  Scenarios: 13  |  Repetitions: 3  |  Total calls: 312
+
+
+## 1. Unified Summary Table
+
+| Model | Mean Latency (ms) | Mean Output Tokens | Structural Divergence Rate |
+|---|---:|---:|---:|
+| `qwen2.5:1.5b-instruct` | 2299 | 118.8 | 2.6% (1/39) |
+| `llama3.2:1b` | 2389 | 119.5 | 100.0% (39/39) |
+| `qwen2.5:3b-instruct` | 2906 | 104.6 | 0.0% (0/39) |
+| `llama3.2:3b` | 3020 | 108.9 | 100.0% (39/39) |
+| `gemma2:2b` | 3744 | 121.8 | 2.6% (1/39) |
+| `gemma2:9b` | 8681 | 126.9 | 0.0% (0/39) |
+| `llama3:8b` | 10523 | 144.7 | 0.0% (0/39) |
+| `phi3:mini` | 14769 | 471.2 | 100.0% (39/39) |
+
+## 2. Systemic Failures Identified
+
+- **Llama 3.2 3B — full collapse of the Socratic schema (100% divergence, 39/39 responses).** The model emits syntactically valid JSON but returns `pontos_fortes` as a **list** instead of a **string**, violating the contract declared in the SYSTEM_PROMPT in 100% of cases under zero-shot regime. The bias is fully reversible under one-shot in-context demonstration; see the paper for the falsification protocol.
+- **Phi-3 Mini — format deviations (100.0% divergence, 39/39 responses).** Despite being marketed by Microsoft as strong in structured reasoning, the model consistently fails when prompted in Brazilian Portuguese: omits keys, generates lists in place of strings, or returns free text inside the JSON. High variance across repetitions suggests low instruction stability in PT-BR.
+
+## 3. AI Engineering Conclusion — Recommended Base Model
+
+**Qwen 2.5 3B-Instruct** is the recommended base model for downstream pedagogical fine-tuning:
+- **Classroom-compatible speed**: mean latency of **2906 ms** — ~5.1x faster than the slowest model tested and comfortably below the 10 s threshold for synchronous educational UX.
+- **Full obedience to the JSON contract**: **0% divergence** (0/39). Emits `pontos_fortes` as string and `perguntas_reflexivas` as list exactly as the SYSTEM_PROMPT specifies — no grammar coercion needed at inference time.
+- **Hardware compatible with public schools**: 3B parameters in Q4 quantization occupy ~2 GB RAM, feasible on modest laptops. The 8-9B models tested (Llama 3 8B, Gemma 2 9B) serve only as reference ceiling in the paper; they are not deployable for the 2026.2 pilot.
+- **Headroom for pedagogical LoRA**: by selecting a model that already respects the schema, fine-tuning capacity can focus on the Socratic Koch rubric (theoretical focus, pedagogical distancing, Computational Thinking bridge) rather than spending adapter capacity fixing format — essential leverage given the still-small dataset (13 -> ~200-500 audited examples).
+
+In summary: **Qwen 2.5 3B-Instruct** combines the best trade-off of speed, structural obedience, and hardware footprint among the 8 models evaluated, providing the most defensible infrastructure to sustain the next phase of fine-tuning on real student writing collected during the pilot.

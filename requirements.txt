@@ -1,0 +1,8 @@
+# Pinned runtime dependencies for the SLM benchmark.
+# All scripts run on Python 3.11+ using these four packages plus the standard library.
+
+requests>=2.31,<3
+pandas>=2.0,<3
+matplotlib>=3.7,<4
+scipy>=1.11,<2
+reportlab>=4.0,<5

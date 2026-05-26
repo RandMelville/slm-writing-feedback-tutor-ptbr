@@ -2,7 +2,7 @@
 
 > Memória de trabalho para assistentes Claude operando neste diretório.
 > Pesquisador: Randerson Melville Rebouças (UFRGS) — randerson.melville@gmail.com
-> Última revisão: 2026-05-22
+> Última revisão: 2026-05-25 — benchmark concluído, paper em EN, contra-experimento Llama 3.2 executado e integrado (§5.3 do paper), Fisher exact rodado (§5.4 do paper), reorganização do repo para padrão de publicação aberta concluída. Estrutura pública atual em §2.
 
 ---
 
@@ -34,26 +34,73 @@ Quando falar em "tese", "plataforma", "aluno", "professora", "andaime cognitivo"
 
 ---
 
-## 2. Estado atual dos artefatos
+## 2. Estado atual dos artefatos (pós-reorganização 2026-05-25)
 
-| Arquivo | Conteúdo | Status |
-|---|---|---|
-| `benchmark_local.py` | Driver que bate no Ollama local com `SYSTEM_PROMPT` do Bento e roda 5 cenários × N modelos | Funcional — precisa atualizar modelos (§5) |
-| `resultados_benchmark_brutos.json` | 10 logs (5 cenários × 2 modelos: `llama3:8b`, `gemma2:9b`) com latência, tokens, resposta JSON | Cobertura parcial; vira teto de referência, não centro do benchmark |
-| `bento8b_dataset_final.jsonl` | 13 cenários padrão-ouro (Coesão Referencial + Sequencial, Koch 2020), JSON socrático autoral | Pequeno demais para FT real |
-| `bento_train_data/train.jsonl` | 13 linhas (cópia do padrão-ouro) | OK |
-| `bento_train_data/valid.jsonl` | **Vazio** (corrigido em 2026-05-22) | OK — ver `bento_train_data/README.md` |
-| `bento_train_data/README.md` | Documenta por que valid.jsonl está vazio e quando voltará a ter conteúdo | OK |
-| `adapters/adapter_config.json` | Qwen2.5-7B-Instruct, LoRA `rank=8, scale=20, dropout=0, 4 layers, lr=1e-5, 20 iters` | Smoke test válido |
-| `adapters/adapters.safetensors` | Pesos LoRA do smoke test (~11 MB, ignorado pelo `.gitignore`) | Sanity check 2026-05-22: LoRA age (+4 pp overlap vs base), mas é *style transfer*, não rubrica Koch — ver `logs/sanity_check_2026_05_22.md` |
-| `prompts.py` | `SYSTEM_PROMPT` canônico (single source of truth) | Criado em 2026-05-22 — unifica os dois prompts que divergiam |
-| `inferencia_adapter.py` | Carrega adapter, modos `--query` e `--sanity-check`, flag `--no-adapter` para comparação | Criado em 2026-05-22 — preserva `SYSTEM_PROMPT_LEGADO` para sanity check honesto |
-| `logs/sanity_check_2026_05_22.md` | Resultado completo do sanity check + interpretação | Achados vão pro paper de benchmark |
-| `Diario_Bento8B_Framework_MLX.txt` | Diário da sessão de FT | ⚠️ Diz 16 layers, mas config real é 4. Trust config, não diário |
+A pasta foi reorganizada em **dois espaços disjuntos**:
+
+### 2.1 Repo público do benchmark (raiz)
+
+Estrutura adequada para git público + reprodução em quatro comandos. Tudo aqui é citável e licenciável (código MIT, dados+paper CC-BY 4.0).
+
+```
+README.md, LICENSE, LICENSE-DATA, CITATION.cff, requirements.txt, .gitignore
+CLAUDE.md (este arquivo, fica em PT-BR para uso interno)
+
+paper/
+  artigo_benchmark_slm.md   # paper em EN, 380+ linhas, §§3-7 com inferencial
+  artigo_benchmark_slm.pdf  # regenerado via md_to_pdf.py
+  md_to_pdf.py
+  references_inventory.txt  # ex-referencias_literatura_escola.txt
+
+src/                        # todos os scripts em src/, paths via ROOT
+  benchmark_local.py        # driver da coleta (CLI argparse)
+  counter_experiment_llama32.py  # protocolo E1/E2/E2b
+  mine_benchmark.py         # JSON bruto → CSV plano
+  summarize_consolidated.py # tabela + 2 PNGs
+  generate_final_report.py  # human_readable_report.txt (EN)
+  inferential_statistics.py # Fisher exact em 7 contingências 2×2
+  prompts.py                # SYSTEM_PROMPT canônico (Bento preservado, doc no README)
+
+data/
+  scenarios_canonical_koch.jsonl   # ex-bento8b_dataset_final.jsonl
+  human_readable_report.txt        # regenerado em EN
+  results/
+    round_1_main_models.json       # ex-resultados_benchmark_consolidado.json
+    round_2_complementary_models.json   # ex-resultados_modelos_restantes.json
+    counter_experiment_llama32.json     # 74 chamadas do contra-experimento
+    counter_experiment_llama32.log
+
+analises/
+  benchmark_flat.csv
+  inferential_results.json
+  latencia_media.png
+  throughput_tokens.png
+```
+
+### 2.2 `_privado_modelo_futuro/` (ignorado pelo .gitignore, fica fora do repo)
+
+Tudo que pertence ao projeto-modelo (Bento pós-FT), não ao benchmark:
+- `adapters/` (LoRA smoke test, 11 MB)
+- `bento_train_data/`
+- `inferencia_adapter.py`, `expand_dataset.py`
+- `Diario_Bento8B_Framework_MLX.txt`, `data_pipeline/`
+- `logs/sanity_check_2026_05_22.md`, `logs/track_a_2026_05_22.md`
+- `proxima_sessao_pesquisa.md`
+
+Quando retomar o trabalho de fine-tuning depois do piloto, esse espaço vira o repo separado do modelo Bento.
+
+### 2.3 Decisões registradas nesta reorganização
+
+- **Idioma:** paper, README e código em EN; CLAUDE.md e dossiês internos em PT-BR.
+- **"Bento" no SYSTEM_PROMPT** (`src/prompts.py`): preservado verbatim — escolha b1, documentada no README, honra reprodutibilidade dos 388 registros.
+- **Estatística inferencial:** somente Fisher exact 2×2, 7 testes (F1-F7), reportados nas §§5.1, 5.2, 5.3 e Tabela 4 (§5.4).
+- **Dossiê do orientador:** apagado (incorporado integralmente ao paper como §5.3).
+- **Arquivos órfãos** (analise_erros_benchmark.py, resultados_benchmark_brutos.json, contexto_bento.txt, teste_fumaça.json, PNGs antigos de analises/graficos/): descartados.
+- **Overleaf:** `.tex` ainda não gerado — requer `brew install pandoc` antes de `pandoc paper/artigo_benchmark_slm.md -o paper/artigo_benchmark_slm.tex --standalone --listings`.
 
 ### ⚠️ Lacunas restantes
 1. ~~Não existe script de inferência~~ — **resolvido em 2026-05-22** (Track B). Ver `inferencia_adapter.py` + `logs/sanity_check_2026_05_22.md`.
-2. **Benchmark cobre 5/13 cenários e modelos do tamanho errado.** Track E resolve depois da Track A.
+2. ~~**Benchmark cobre 5/13 cenários e modelos do tamanho errado.**~~ — **resolvido em 2026-05-24** (Track E). 8 modelos × 13 cenários × 3 reps = 312 chamadas. Ver §5.0.
 3. **Sem logs de treino preservados** — próxima rodada do MLX-LM precisa redirecionar stdout para `logs/run_YYYYMMDD_HHMM.log`.
 4. **`SYSTEM_PROMPT` canônico pode precisar de regra 6:** *"Não opine sobre a obra que o aluno cita; foque no texto do aluno."* Achado do sanity check — modelo confundiu "alienista" (título) com personagem grande no cenário 5.
 
@@ -170,6 +217,39 @@ bento/
 
 ## 5. Modelos do benchmark — alvo hardware escolar
 
+### 5.0 Resultados consolidados (2026-05-24) — BENCHMARK CONCLUÍDO
+
+**Pipeline executado com sucesso.** 8 modelos × 13 cenários × 3 reps = 312 chamadas, 0 erros de conexão. Outputs em `resultados_benchmark_consolidado.json` + `resultados_modelos_restantes.json`; relatório fechado em `relatorio_final_benchmark.txt`.
+
+**Tabela unificada (ordenada por latência crescente):**
+
+| Modelo | Latência média (ms) | Tokens out médios | Divergência estrutural |
+|---|---:|---:|---:|
+| `qwen2.5:1.5b-instruct` | 2.299 | 118,8 | 2,6% (1/39) |
+| `llama3.2:1b` | 2.389 | 119,5 | **100% (39/39)** |
+| `qwen2.5:3b-instruct` | **2.906** | 104,6 | **0% (0/39)** |
+| `llama3.2:3b` | 3.020 | 108,9 | **100% (39/39)** |
+| `gemma2:2b` | 3.744 | 121,8 | 2,6% (1/39) |
+| `gemma2:9b` | 8.681 | 126,9 | 0% (0/39) |
+| `llama3:8b` | 10.523 | 144,7 | 0% (0/39) |
+| `phi3:mini` | 14.769 | 471,2 | **100% (39/39)** |
+
+**Achados sistemáticos publicáveis:**
+
+1. **Família Llama 3.2 inteira falha o contrato JSON (100% nos dois tamanhos).** Tanto 1B quanto 3B emitem JSON sintaticamente válido mas retornam `pontos_fortes` como **lista** em vez de **string**. Não é problema de capacidade — é falha arquitetural/tuning de família. Sem grammar coercion (BNF no Ollama) ou few-shot pesado, ambos são não-deployáveis como tutor estruturado.
+2. **Phi-3 Mini colapsa em três frentes simultâneas:** 100% divergência + latência 14,7s (5× pior que Qwen 3B, **acima** do limite de 10s pra UX em sala) + verbosidade 4× maior (471 vs ~110-145 tokens). Reforça o argumento de que "instruct-tuning forte em EN" não transfere automaticamente pra PT-BR. Outlier útil pra boxplot do paper.
+3. **Surpresa positiva:** `qwen2.5:1.5b-instruct` é o **mais rápido** (2,3s) e quase limpo (2,6%, 1/39). Alternativa secundária pra escolas com hardware ainda mais modesto.
+
+**Modelo-base do piloto 2026.2 decidido empiricamente: `qwen2.5:3b-instruct`.** Justificativa em 4 critérios:
+- **Velocidade compatível com sala:** 2,9s médios, ~5× mais rápido que o pior outlier, folgadamente abaixo de 10s.
+- **Obediência total ao schema:** 0/39 divergências — único modelo ≤3B com adesão perfeita ao SYSTEM_PROMPT; dispensa grammar coercion no inference.
+- **Hardware compatível:** 3B em Q4 ≈ 2 GB RAM. 8-9B viram apenas teto de referência no paper.
+- **Margem pro LoRA pedagógico:** com o formato já garantido pelo modelo-base, o adapter pode focar 100% da capacidade na rubrica socrática de Koch (foco teórico, 2ª pessoa, ponte com PC) em vez de gastar parâmetros consertando estrutura — crítico dado dataset ainda enxuto.
+
+---
+
+### 5.1 Planejamento original (preservado para histórico)
+
 A matriz original do `benchmark_local.py` (`llama3:8b`, `gemma2:9b`) era boa pra primeira foto, mas esses tamanhos não são deployáveis em escola pública. Para o artigo/capítulo e para escolher o modelo-base do FT, o benchmark precisa cobrir:
 
 **Faixa deployável (centro do benchmark):**
@@ -223,12 +303,12 @@ Ver plano completo em `~/.claude/plans/antes-de-prossugir-para-delegated-metcalf
 
 ### Mapa dos deliverables (cronograma vivo)
 
-| Deliverable | Quando | Depende de |
-|---|---|---|
-| **Paper de Benchmark** | 2026 (workshop) | Tracks A + E + baseline humano + escrita |
-| **Modelo do piloto** (open-source ≤3B, escolhido pelo benchmark) | 2026.2 | Conclusão da Track E |
-| **Bento (modelo fine-tuned)** | 2027+ | Redações reais do piloto + Track D + FT (Track F) |
-| **Bento paper** | 2027+ | Bento treinado + avaliado em test set congelado |
+| Deliverable | Quando | Depende de | Status |
+|---|---|---|---|
+| **Paper de Benchmark** | 2026 (workshop) | Tracks A + E + baseline humano + escrita | Dados completos (Track E ✅); falta baseline humano + escrita |
+| **Modelo do piloto** (open-source ≤3B, escolhido pelo benchmark) | 2026.2 | Conclusão da Track E | ✅ Decidido em 2026-05-24: `qwen2.5:3b-instruct` (§5.0) |
+| **Bento (modelo fine-tuned)** | 2027+ | Redações reais do piloto + Track D + FT (Track F) | Dataset 13 → 200-500 ainda pendente |
+| **Bento paper** | 2027+ | Bento treinado + avaliado em test set congelado | — |
 
 **Track 0 (bloqueante, em execução):** higiene + memória + correção valid.jsonl + este CLAUDE.md.
 
@@ -239,7 +319,7 @@ Ver plano completo em `~/.claude/plans/antes-de-prossugir-para-delegated-metcalf
 
 **Sequenciais após paralelos:**
 - **D** (depende de C.3) — estrutura `data_pipeline/` + esqueletos + `validar_dataset.py`.
-- **E** (depende de A) — rebenchmark com modelos ≤3B + n=3 + 13/13 cenários.
+- **E** ~~(depende de A) — rebenchmark com modelos ≤3B + n=3 + 13/13 cenários.~~ ✅ **Concluída em 2026-05-24.** Ver §5.0.
 
 **Fase 2 (NÃO executar agora):**
 - **F** — FT real em modelo deployable. Pré-requisitos: dataset ≥200 linhas auditadas (D), modelo-base escolhido por evidência (E), test set 100% real congelado.

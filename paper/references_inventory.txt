@@ -1,0 +1,301 @@
+================================================================================
+REFERÊNCIAS BIBLIOGRÁFICAS — LEVANTAMENTO DE LITERATURA REAL (2023-2026)
+Para o artigo de benchmark de SLMs para tutoria socrática offline (RBIE)
+Levantamento realizado em: 2026-05-24
+================================================================================
+
+PROTOCOLO: Cada entrada foi verificada por fetch direto da página oficial
+(arXiv, ACL Anthology, SBC/SOL, SciELO). Itens NÃO verificáveis foram
+descartados. URLs e DOIs incluídos para indexação no Overleaf (BibTeX).
+
+================================================================================
+FRENTE 1 — Modelos de Linguagem na Prática Escolar Brasileira e Conectividade
+================================================================================
+
+[1.1] SOUSA NETO, A. F. de; SILVA, S. D.; SANTOS JÚNIOR, R. de V. dos.
+      ChatGPT como Ferramenta de Aprendizagem: Um Estudo com Estudantes
+      do Ensino Médio no Interior do RN.
+      In: Anais do XXXV Simpósio Brasileiro de Informática na Educação
+      (SBIE 2024). Porto Alegre: SBC, 2024.
+      DOI: https://doi.org/10.5753/sbie.2024.241816
+      URL: https://sol.sbc.org.br/index.php/sbie/article/view/31335
+
+      RESUMO: Estudo empírico com estudantes do ensino médio no interior
+      do Rio Grande do Norte sobre padrões de uso e percepção do ChatGPT
+      em atividades escolares; aponta a integração ampla da ferramenta entre
+      adolescentes mesmo em regiões com infraestrutura limitada, sem, porém,
+      problematizar a dependência de conectividade ou APIs proprietárias.
+
+------------------------------------------------------------------------
+
+[1.2] SILVA, T. L. da; VIDOTTO, K. N. S.; TAROUCO, L. M. R.
+      Investigando as percepções de estudantes e professores do ensino
+      médio e técnico sobre o uso do ChatGPT em suas atividades escolares.
+      In: Anais do XXXV Simpósio Brasileiro de Informática na Educação
+      (SBIE 2024). Porto Alegre: SBC, 2024.
+      DOI: https://doi.org/10.5753/sbie.2024.242584
+      URL: https://sol.sbc.org.br/index.php/sbie/article/view/31362
+
+      RESUMO: Investigação realizada em escola do sul do Brasil mapeando
+      percepções de docentes e discentes sobre o uso pedagógico do ChatGPT
+      em sala de aula. Reforça a tendência nacional de pesquisa centrada em
+      modelos proprietários acessados via nuvem, sem alternativas locais.
+
+------------------------------------------------------------------------
+
+[1.3] LIMA, C. B.; SERRANO, A.
+      Inteligência Artificial Generativa e ChatGPT: uma investigação sobre
+      seu potencial na Educação.
+      Transinformação, Campinas, v. 36, e2410839, 2024.
+      DOI: https://doi.org/10.1590/2318-0889202436e2410839
+      URL: http://www.scielo.br/j/tinf/a/L6D4gn3jb7szxS9LjSK5HSn/?lang=pt
+
+      RESUMO: Revisão sistemática de 10 estudos sobre o impacto do ChatGPT
+      em contextos educacionais brasileiros, identificando potencialidades
+      (geração de conteúdo personalizado, automatização avaliativa) e
+      limitações críticas (raciocínio falho, imprecisão, plágio). Não
+      contempla execução local de modelos abertos como linha de mitigação.
+
+------------------------------------------------------------------------
+
+[1.4] KOUTCHEME, C.; DAINESE, N.; HELLAS, A.
+      Direct Repair Optimization: Training Small Language Models For
+      Educational Program Repair Improves Feedback.
+      In: Proceedings of the 20th Workshop on Innovative Use of NLP for
+      Building Educational Applications (BEA 2025). ACL, 2025.
+      URL: https://aclanthology.org/2025.bea-1.41/
+
+      RESUMO: Demonstra empiricamente que SLMs (LLaMA-3.1-3B e Qwen-2.5-3B
+      — mesmas famílias do nosso benchmark) podem ser melhorados via ajuste
+      fino auto-supervisionado para feedback educacional em programação.
+      Referência internacional direta para a tese de que SLMs deployáveis
+      localmente são viáveis quando especializados — sustenta nossa agenda
+      de desdobramento pós-benchmark.
+
+------------------------------------------------------------------------
+
+LACUNA HONESTA NA LITERATURA (FRENTE 1):
+Não foi localizado, no levantamento, nenhum estudo brasileiro peer-reviewed
+que avalie empiricamente SLMs abertos servidos localmente (via Ollama ou
+similar) como tutores em Língua Portuguesa para a educação básica. As
+publicações brasileiras de 2023-2026 (SBIE, RBIE, Transinformação) tratam
+quase exclusivamente de ChatGPT/GPT-4 via API. Essa lacuna reforça o
+argumento de novidade do nosso artigo e deve ser explicitada na introdução
+como gap empírico endereçado pelo presente trabalho.
+
+================================================================================
+FRENTE 2 — Avaliação de LLMs como Tutores Socráticos / Andaimes de Escrita
+================================================================================
+
+[2.1] MACINA, J.; DAHEIM, N.; HAKIMI, I.; KAPUR, M.; GUREVYCH, I.; SACHAN, M.
+      MathTutorBench: A Benchmark for Measuring Open-ended Pedagogical
+      Capabilities of LLM Tutors.
+      In: Proceedings of EMNLP 2025 (Main Conference, oral). Singapore, 2025.
+      Preprint: arXiv:2502.18940.
+      URL: https://arxiv.org/abs/2502.18940
+
+      RESUMO: Benchmark dedicado à avaliação de capacidades PEDAGÓGICAS
+      (não apenas conceituais) de LLMs atuando como tutores; treina um
+      modelo de recompensa que discrimina respostas de professores
+      experientes vs. novatos e demonstra trade-off entre expertise temática
+      e qualidade pedagógica — achado convergente com a nossa descoberta
+      de superficialidade no Qwen 2.5 3B (Seção 6 do nosso artigo).
+
+------------------------------------------------------------------------
+
+[2.2] LIU, Y.; LI, C.; ZHANG, T.; WANG, M.; ZHU, Q.; LI, J.; HUANG, H.
+      Discerning Minds or Generic Tutors? Evaluating Instructional Guidance
+      Capabilities in Socratic LLMs.
+      Preprint: arXiv:2508.06583, 2025.
+      URL: https://arxiv.org/abs/2508.06583
+
+      RESUMO: Apresenta o GuideEval, framework comportamental em três fases
+      (Percepção, Orquestração, Elicitação) para diagnosticar limites de
+      LLMs como tutores socráticos. Evidencia que perguntas socráticas mal
+      ajustadas ao estado cognitivo do aluno causam sobrecarga e prejudicam
+      a aprendizagem — referência direta para o argumento de que aderência
+      a formato não implica em adequação pedagógica.
+
+------------------------------------------------------------------------
+
+[2.3] HASHEMI, H.; EISNER, J.; ROSSET, C.; VAN DURME, B.; KEDZIE, C.
+      LLM-Rubric: A Multidimensional, Calibrated Approach to Automated
+      Evaluation of Natural Language Texts.
+      In: Proceedings of the 62nd Annual Meeting of the Association for
+      Computational Linguistics (ACL 2024, Long Papers), p. 13806-13834.
+      ACL, 2024.
+      URL: https://aclanthology.org/2024.acl-long.745/
+
+      RESUMO: Propõe framework calibrado para avaliação automatizada de
+      textos via LLM combinando distribuições multidimensionais de juízes
+      humanos a uma rede neural pequena por avaliador. Sustenta
+      metodologicamente o uso de rubricas estruturadas (como a taxonomia
+      de Koch no nosso trabalho) para diagnóstico de saídas de LLMs.
+
+------------------------------------------------------------------------
+
+[2.4] ROSA, B. A.; OLIVEIRA, H.; RODRIGUES, L.; OLIVEIRA, E. A.; MELLO, R. F.
+      Enhancing Essay Cohesion Assessment: A Novel Item Response Theory
+      Approach.
+      Preprint: arXiv:2507.08487, 2025.
+      URL: https://arxiv.org/abs/2507.08487
+
+      RESUMO: Combina Teoria de Resposta ao Item (TRI) com aprendizado de
+      máquina para avaliar COESÃO TEXTUAL em redações em português brasileiro,
+      usando 325 features linguísticas sobre os corpora Essay-BR (6.563
+      redações) e Brazilian Portuguese Narrative Essays (1.235 redações).
+      Referência nacional direta sobre operacionalização computacional de
+      coesão à luz da Linguística Textual — base para diálogo com a
+      taxonomia de Koch adotada no nosso benchmark.
+
+------------------------------------------------------------------------
+
+[2.5] RIBEIRO, E.; MAMEDE, N.; BAPTISTA, J.
+      Exploring the Automated Scoring of Narrative Essays in Brazilian
+      Portuguese using Transformer Models.
+      In: Proceedings of the 16th International Conference on Computational
+      Processing of Portuguese (PROPOR 2024). ACL, 2024.
+      URL: https://aclanthology.org/2024.propor-2.4/
+
+      RESUMO: Investiga arquiteturas Transformer para pontuação automatizada
+      de redações narrativas em PT-BR de alunos da educação básica,
+      reportando trade-offs entre tamanhos de modelo e qualidade preditiva.
+      Referência para o estado da arte em AES em Português antes da onda
+      LLM, útil como contraponto histórico-comparativo.
+
+================================================================================
+ENTRADAS BIBTEX PRONTAS (cole no .bib do Overleaf)
+================================================================================
+
+@inproceedings{sousaneto2024chatgpt,
+  author    = {Sousa Neto, Ademar F. and Silva, Salatiel D. and Santos Júnior, Ramiro de V. dos},
+  title     = {{ChatGPT} como Ferramenta de Aprendizagem: Um Estudo com Estudantes do Ensino Médio no Interior do {RN}},
+  booktitle = {Anais do XXXV Simpósio Brasileiro de Informática na Educação (SBIE)},
+  year      = {2024},
+  publisher = {SBC},
+  doi       = {10.5753/sbie.2024.241816}
+}
+
+@inproceedings{silva2024percepcoes,
+  author    = {Silva, Teresinha Letícia da and Vidotto, Kajiana Nuernberg Sartor and Tarouco, Liane Margarida Rockenbach},
+  title     = {Investigando as percepções de estudantes e professores do ensino médio e técnico sobre o uso do {ChatGPT} em suas atividades escolares},
+  booktitle = {Anais do XXXV Simpósio Brasileiro de Informática na Educação (SBIE)},
+  year      = {2024},
+  publisher = {SBC},
+  doi       = {10.5753/sbie.2024.242584}
+}
+
+@article{lima2024ia,
+  author  = {Lima, Cleosanice Barbosa and Serrano, Agostinho},
+  title   = {Inteligência Artificial Generativa e {ChatGPT}: uma investigação sobre seu potencial na Educação},
+  journal = {Transinformação},
+  volume  = {36},
+  pages   = {e2410839},
+  year    = {2024},
+  doi     = {10.1590/2318-0889202436e2410839}
+}
+
+@inproceedings{koutcheme2025dro,
+  author    = {Koutcheme, Charles and Dainese, Nicola and Hellas, Arto},
+  title     = {Direct Repair Optimization: Training Small Language Models For Educational Program Repair Improves Feedback},
+  booktitle = {Proceedings of the 20th Workshop on Innovative Use of NLP for Building Educational Applications (BEA)},
+  year      = {2025},
+  publisher = {Association for Computational Linguistics}
+}
+
+@inproceedings{macina2025mathtutorbench,
+  author    = {Macina, Jakub and Daheim, Nico and Hakimi, Ido and Kapur, Manu and Gurevych, Iryna and Sachan, Mrinmaya},
+  title     = {{MathTutorBench}: A Benchmark for Measuring Open-ended Pedagogical Capabilities of {LLM} Tutors},
+  booktitle = {Proceedings of EMNLP 2025},
+  year      = {2025},
+  note      = {arXiv:2502.18940}
+}
+
+@misc{liu2025guideeval,
+  author = {Liu, Ying and Li, Can and Zhang, Ting and Wang, Mei and Zhu, Qiannan and Li, Jian and Huang, Hua},
+  title  = {Discerning Minds or Generic Tutors? Evaluating Instructional Guidance Capabilities in Socratic {LLMs}},
+  year   = {2025},
+  eprint = {2508.06583},
+  archivePrefix = {arXiv}
+}
+
+@inproceedings{hashemi2024llmrubric,
+  author    = {Hashemi, Helia and Eisner, Jason and Rosset, Corby and Van Durme, Benjamin and Kedzie, Chris},
+  title     = {{LLM-Rubric}: A Multidimensional, Calibrated Approach to Automated Evaluation of Natural Language Texts},
+  booktitle = {Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (ACL) -- Long Papers},
+  pages     = {13806--13834},
+  year      = {2024}
+}
+
+@misc{rosa2025cohesion,
+  author = {Rosa, Bruno Alexandre and Oliveira, Hilário and Rodrigues, Luiz and Oliveira, Eduardo Araujo and Mello, Rafael Ferreira},
+  title  = {Enhancing Essay Cohesion Assessment: A Novel Item Response Theory Approach},
+  year   = {2025},
+  eprint = {2507.08487},
+  archivePrefix = {arXiv}
+}
+
+@inproceedings{ribeiro2024narrative,
+  author    = {Ribeiro, Eugénio and Mamede, Nuno and Baptista, Jorge},
+  title     = {Exploring the Automated Scoring of Narrative Essays in Brazilian Portuguese using Transformer Models},
+  booktitle = {Proceedings of the 16th International Conference on Computational Processing of Portuguese (PROPOR)},
+  year      = {2024},
+  publisher = {Association for Computational Linguistics}
+}
+
+================================================================================
+NOTAS DE INTEGRAÇÃO AO ARTIGO
+================================================================================
+
+INTRODUÇÃO (§1):
+- Use [1.1] e [1.2] (SBIE 2024) para mostrar que a literatura nacional
+  está focada no eixo ChatGPT/API-nuvem, e [1.3] (Lima & Serrano 2024)
+  como evidência de revisão sistemática que NÃO contempla SLMs locais.
+- Use a LACUNA HONESTA para reforçar o argumento de novidade do nosso
+  trabalho.
+
+TRABALHOS RELACIONADOS (§2):
+- Frente "aplicação educacional de LLMs" — citar [1.1], [1.2], [1.3].
+- Frente "SLMs viáveis localmente em educação" — citar [1.4] (Koutcheme
+  et al., BEA 2025) como precedente internacional direto.
+- Frente "avaliação pedagógica de LLMs como tutores" — citar [2.1]
+  (MathTutorBench), [2.2] (GuideEval), [2.3] (LLM-Rubric).
+- Frente "avaliação computacional de coesão em PT-BR" — citar [2.4]
+  (Rosa et al., TRI sobre Essay-BR) e [2.5] (Ribeiro et al., PROPOR 2024).
+
+DISCUSSÃO (§5 e §6):
+- Quando explicar o achado de superficialidade pedagógica no Qwen 2.5 3B,
+  cite [2.1] (Macina et al.) — convergência empírica com o trade-off
+  expertise-pedagogia que esses autores documentam.
+- Quando discutir o achado arquitetural de format bias, [2.2] (Liu et al.)
+  fornece base teórica complementar a Wu & Aji (2023).
+
+CONCLUSÃO (§7):
+- A agenda futura ("desenvolvimento de modelos especializados via ajuste
+  fino") tem precedente metodológico direto em [1.4] (Koutcheme et al.) —
+  cite explicitamente como prova de conceito internacional do caminho que
+  o presente trabalho propõe para a tutoria socrática em PT-BR.
+
+================================================================================
+PROTOCOLO DE BUSCA APLICADO (para transparência metodológica)
+================================================================================
+
+Bases consultadas: Google Scholar (via Google Search), ACL Anthology
+(aclanthology.org), repositório SOL/SBC (sol.sbc.org.br), arXiv (arxiv.org),
+SciELO (scielo.br).
+
+Recorte temporal: 2023-2026 (atual: 2026-05-24).
+
+Strings de busca utilizadas (amostra):
+- "LLM ChatGPT educação básica escola pública Brasil conectividade"
+- "modelos de linguagem locais offline Ollama ensino fundamental Brasil"
+- "Socratic LLM tutor evaluation writing scaffolding"
+- "LLM rubric evaluation text cohesion Portuguese pedagogical feedback"
+- "SBIE 2024 ChatGPT redação escrita ensino fundamental médio português"
+- "automatic essay scoring Brazilian Portuguese ENEM BERT LLM cohesion"
+- "small language model SLM education local inference Portuguese BEA"
+
+Cada referência listada acima foi verificada por FETCH DIRETO da URL
+oficial. Itens não-verificáveis (paywall, PDF binário, 403) foram
+descartados ou substituídos pela versão indexada em HTML (página do
+artigo, não PDF).

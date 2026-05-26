@@ -1,0 +1,726 @@
+[
+  {
+    "experimento": "E1_temp0",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 1,
+    "latencia_ms": 3192,
+    "resposta_ia": "{\n  \"pontos_fortes\": [\n    \"A Cartomante falou pro Camilo que tava tudo bem.\",\n    \"A Cartomante leu as cartas.\",\n    \"A Cartomante sorriu pra ele.\",\n    \"A Cartomante deu certeza pra ele.\"\n  ],\n  \"perguntas_reflexivas\": [\n    \"Ela falou o que?\",\n    \"O que ela fez mal?\"\n  ]\n}",
+    "conforme": false,
+    "motivo": "pf=list[4]",
+    "pf_tipo": "list[4]"
+  },
+  {
+    "experimento": "E1_temp0",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 2,
+    "latencia_ms": 1373,
+    "resposta_ia": "{\n  \"pontos_fortes\": [\n    \"O Simão Bacamarte prendeu o barbeiro porque ele achava que ele era louco\",\n    \"ele queria provar a teoria dele pra ele\"\n  ],\n  \"perguntas_reflexivas\": [\"...\", \"...\"]\n}",
+    "conforme": false,
+    "motivo": "pf=list[2]",
+    "pf_tipo": "list[2]"
+  },
+  {
+    "experimento": "E1_temp0",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 3,
+    "latencia_ms": 1447,
+    "resposta_ia": "{\n  \"pontos_fortes\": [\n    \"Eu gostei muito do conto A Cartomante porque ele é triste\",\n    \"embora o final seja chocante, mas era óbvio que ia acontecer aquilo\"\n  ],\n  \"perguntas_reflexivas\": [\"...\", \"...\"]\n}",
+    "conforme": false,
+    "motivo": "pf=list[2]",
+    "pf_tipo": "list[2]"
+  },
+  {
+    "experimento": "E1_temp0",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 4,
+    "latencia_ms": 2376,
+    "resposta_ia": "{\n  \"pontos_fortes\": [\n    \"O Camilo morreu no final.\",\n    \"Mas antes disso ele recebeu um bilhete do Vilela.\",\n    \"A cartomante já tinha dito que tava tudo certo.\",\n    \"Então ele conheceu a Rita primeiro de tudo.\",\n    \"Aí ele foi na casa do amigo.\"\n  ],\n  \"perguntas_reflexivas\": [\n    \"Quem é o Vilela?\",\n    \"Por que a cartomante disse que tudo estava certo?\"\n  ]\n}",
+    "conforme": false,
+    "motivo": "pf=list[5]",
+    "pf_tipo": "list[5]"
+  },
+  {
+    "experimento": "E1_temp0",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 5,
+    "latencia_ms": 2191,
+    "resposta_ia": "{\n  \"pontos_fortes\": [\n    \"Aqui está uma opinião do aluno sobre O Alienista: A Casa Verde.\",\n    \"O texto apresenta uma visão crítica da obra de Bacamarte.\"\n  ],\n  \"perguntas_reflexivas\": [\n    \"Qual foi a grandeza de 'A Casa Verde'?\",\n    \"Quais eram as características que o povo de Itaguaí considerava estranhas na ciência de Bacamarte?\"\n  ]\n}",
+    "conforme": false,
+    "motivo": "pf=list[2]",
+    "pf_tipo": "list[2]"
+  },
+  {
+    "experimento": "E1_temp0",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 6,
+    "latencia_ms": 1560,
+    "resposta_ia": "{\n  \"pontos_fortes\": [\n    \"A Casa Verde era o lugar onde os loucos ficavam.\",\n    \"A Casa Verde assustava o povo.\"\n  ],\n  \"perguntas_reflexivas\": [\"O que aconteceu com a Casa Verde?\", \"Por que a Casa Verde foi esvaziada?\"]\n}",
+    "conforme": false,
+    "motivo": "pf=list[2]",
+    "pf_tipo": "list[2]"
+  },
+  {
+    "experimento": "E1_temp0",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 7,
+    "latencia_ms": 6832,
+    "resposta_ia": "{\n  \"pontos_fortes\": [\n    \"O homem ficou pelado\",\n    \"Ele abriu a porta\",\n    \"O bonde passou\",\n    \"A mulher dele saiu\",\n    \"Ele tava devendo o aluguel\"\n  ],\n  \"perguntas_reflexivas\": [\"...\", \"...\"],\n  \"conclusão\": \"E assim, ele se escondeu no elevador e ficou todo mundo rindo dele na rua. Ele entrou de novo em casa.\",\n  \"pontos_de_reflexão\": [\n    \"A linguagem usada é muito simples e direta, o que pode ser um problema para a coesão e coerência\",\n    \"O uso de pronominalização ambígua (por exemplo, 'ele' em vez de 'o homem') pode ser considerado incoerente\"\n  ],\n  \"pontos_de_reflexão_2\": [\n    \"A linguagem usada é muito variada e oral, o que pode ser um problema para a coesão e coerência\",\n    \"O uso de conectivos contraditórios (por exemplo, 'tava devendo' em vez de 'tava devedo') pode ser considerado incoerente\"\n  ],\n  \"pontos_de_reflexão_3\": [\n    \"A linguagem usada é muito simples e direta, o que pode ser um problema para a coesão e coerência\",\n    \"O uso de marcadores temporais (por exemplo, 'tava devendo') pode ser considerado incoerente\"\n  ]\n}",
+    "conforme": false,
+    "motivo": "pf=list[5]",
+    "pf_tipo": "list[5]"
+  },
+  {
+    "experimento": "E1_temp0",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 8,
+    "latencia_ms": 1141,
+    "resposta_ia": "{\n  \"pontos_fortes\": [\n    \"A moça teceu o marido com o tear.\",\n    \"Ela pediu mais coisas pra ela.\"\n  ],\n  \"perguntas_reflexivas\": [\"...\", \"...\"]\n}",
+    "conforme": false,
+    "motivo": "pf=list[2]",
+    "pf_tipo": "list[2]"
+  },
+  {
+    "experimento": "E1_temp0",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 9,
+    "latencia_ms": 2451,
+    "resposta_ia": "{\n  \"pontos_fortes\": [\n    \"O detetive chegou\",\n    \"Era de noite\",\n    \"A casa era grande\",\n    \"Tinha uma borboleta\",\n    \"A borboleta era rara\"\n  ],\n  \"perguntas_reflexivas\": [\"...\", \"...\"],\n  \"respostas_corretas\": [\n    \"O homem morreu\",\n    \"Ninguém viu nada\",\n    \"O detetive achou uma pista\",\n    \"Todo mundo era suspeito\"\n  ]\n}",
+    "conforme": false,
+    "motivo": "pf=list[5]",
+    "pf_tipo": "list[5]"
+  },
+  {
+    "experimento": "E1_temp0",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 10,
+    "latencia_ms": 1112,
+    "resposta_ia": "{\n  \"pontos_fortes\": [\n    \"O personagem foi internado\",\n    \"portanto ele se sentia muito sozinho lá dentro\"\n  ],\n  \"perguntas_reflexivas\": [\"...\", \"...\"]\n}",
+    "conforme": false,
+    "motivo": "pf=list[2]",
+    "pf_tipo": "list[2]"
+  },
+  {
+    "experimento": "E1_temp0",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 11,
+    "latencia_ms": 2445,
+    "resposta_ia": "{\n  \"pontos_fortes\": [\n    \"A Cartomante: Camilo vivia angustiado com os bilhetes anônimos.\",\n    \"Por isso, procurou a cartomante, que leu as cartas e o tranquilizou.\",\n    \"Saiu de lá aliviado e seguiu para a casa do amigo.\"\n  ],\n  \"perguntas_reflexivas\": [\n    \"Quem é a Cartomante?\",\n    \"Por que Camilo procurou a Cartomante?\"\n  ]\n}",
+    "conforme": false,
+    "motivo": "pf=list[3]",
+    "pf_tipo": "list[3]"
+  },
+  {
+    "experimento": "E1_temp0",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 12,
+    "latencia_ms": 2050,
+    "resposta_ia": "{\n  \"pontos_fortes\": [\n    \"Simão Bacamarte fundou a Casa Verde para estudar a loucura\",\n    \"No início, internava apenas casos extremos; depois, passou a recolher quase toda a cidade\"\n  ],\n  \"perguntas_reflexivas\": [\"Como a teoria não se sustentava\", \"Ele inverteu o critério e libertou os internos\"]\n}",
+    "conforme": false,
+    "motivo": "pf=list[2]",
+    "pf_tipo": "list[2]"
+  },
+  {
+    "experimento": "E1_temp0",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 13,
+    "latencia_ms": 1487,
+    "resposta_ia": "{\n  \"pontos_fortes\": [\n    \"Enquanto o café passava\",\n    \"o homem tirou a roupa para tomar banho\",\n    \"enquanto o café passava e ouviu a campainha\"\n  ],\n  \"perguntas_reflexivas\": [\"...\", \"...\"]\n}",
+    "conforme": false,
+    "motivo": "pf=list[3]",
+    "pf_tipo": "list[3]"
+  },
+  {
+    "experimento": "E1_temp0",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 1,
+    "latencia_ms": 4711,
+    "resposta_ia": "{\n  \"pontos_fortes\": [\n    \"Uso eficaz de conectivos para indicar a relação entre as ideias\",\n    \"Repetição lexical para enfatizar a importância das cartas\"\n  ],\n  \"perguntas_reflexivas\": [\n    \"O que aconteceu com Camilo após a conversa com a cartomante?\",\n    \"Por que a cartomante acreditou que tudo estava bem?\"\n  ]\n}",
+    "conforme": false,
+    "motivo": "pf=list[2]",
+    "pf_tipo": "list[2]"
+  },
+  {
+    "experimento": "E1_temp0",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 2,
+    "latencia_ms": 3344,
+    "resposta_ia": "{\n  \"pontos_fortes\": [\n    \"A narrativa apresenta uma análise profunda da condição humana e das relações sociais.\",\n    \"O uso do personagem Simão Bacamarte como um espelho para a sociedade é interessante.\"\n  ],\n  \"perguntas_reflexivas\": [\n    \"Qual pode ser a teoria que o barbeiro quer provar para Simão Bacamarte?\",\n    \"Como as relações sociais são influenciadas pela percepção de loucura?\"\n  ]\n}",
+    "conforme": false,
+    "motivo": "pf=list[2]",
+    "pf_tipo": "list[2]"
+  },
+  {
+    "experimento": "E1_temp0",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 3,
+    "latencia_ms": 2717,
+    "resposta_ia": "{\n  \"pontos_fortes\": [\n    \"Uma análise mais aprofundada sobre as escolhas do autor\",\n    \"A relação entre a tristeza e o humor\"\n  ],\n  \"perguntas_reflexivas\": [\n    \"O que você achou que era óbvio no final do conto?\",\n    \"Por que acho que você riu nas partes mais tristes do conto?\"\n  ]\n}",
+    "conforme": false,
+    "motivo": "pf=list[2]",
+    "pf_tipo": "list[2]"
+  },
+  {
+    "experimento": "E1_temp0",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 4,
+    "latencia_ms": 2898,
+    "resposta_ia": "{\n  \"pontos_fortes\": [\n    \"Uso de conectivos para indicar causa e consequência\",\n    \"Reconhecimento da importância das relações sociais no texto\"\n  ],\n  \"perguntas_reflexivas\": [\n    \"Como o autor pretende nos mostrar que a morte do Camilo é um evento inevitável?\",\n    \"Quais são as implicações da cartomancia na trama?\"\n  ]\n}",
+    "conforme": false,
+    "motivo": "pf=list[2]",
+    "pf_tipo": "list[2]"
+  },
+  {
+    "experimento": "E1_temp0",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 5,
+    "latencia_ms": 3474,
+    "resposta_ia": "{\n  \"pontos_fortes\": [\n    \"Uma boa tentativa de criar uma sequência cronológica\",\n    \"A inclusão de detalhes interessantes sobre os personagens (Bacamarte, o povo de Itaguaí)\"\n  ],\n  \"perguntas_reflexivas\": [\n    \"Quais são as razões pelas quais você acha que a opinião do autor é importante?\",\n    \"Como você acha que a descrição da ciência de Bacamarte contribui para o texto?\"\n  ]\n}",
+    "conforme": false,
+    "motivo": "pf=list[2]",
+    "pf_tipo": "list[2]"
+  },
+  {
+    "experimento": "E1_temp0",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 6,
+    "latencia_ms": 3465,
+    "resposta_ia": "{\n  \"pontos_fortes\": [\n    \"Uso de personificações para dar uma sensação de mister e medo\",\n    \"Repetição do nome 'Casa Verde' para enfatizar sua importância\"\n  ],\n  \"perguntas_reflexivas\": [\n    \"O que é a Casa Verde, exatamente? É um lugar físico ou uma metáfora?\",\n    \"Por que a Casa Verde assusta o povo? Seria apenas devido à sua construção ou há algo mais?\"\n  ]\n}",
+    "conforme": false,
+    "motivo": "pf=list[2]",
+    "pf_tipo": "list[2]"
+  },
+  {
+    "experimento": "E1_temp0",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 7,
+    "latencia_ms": 3528,
+    "resposta_ia": "{\n  \"pontos_fortes\": [\n    \"Uso de verbos do presente do indicativo para descrever ações passadas\",\n    \"O uso de pronomes pessoais e possessivos para indicar relações entre personagens\"\n  ],\n  \"perguntas_reflexivas\": [\n    \"Como o narrador se sente após ser cobrador? (pode ser inferido pelo contexto)\",\n    \"Por que a mulher do narrador saiu do bonde? (pode ser uma questão de continuidade)\"\n  ]\n}",
+    "conforme": false,
+    "motivo": "pf=list[2]",
+    "pf_tipo": "list[2]"
+  },
+  {
+    "experimento": "E1_temp0",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 8,
+    "latencia_ms": 2407,
+    "resposta_ia": "{\n  \"pontos_fortes\": [\n    \"Uso de metáfora (tecer como fazer algo)\",\n    \"Repetição do verbo 'teceu'\"\n  ],\n  \"perguntas_reflexivas\": [\n    \"O que a moça queria com o marido?\",\n    \"Por que ela desfez o palácio?\"\n  ]\n}",
+    "conforme": false,
+    "motivo": "pf=list[2]",
+    "pf_tipo": "list[2]"
+  },
+  {
+    "experimento": "E1_temp0",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 9,
+    "latencia_ms": 2877,
+    "resposta_ia": "{\n  \"pontos_fortes\": [\n    \"Uso de personagens e cenário interessantes\",\n    \"Tentativa de construção de suspense\"\n  ],\n  \"perguntas_reflexivas\": [\n    \"O que aconteceu com a borboleta rara?\",\n    \"Por que o homem morreu se ninguém viu nada?\",\n    \"Como o detetive conseguiu encontrar uma pista pequena?\"\n  ]\n}",
+    "conforme": false,
+    "motivo": "pf=list[2]",
+    "pf_tipo": "list[2]"
+  },
+  {
+    "experimento": "E1_temp0",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 10,
+    "latencia_ms": 3443,
+    "resposta_ia": "{\n  \"pontos_fortes\": [\n    \"Uso eficaz do pronome 'lá dentro' para indicar o local onde o personagem está\",\n    \"Descrição do cenário como um elemento que influencia a emoção do leitor\"\n  ],\n  \"perguntas_reflexivas\": [\n    \"O que pode ter levado o personagem a querer ficar no cemitério apesar da situação difícil?\",\n    \"Como a escrita do personagem está relacionada à sua decisão final?\"\n  ]\n}",
+    "conforme": false,
+    "motivo": "pf=list[2]",
+    "pf_tipo": "list[2]"
+  },
+  {
+    "experimento": "E1_temp0",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 11,
+    "latencia_ms": 2517,
+    "resposta_ia": "{\n  \"pontos_fortes\": [\n    \"Uso de conectivos contraditórios (porém)\",\n    \"Marcadores temporais (afinal)\"\n  ],\n  \"perguntas_reflexivas\": [\n    \"O que aconteceu com a previsão que havia salvado Camilo?\",\n    \"Por que Vilela estava à espera de Camilo?\"\n  ]\n}",
+    "conforme": false,
+    "motivo": "pf=list[2]",
+    "pf_tipo": "list[2]"
+  },
+  {
+    "experimento": "E1_temp0",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 12,
+    "latencia_ms": 3027,
+    "resposta_ia": "{\n  \"pontos_fortes\": [\n    \"Uso de conectivos para conectar ideias\",\n    \"Descrição do desenvolvimento da teoria de Simão Bacamarte\"\n  ],\n  \"perguntas_reflexivas\": [\n    \"O que levou Simão Bacamarte a mudar sua abordagem em relação aos internos?\",\n    \"Como a teoria de Simão Bacamarte se relaciona com a realidade?\"\n  ]\n}",
+    "conforme": false,
+    "motivo": "pf=list[2]",
+    "pf_tipo": "list[2]"
+  },
+  {
+    "experimento": "E1_temp0",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 13,
+    "latencia_ms": 6156,
+    "resposta_ia": "{\n  \"pontos_fortes\": [\n    \"A história começa com uma ação descritiva (tirou a roupa) e um evento que causa uma mudança de situação (ouviu a campainha).\",\n    \"O uso do verbo 'deixou' é interessante, pois pode ser interpretado como uma ação que foi feita ao homem, mas também pode indicar uma situação em que ele se encontra.\",\n    \"A descrição do corredor como um lugar onde a confusão aumenta sugere que algo está acontecendo, mas o que exatamente é esse 'algo'?\"\n  ],\n  \"perguntas_reflexivas\": [\n    \"O que está acontecendo com a pessoa que abriu a porta?\",\n    \"Por que a campainha bateu naquele momento?\",\n    \"O que vai acontecer com o homem agora que ele está nu no corredor?\"\n  ]\n}",
+    "conforme": false,
+    "motivo": "pf=list[3]",
+    "pf_tipo": "list[3]"
+  },
+  {
+    "experimento": "E2_fewshot",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 2,
+    "latencia_ms": 6484,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você usou uma linguagem muito rica para descrever as relações entre os personagens: 'o barbeiro', 'a teoria dele'... Isso ajuda a criar um clima de tensão e suspense. Mas, ao mesmo tempo, você também usou uma linguagem bastante simples e direta para explicar o que aconteceu no final do conto. Isso é interessante porque mostra que você está procurando equilibrar diferentes níveis de linguagem.\",\n  \"perguntas_reflexivas\": [\"Como você fez para manter a tensão ao longo da história, mas ao mesmo tempo ser claro sobre o que aconteceu no final?\", \"Você usou uma linguagem muito simples para descrever as relações entre os personagens. Será que essa escolha de linguagem foi uma tentativa de criar um clima mais 'realista' ou de enfatizar a simplicidade da situação?\", \"Quais outras formas poderiam você ter usado para explicar o que aconteceu no final do conto, sem usar palavras tão simples?\", \"Você usou uma linguagem muito direta e objetiva para descrever as relações entre os personagens. Será que essa escolha de linguagem foi uma tentativa de criar um clima mais 'realista' ou de enfatizar a simplicidade da situação?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2_fewshot",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 3,
+    "erro": "HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=120)"
+  },
+  {
+    "experimento": "E2_fewshot",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 4,
+    "latencia_ms": 8904,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você conseguiu criar uma crônica interessante, mas com alguns pontos que precisam ser corrigidos para se tornar mais coerente e lógico. Aqui estão algumas sugestões:\",\n  \"perguntas_reflexivas\": [\"Aqui está o problema: a crônica começa com 'O Camilo morreu no final' e depois afirma que ele não morreu, mas sim que ele recebeu um bilhete do Vilela. Isso é uma confusão. Você precisa reescrever a frase para começar a história de forma mais clara.\", \"Aqui está o problema: 'A cartomante já tinha dito que tava tudo certo' também não faz sentido, pois a cartomante não pode ter dito isso se ele morreu no final da história. Você precisa reescrever essa frase para que ela tenha feito isso antes de ele morrer.\", \"Essa parte da crônica parece ser uma sequência de eventos aleatórios e sem um propósito claro. Você poderia criar uma estrutura mais lógica, com uma unidade ou uma ideia central?\", \"Aqui está o problema: 'Então ele conheceu a Rita primeiro de tudo' também não faz sentido, pois a crônica já mencionou que ele morreu no final da história e que ele conheceu a Rita depois disso. Você precisa reescrever essa frase para que ela tenha feito isso antes de ele morrer.\", \"Aqui está o problema: 'Aí ele foi na casa do amigo' também não faz sentido, pois a crônica já mencionou que ele morreu no final da história e que ele foi à casa do Vilela. Você precisa reescrever essa frase para que ela tenha feito isso antes de ele morrer.\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2_fewshot",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 5,
+    "latencia_ms": 5056,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você apresentou uma visão bastante crítica sobre a Casa Verde e o Alienista, destacando suas características como 'importante' e 'estranha'. A imagem do povo de Itaguaí com medo é interessante e pode ser desenvolvida mais a fundo. No entanto, a frase 'As pessoas se revoltaram um dia' parece ter sido escrita de forma muito direta e sem muitos detalhes, o que pode tornar a história menos envolvente.\",\n  \"perguntas_reflexivas\": [\"Você usou a linguagem do 'povo de Itaguaí' para criar uma imagem mais pessoal. Será que você poderia usar essa linguagem em outras partes da história?\", \"O Alienista é um personagem com muitas habilidades, mas também tem um lado sombrio. Você poderia explorar esse lado em mais detalhes?\", \"Será que a frase 'As pessoas se revoltaram um dia' é uma forma de justificar o destino do Alienista? Ou seria melhor manter essa ideia aberta para o leitor?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2_fewshot",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 6,
+    "latencia_ms": 6570,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Aqui está uma análise detalhada do seu resumo: você conseguiu capturar o espírito da história, mas há algumas coisas que precisam ser corrigidas para torná-la perfeita. Primeiramente, a estrutura do resumo é simples e fácil de entender, mas poderia ser mais lógica se você tivesse usado frases mais conectadas. Além disso, a repetição da palavra 'Casa Verde' em várias frases pode ser considerada uma variável ambígua que não contribui muito para o resumo.\",\n  \"perguntas_reflexivas\": [\"Você usou a frase 'A Casa Verde foi esvaziada porque a Casa Verde não fazia mais sentido.' Para expressar a ideia de que a Casa Verde perdeu seu significado, poderia ter usado uma variável diferente para descrever o que aconteceu com ela?\", \"Como você pode explicar a ideia de que os loucos ficavam na Casa Verde sem saber quem era o Bacamarte?\", \"Será que você poderia usar mais detalhes sobre o ambiente e as pessoas ao redor da Casa Verde para tornar o resumo mais vívido?\", \"Você usou a frase 'A Casa Verde assustava o povo' para descrever o impacto da história. Será que essa é a única maneira de expressar esse conceito ou há outras formas de fazer isso?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2_fewshot",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 7,
+    "latencia_ms": 7627,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você conseguiu criar um cenário bastante interessante, com a mulher saída da casa do homem nu e o cobrador que bate no elevador. A situação é muito crua, mas você usou linguagem que evita ser policial gramatical, o que é importante para manter uma atmosfera mais leve e humorística.\",\n  \"perguntas_reflexivas\": [\"Você usou a estrutura de fraseção 'O homem ficou...', que é uma boa maneira de criar um diálogo entre os personagens. Mas como você fez com que o cobrador bate no elevador? Seria melhor usar uma variável diferente, como 'o alguém' ou 'a pessoa'?\", \"Quais outras palavras poderiam ser usadas para descrever a cena do cobrador batendo na porta? Por exemplo, 'o homem abriu a porta', 'a mulher saiu da casa'?\", \"Você mencionou que o homem ficou 'todo mundo rindo dele na rua'. Será que você pode explicar melhor por que ele está fazendo isso e como isso é importante para a história?\", \"Como você fez com que o homem ente de novo em casa? Seria melhor usar uma variável diferente, como 'a porta' ou 'a janela'\", \"Você usou a estrutura de fraseção 'A mulher dele saiu'. Será que você pode explicar melhor por que ela está saída da casa e como isso é importante para a história?\", \"Como você fez com que o homem ficasse 'tudo mundo rindo dele na rua'? Será que você pode explicar melhor por que isso aconteceu e como isso é importante para a história?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2_fewshot",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 8,
+    "latencia_ms": 15494,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você tem uma habilidade incrível em criar histórias com palavras simples, mas que têm profundidade e complexidade ao mesmo tempo. A forma como você usou o termo 'teceu' para descrever a ação da moça é muito interessante. Esse uso de um verbo que se refere a uma ação física pode criar uma sensação de intensidade e violência, mas também pode ser usado para expressar emoções mais complexas.\",\n  \"perguntas_reflexivas\": [\"Você usou o termo 'teceu' várias vezes em diferentes frases. Será que você queria chamar a atenção do leitor para a ideia de que a moça teceu um marido com o tear, ou se isso era apenas uma metáfora?\", \"Será que você usou palavras como 'companhia' e 'palácio' para criar uma imagem mais romântica da relação entre a moça e seu marido?\", \"Quais outras formas poderiam ser usadas para descrever a ação da moça em relação ao marido, sem usar palavras tão simples?\", \"Você usou o termo 'desfez' para descrever a ação do marido. Será que isso é uma forma de criar uma sensação de perda e derrota, ou se isso era apenas uma metáfora?\", \"Será que você queria chamar a atenção do leitor para a ideia de que a moça teceu um marido, ou se isso foi apenas uma metáfora?\", \"Você usou o termo 'fiz' várias vezes em diferentes frases. Será que isso é uma forma de criar uma sensação de controle e poder sobre a vida do marido, ou se isso era apenas uma metáfora?\", \"Quais outras formas poderiam ser usadas para descrever a relação entre a moça e o marido, sem usar palavras tão simples?\", \"Você usou o termo 'gostava' várias vezes em diferentes frases. Será que isso é uma forma de criar uma sensação de emoção e conexão com a história, ou se isso foi apenas uma metáfora?\", \"Será que você queria chamar a atenção do leitor para a ideia de que a moça teceu um marido, ou se isso foi apenas uma metáfora?\", \"Você usou o termo 'felicidade' várias vezes em diferentes frases. Será que isso é uma forma de criar uma sensação de bem-estar e felicidade no final da história, ou se isso foi apenas uma metáfora?\", \"Quais outras formas poderiam ser usadas para descrever a relação entre a moça e o marido, sem usar palavras tão simples?\", \"Você usou o termo 'fim' várias vezes em diferentes frases. Será que isso é uma forma de criar uma sensação de perda e derrota no final da história, ou se isso foi apenas uma metáfora?\", \"Será que você queria chamar a atenção do leitor para a ideia de que a moça teceu um marido, ou se isso foi apenas uma metáfora?\", \"Você usou o termo 'novo' várias vezes em diferentes frases. Será que isso é uma forma de criar uma sensação de mudança e renovação no final da história, ou se isso foi apenas uma metáfora?\" \n  ]}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2_fewshot",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 9,
+    "latencia_ms": 2957,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você fez um excelente trabalho em criar a atmosfera do crime, com o detalhe da noite e da grande casa. Além disso, a descrição da borboleta rara é muito interessante e ajuda a criar uma conexão visual com o leitor.\",\n  \"perguntas_reflexivas\": [\"O que você fez para evitar usar palavras como 'nada' ou 'nenhum'?\", \"Como você conseguiu criar uma sensação de suspense no início do texto?\", \"Será que você usou a estrutura de um interrogatório para criar tensão, ou foi mais uma questão de detalhe?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2_fewshot",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 10,
+    "latencia_ms": 4917,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você usou uma estrutura narrativa simples e direta para contar a história do personagem. A frase 'O lugar era horrível' é um bom exemplo disso, pois evoca uma imagem clara na mente do leitor. No entanto, você poderia ter usado mais detalhes para tornar essa descrição mais vívida.\",\n  \"perguntas_reflexivas\": [\"Você usou a frase 'por isso ele queria ficar' como um ponto de partida para explicar o personagem, mas seria melhor usar uma linguagem mais clara e direta. Por exemplo: 'O lugar era horrível, então ele decidiu ficar lá',\", \"Como você fez com que o leitor se sinta conectado ao personagem? Você usou palavras como 'sofresse' para transmitir a ideia de que o personagem está sofrendo?\", \"Você poderia ter usado uma linguagem mais crua e direta em relação à morte do personagem, sem usar palavras como 'desistiu de tudo no fim'. Isso ajudaria a manter a tensão na história.\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2_fewshot",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 11,
+    "latencia_ms": 71201,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você fez uma boa escolha ao começar com 'Camilo vivia angustiado' e depois mudar para 'por isso', que é um bom ponto de partida para a história. A repetição da palavra 'vivia' pode ter sido uma tentativa de criar uma sensação de tensão, mas não funcionou muito bem na sequência.\",\n  \"perguntas_reflexivas\": [\"Você usou o pronome 'ele' em vez do 'você', mas isso não é necessário. Será que você queria chamar a atenção para a pessoa que está sendo tratada?\", \"A frase 'por isso, procurou a cartomante' pode ter sido uma boa ideia, mas a repetição de 'procurou' em seguida pode ter criado um contraste entre o que foi feito e o que aconteceu. Será que você queria mostrar que ele estava disposto a fazer qualquer coisa?\", \"Quais outras formas poderiam ser usadas para expressar a angústia de Camilo, sem repetir 'vivia'?\", \"Você pode ter usado uma frase mais direta e eficaz para mostrar como a cartomante o tranquilizou\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\", \"Será que você poderia usar um tom mais crítico em relação à previsão da cartomante, e mostrar como ela não conseguiu salvar o dia?\", \"A história é muito simples. Será que você quer explorar mais profundamente as motivações por trás da busca de Camilo?\",\"A história é muito simples.\" \n\n    \t] \n    \t}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2_fewshot",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 12,
+    "latencia_ms": 4555,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você fez uma boa escolha ao apresentar a história do Alienista como uma crise de teoria. Simão Bacamarte inicialmente se concentrou em casos extremos, mas gradualmente expandiu seu foco para a cidade inteira. A ideia de que a teoria não se sustentava é interessante e pode levar à reflexão sobre a natureza da loucura.\",\n  \"perguntas_reflexivas\": [\"Quais são as implicações dessa mudança de foco? Será que essa abordagem permitiu que os internos encontrassem um tratamento mais eficaz?\", \"Como a ideia de que a teoria não se sustentava afeta a percepção do Alienista e dos internos em relação à loucura?\", \"Se a teoria da loucura não funcionou, como o Alienista conseguiu criar um ambiente seguro para os internos?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2_fewshot",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 13,
+    "latencia_ms": 4581,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você conseguiu criar uma história com um narrador que é bastante ativo e envolvente. A descrição do banho e da roupa é muito detalhada, mas o foco está na cena de abertura: a confusão e a distração. O uso de palavras como 'enquanto', 'ouviu' e 'desceu' cria uma sensação de movimento e dinamismo.\",\n  \"perguntas_reflexivas\": [\"Lembre-se de que o narrador está usando um tom de voz para contar a história, mas não há muitas reflexões sobre como isso afeta a narrativa. Será que você poderia explorar mais essa ideia?\", \"Quais são as consequências do homem estar distraído enquanto ouve a campainha? Será que ele se sente desconfortável ou inseguro?\", \"Como você pode criar uma sensação de suspense sem usar palavras como 'atordoado' ou 'assustado'?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2_fewshot",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 2,
+    "latencia_ms": 7705,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você conseguiu capturar bem a tensão entre a teoria do Simão Bacamarte e o comportamento do barbeiro. A ideia de que o barbeiro é 'louco' para provar uma teoria é interessante, e você usou essa tensão para criar um clima de suspense. Sua escrita também tem um ritmo rápido e direto, o que ajuda a manter o leitor engajado.\",\n  \"perguntas_reflexivas\": [\"O que aconteceu com Simão Bacamarte no final do conto? Ele mudou de ideia sobre o barbeiro?\", \"Por que você acho que o barbeiro ficou 'confuso' ao ser soltado? Será que isso tem algo a ver com a teoria do Simão Bacamarte?\", \"Você usou a frase 'ele queria provar a teoria dele pra ele'. Qual é a diferença entre 'provar' e 'mostrar'? Como isso pode mudar o significado da frase?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2_fewshot",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 3,
+    "latencia_ms": 7350,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você reconheceu a emoção do conto e expressou isso de forma autêntica! A tristeza e a ironia são sentimentos fortes para uma história, e você conseguiu capturar isso. Além disso, sua análise sobre o final ser chocante mas óbvio é interessante. Você está começando a pensar no impacto da estrutura narrativa na emoção do leitor.\",\n  \"perguntas_reflexivas\": [\"O que aconteceu com a sua risada? Ela foi uma reação ao humor do conto ou era mais uma tentativa de controlar o chocante final?\", \"Por que você disse que o final era óbvio? Isso significa que você estava esperando algo assim desde o início, ou foi apenas uma análise posterior?\", \"Como você acha que as palavras 'triste' e 'ri bastante' se relacionam entre si? Será que elas são opostos absolutos, ou há um grau de tristeza que pode ser irônico ou até mesmo humorístico?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2_fewshot",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 4,
+    "latencia_ms": 8008,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você fez uma mudança interessante no início da sua crônica: começou com o final, e depois vai para trás no tempo. Isso é um jeito de dizer que a história não tem um começo claro ou um início bem definido. É como se você estivesse mostrando ao leitor que a morte do Camilo foi a coisa mais importante da história, e que tudo o resto era apenas uma questão de tempo até lá.\",\n  \"perguntas_reflexivas\": [\"Você queria mostrar que a morte do Camilo é a parte mais importante da história? Ou você está tentando dizer que não tem um começo claro para essa história?\", \"Se você começou com o final, por que você ainda usou 'O Camilo morreu no final' na primeira frase? Isso parece contraditório. O que você queria fazer com essa repetição?\", \"Você usou a palavra 'tudo certo' para se referir às palavras da cartomante. Mas a cartomante disse que tudo estava certo, e o Camilo acabou morrendo. Quais outras palavras poderiam ter sido usadas para dizer isso de uma maneira diferente?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2_fewshot",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 5,
+    "latencia_ms": 7166,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você teve uma boa ideia de capturar a essência da história: a Casa Verde é um elemento importante e o povo de Itaguaí tem medo dela. Sua descrição do Bacamarte como alguém que estudava muito também ajuda a dar uma ideia do personagem. No entanto, há algumas coisas que poderiam ser melhoradas para tornar o texto mais coerente.\",\n  \"perguntas_reflexivas\": [\"Você usou 'foi' várias vezes em sequência nas primeiras duas frases. Isso pode criar um efeito de monotonia ou até mesmo uma repetição sem sentido. Como você poderia variar essa estrutura?\", \"A frase 'As pessoas se revoltaram um dia' é um pouco ambígua. O que exatamente aconteceu? Será que a revolta foi imediata ou ocorreu após algum evento específico?\", \"Você usou o nome do personagem Bacamarte, mas não mencionou seu nome real. Isso pode deixar o leitor sem uma ideia clara de quem está falando sobre.\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2_fewshot",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 6,
+    "latencia_ms": 8155,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você criou um ambiente sinistro e intrigante ao descrever a Casa Verde como lugar onde os loucos ficavam, feita pelo Bacamarte e assustando o povo. A ideia de uma casa que fica cheia e depois é esvaziada porque não faz mais sentido é uma metáfora poderosa sobre a evolução da sanidade e do papel da medicina na sociedade.\",\n  \"perguntas_reflexivas\": [\"Você usou 'fazia' em vez de 'fazia mais sentido'. O que você achava que era o verbo correto para essa ideia?\", \"A frase 'A Casa Verde ficava cheia' é uma boa maneira de criar suspense. Você usou um verbo que pode ser interpretado de várias formas: a casa fica cheia de pessoas, ou a casa está cheia de coisas. Quais outras opções você teria considerado?\", \"O Bacamarte é um personagem importante no livro, mas ele não aparece até o final. Você usou sua imaginação para criar uma história sobre ele. O que você achava que era a melhor maneira de introduzir o Bacamarte na história sem dar mais detalhes do que o livro oferecia?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2_fewshot",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 7,
+    "latencia_ms": 7448,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você conseguiu capturar a essência da situação: o homem está em uma situação humilhante e engraçada, mas também um pouco triste. A sua narrativa tem um ritmo rápido e direto, como se estivesse contando a história de forma oral. Você usou conectivos para ligar as ideias entre si, como 'Ele abriu a porta' e 'O bonde passou', o que ajuda a criar uma sequência lógica.\",\n  \"perguntas_reflexivas\": [\"Quais palavras poderiam ser substituídas por 'ele' nas frases? Por exemplo: 'A mulher dele saiu.' Seria possível usar apenas 'ela'?\", \"Como você pode tornar o personagem mais expressivo através da linguagem que usa para descrever suas ações e sentimentos? Por exemplo, em vez de dizer 'Ele se escondeu no elevador', poderia ser algo como 'Ele se esconderia rapidamente no elevador'?\", \"O que aconteceria se o homem não tivesse entrado na casa? Será que a história teria um final diferente?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2_fewshot",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 8,
+    "latencia_ms": 5998,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você usou uma linguagem muito direta e concisa, o que é bom para contar uma história rápida. Sua narrativa também tem um ritmo interessante, com mudanças bruscas entre a teia do marido e o palácio. Isso ajuda a manter o leitor engajado.\",\n  \"perguntas_reflexivas\": [\"A palavra 'teceu' tem um sentido muito específico aqui. O que você achou quando viu ela usar esse termo para se referir à sua relação com o marido?\", \"Se a moça queria companhia, por que ela não pediu diretamente? Será que a teia foi uma forma de tentativa de comunicação?\", \"A frase 'ela gostava dela mesma de novo' é um pouco ambígua. O que você achou quando leu isso pela primeira vez?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2_fewshot",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 9,
+    "latencia_ms": 8300,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você fez um ótimo trabalho em criar suspense e mistério, especialmente com a parte do homem morrendo sem que ninguém tenha visto nada! Isso é o que torna um bom conto: fazer as pessoas quererem saber o que aconteceu. A sua descrição da casa também é muito boa, especialmente a parte sobre ela ser grande e ter uma borboleta rara. E como você fez a pista parecer pequena, mas importante, isso mostra que você entendeu bem o conceito de 'pistas menores' que podem levar ao final do conto.\",\n  \"perguntas_reflexivas\": [\"Você usou muitas palavras que são muito específicas e detalhadas. Por exemplo, 'rara'. Qual é a diferença entre usar essa palavra ou simplesmente dizer que era uma borboleta especial? E como isso afeta o leitor?\", \"A sua história tem um tom de mistério, mas também parece um pouco... previsível. Como você pode tornar o conto mais surpreendente e menos previsível para o leitor?\", \"Você usou a palavra 'ninguém' várias vezes. Será que essa escolha é estratégica ou apenas uma forma de dizer que ninguém viu nada?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2_fewshot",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 10,
+    "latencia_ms": 6798,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você criou um tom sombrio e introspectivo com a descrição do personagem sentindo-se sozinho no hospital. A contradição entre o lugar 'horrível' e o personagem querendo ficar lá é interessante, mostrando que ele não está apenas física ou emocionalmente mal. Sua escrita também tem um ritmo lento e reflexivo, o que ajuda a transmitir a sensação de isolamento.\",\n  \"perguntas_reflexivas\": [\"O personagem escrevia mesmo enquanto sofria? Será que isso é uma forma de escapismo ou de lidar com as suas dores?\", \"Por que ele 'desistiu de tudo' no fim? Isso parece um pouco abrupto. Pode ser que haja algo mais a ser dito sobre o seu estado mental antes disso?\", \"Você usou muitas palavras que têm conotação negativa, como 'horrível'. Será que elas ajudam a criar uma atmosfera sombria ou são apenas uma escolha de linguagem?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2_fewshot",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 11,
+    "latencia_ms": 8434,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você conseguiu manter a ordem cronológica dos eventos e isso ajuda muito na compreensão do que está acontecendo no texto. Além disso, você usou 'aliviado' para descrever o Camilo após a leitura das cartas, o que é um bom exemplo de como as palavras podem ajudar a criar uma atmosfera em seu texto.\",\n  \"perguntas_reflexivas\": [\"Quais outras formas poderiam ser usadas para dizer que o Camilo estava 'angustiado' no início do texto? Por exemplo, você poderia usar 'triste', 'estressado' ou até mesmo 'desesperado'. Como essas palavras mudariam a imagem que temos da situação?\", \"Você usou 'aliviado' para descrever o Camilo após a leitura das cartas. Mas por quê? O que é que o alívio do personagem nos diz sobre a importância das cartas na história?\", \"O texto menciona que a previsão não salvou o Camilo, mas você poderia ter usado uma palavra ou expressão para enfatizar isso ainda mais. Por exemplo, 'a previsão foi apenas um engano' ou 'o destino era outro'. Como essas palavras mudariam a mensagem da história?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2_fewshot",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 12,
+    "latencia_ms": 6944,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você entendeu bem a ideia central do livro: Simão Bacamarte começa com uma abordagem mais restritiva e, à medida que sua teoria não se sustenta, muda de direção e libera os pacientes. Esse processo de mudança é interessante e você o capturou bem. Além disso, a frase 'ele mesmo' no final é muito impactante e mostra que Simão acabou sendo o único caso que ele não conseguiu tratar.\",\n  \"perguntas_reflexivas\": [\"O que aconteceu com os pacientes que foram libertados? Eles voltaram para a sociedade ou continuam vivendo em algum lugar? Será que eles encontraram um novo tratamento ou simplesmente... sobreviveram?\", \"Como você achou de usar o termo 'critério' para descrever a forma como Simão escolhia seus pacientes? Pode ser mais claro se usarmos uma palavra diferente, como 'regra' ou 'padrão'?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2_fewshot",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 13,
+    "latencia_ms": 8319,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você conseguiu capturar bem a tensão da situação: o homem está em uma situação desconfortável e não sabe como sair dela. A sua escrita também tem um ritmo rápido, que se ajusta bem à sensação de confusão e caos que está sendo descrita.\",\n  \"perguntas_reflexivas\": [\"Quais palavras poderiam ser usadas para descrever a reação do homem quando ele percebeu que estava nu? Seria 'surpresa', 'choque' ou talvez algo mais forte?\", \"Como você pode usar conectivos para mostrar como as coisas estão se tornando cada vez mais complicadas para o homem? Por exemplo, poderia ser algo como: 'Ela bateu atrás dele e o deixou nu no corredor; logo depois, percebeu que a confusão só aumentava...'\", \"Você usou a expressão 'Sem saída' para descrever a situação do homem no elevador. O que você achou da escolha dessa palavra? Seria mais adequada outra opção?\", \"A frase 'Desceu pelo elevador' é interessante, mas poderia ser reescrita de alguma forma para mostrar melhor o estado de espírito do personagem?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2b_fewshot_temp0",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 2,
+    "latencia_ms": 10161,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você usou uma linguagem muito rica para criar um clima de tensão e suspense na primeira metade do conto. A descrição da cena em que o Simão Bacamarte prende o barbeiro é muito detalhada, e a ideia de que ele acha que o barbeiro é louco é uma boa maneira de criar um conflito entre as personagens.\",\n  \"perguntas_reflexivas\": [\"Você usou a linguagem do 'alienista' para descrever a ideia de que o Simão Bacamarte está tentando 'provar' a teoria dele, mas isso é uma metáfora interessante. Será que você poderia explicar mais sobre por que essa linguagem é tão importante?\", \"Quais outras formas poderiam ser usadas para descrever a ideia de que o Simão Bacamarte está tentando 'provar' a teoria dele? Será que você poderia usar uma linguagem mais clara e direta?\", \"Você usou a palavra 'confuso' na última frase, mas isso é um pouco genérico. Será que você poderia usar uma linguagem mais específica para descrever o estado emocional do barbeiro?\", \"Será que você poderia explicar mais sobre como o Simão Bacamarte está se sentindo ao longo da história? É claro que ele está tentando 'provar' a teoria dele, mas isso é uma questão muito complexa.\", \"Quais outras formas poderiam ser usadas para criar um clima de tensão e suspense na última metade do conto?\", \"Será que você poderia usar mais linguagem oral para criar um clima de tensão e suspense? Por exemplo, você poderia usar sons, silêncios, ou até mesmo imagens para criar uma atmosfera mais aconchegante.\", \"Você usou a linguagem do 'alienista' para descrever a ideia de que o Simão Bacamarte está tentando 'provar' a teoria dele. Será que você poderia usar uma linguagem mais clara e direta?\", \"Quais outras formas poderiam ser usadas para criar um clima de tensão e suspense na última metade do conto?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2b_fewshot_temp0",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 3,
+    "erro": "HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=120)"
+  },
+  {
+    "experimento": "E2b_fewshot_temp0",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 4,
+    "erro": "HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=120)"
+  },
+  {
+    "experimento": "E2b_fewshot_temp0",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 5,
+    "latencia_ms": 6179,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você fez uma boa escolha em usar a linguagem da história para descrever o ambiente e as personagens. O uso de palavras como 'importante', 'grande' e 'medo' ajuda a criar um clima de tensão, que é fundamental na narrativa do Alienista.\",\n  \"perguntas_reflexivas\": [\"Você usou a linguagem da história para descrever o ambiente. Mas, se você quiser usar uma linguagem mais moderna, como a linguagem do Pensamento Computacional (lógica, sequência, condição), poderia usar palavras como 'influenciado' em vez de 'importante', ou 'desafiador' em vez de 'grande'.\", \"Se você quiser mostrar que Bacamarte estudou muito, poderia usar uma linguagem mais formal e acadêmica, como a linguagem do Pensamento Computacional (lógica, sequência, condição).\", \"Você usou a linguagem da história para descrever as pessoas. Mas, se você quiser mostrar que as pessoas se revoltaram um dia, poderia usar uma linguagem mais direta e crua, como a linguagem do Pensamento Computacional (lógica, sequência, condição).\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2b_fewshot_temp0",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 6,
+    "latencia_ms": 5229,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você conseguiu capturar a essência da história de O Alienista: a Casa Verde simboliza o desconhecido e o assustador, e sua ausência é um sinal de que algo está errado. A repetição do nome 'A Casa Verde' em várias frases é uma estratégia para enfatizar a ideia de que essa casa não faz sentido mais.\",\n  \"perguntas_reflexivas\": [\"Você usou o termo 'assustava o povo', mas poderia ter usado um verbo mais forte, como 'afastava' ou 'evitava', para enfatizar a ideia de que a Casa Verde era perigosa?\", \"Será que você usou palavras como 'Casa Verde' em várias frases? Isso pode criar uma sensação de repetição e confusão no leitor.\", \"Quais outras formas poderiam ser usadas para reforçar a ideia de que a Casa Verde não faz sentido?\", \"Você poderia ter usado mais detalhes na descrição da Casa Verde, como o que ela fazia dentro dela ou como os moradores lá estavam tratando com eles?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2b_fewshot_temp0",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 7,
+    "latencia_ms": 4350,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você conseguiu criar uma sequência lógica e coerente, mas com alguns detalhes que podem ser considerados como 'narrativas extras' ou 'desenvolvimentos'. Por exemplo, a mulher saiu do apartamento do homem nu, o que pode ser visto como um momento de liberdade e independência. Além disso, a cena no elevador é uma boa maneira de mostrar a solidão do homem nu, mas também pode ser considerada como uma 'narrativa adicional' que não está completamente conectada ao resto da história.\",\n  \"perguntas_reflexivas\": [\"Como você fez para criar essa sequência lógica? Você usou palavras específicas para descrever o momento em que a mulher sai do apartamento?\", \"Se a gente pensasse no seu texto como um filme, qual seria o título e o tema principal?\", \"Qual é a mensagem que você quer passar ao leitor com essa história?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2b_fewshot_temp0",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 8,
+    "erro": "HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=120)"
+  },
+  {
+    "experimento": "E2b_fewshot_temp0",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 9,
+    "latencia_ms": 5872,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você fez um bom começo com a estrutura do texto, mas há algumas coisas que precisam ser melhoradas para torná-lo mais forte e coerente. A primeira coisa é que você não usou o ponto de vista correto no início da história: 'O detetive chegou' deve estar no final da frase ou na primeira frase, dependendo do seu estilo preferido. Além disso, a introdução ao personagem do detetive pode ser mais eficaz se você tiver uma descrição mais detalhada de quem ele é e o que ele faz.\",\n  \"perguntas_reflexivas\": [\"Você usou 'era de noite' para indicar a hora. Será que essa escolha foi boa? Qual seria a melhor opção?\", \"A frase 'Todo mundo era suspeito' parece muito direta, mas talvez você tenha pensado em usar uma expressão mais descriptiva, como 'todo mundo parecia suspeito'.\", \"Qual é o seu estilo de narrativa preferido: linear ou circular? Você usou a estrutura linear aqui, mas seria interessante explorar a circularidade da história e mostrar como ela se desenvolve ao longo do texto.\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2b_fewshot_temp0",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 10,
+    "latencia_ms": 5534,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você usou uma estrutura narrativa simples e direta para contar a história do personagem. A repetição da frase 'O lugar era horrível' é um bom exemplo disso, pois ajuda a criar uma sensação de desespero e desânimo no personagem.\",\n  \"perguntas_reflexivas\": [\"Você usou o pronome 'ele' para referir-se ao personagem, mas isso pode ser considerado ambíguo. Seria melhor usar o pronome 'não ele', para evitar confusão?\", \"A frase 'embora ele sofresse' é uma boa tentativa de mostrar a dor do personagem, mas poderia ser mais forte se você tivesse usado um verbo mais forte, como 'sufria' ou 'suafrigou'\", \"Quais outras palavras poderiam ser usadas para descrever o ambiente do cemitério? Por exemplo, 'um lugar sombrio', 'um local de morte', etc.?\", \"Você mencionou que a história acabou com um personagem sofrendo, mas não mencionou se ele morreu ou se sobreviveu. Seria interessante explorar essa questão mais a fundo na próxima vez.\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2b_fewshot_temp0",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 11,
+    "latencia_ms": 5944,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você fez uma boa escolha ao começar com 'Camilo vivia angustiado' e depois mudar para 'procurou a cartomante'. Isso cria um contraste interessante entre o estado inicial de dor do personagem e sua busca pela solução. A frase que segue é muito clara: 'A previsão, afinal, não o havia salvado.' É uma boa maneira de mostrar como a cartomante foi falsa e Vilela foi a verdadeira responsável pelo seu destino.\",\n  \"perguntas_reflexivas\": [\"Você usou a estrutura do sentimento para criar um clima de tensão inicial. Mas, ao final, o personagem não se sente mais angustiado?\", \"Como você fez com que Vilela parecesse estar à espera? Isso é uma boa maneira de criar suspense e aumentar a tensão.\", \"A frase 'porém' é um ponto fraco na estrutura do texto. Você poderia usar outro conectivo para melhorar a coesão?\", \"Você usou o verbo 'saiu' para indicar que Vilela estava à espera, mas isso pode ser interpretado como uma forma de desculpa ou justificativa. Será que você quer explorar essa ideia mais a fundo?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2b_fewshot_temp0",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 12,
+    "latencia_ms": 6433,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você fez uma boa escolha ao começar com a ideia de que a teoria não se sustentava. A inovação é sempre importante, mas também é fundamental considerar as limitações e os riscos potenciais. Ao libertar os internos, você enfrentou um desafio muito grande: como garantir que o louco fosse capaz de lidar com a realidade sem se perder em ideias distorcidas ou perigosas? A solução foi encontrar uma forma de 'reeducar' os internos, mas não de 'curá-los', e isso é um ponto forte do seu trabalho.\",\n  \"perguntas_reflexivas\": [\"Você usou a linguagem da teoria para descrever o processo de inverteção do critério. Mas como você fez com que essa ideia se tornasse realidade? Você encontrou uma forma de 'reeducar' os internos sem recorrer à manipulação ou ao controle?\", \"Se a gente pensasse no seu texto como um jogo, qual seria o próximo passo para Simão Bacamarte? Será que ele precisaria encontrar uma maneira de lidar com as consequências de suas ações?\", \"Quais são os riscos potenciais de libertar os internos sem uma estratégia clara e bem definida? Você poderia ter feito algo diferente para evitar esse resultado trágico?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2b_fewshot_temp0",
+    "modelo": "llama3.2:1b",
+    "cenario_id": 13,
+    "latencia_ms": 5498,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você usou uma linguagem muito clara para contar essa história: 'o homem tirou a roupa' é direto e simples, mas ao mesmo tempo, você conseguiu criar um cenário interessante com a campainha. A frase 'enquanto o café passava' é uma boa maneira de introduzir o momento em que tudo começa. Mas, para tornar mais forte a narrativa, poderia usar uma linguagem mais variada: você poderia usar pronomes mais expressivos, como 'ele', 'o homem', etc., e também usar conectivos mais complexos para criar um ritmo mais interessante.\",\n  \"perguntas_reflexivas\": [\"Como você fez com que a campainha se sinta? Você usou uma linguagem que faça com que ela seja uma personagem importante na história?\", \"Se a gente pensasse no seu texto como um filme, qual seria o título do filme? Qual seria o nome da personagem principal?\", \"Você poderia usar mais variedade de palavras para descrever as pessoas e os objetos: por exemplo, 'o homem' em vez de 'ele', 'a roupa' em vez de 'as roupas', etc.\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2b_fewshot_temp0",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 2,
+    "latencia_ms": 10011,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você conseguiu capturar bem a tensão entre o Simão Bacamarte e o barbeiro, mostrando como o alienista queria provar sua teoria de que o homem era louco. A frase 'ele queria provar a teoria dele pra ele' é especialmente interessante porque mostra como o Simão está tentando comprovar algo para convencer alguém.\",\n  \"perguntas_reflexivas\": [\"O que você achou que estava acontecendo no final do conto? A soltura do barbeiro parece um pouco abrupta. O que poderia ter acontecido para que o Simão não tivesse soltado ele?\", \"Como você acha que o Simão Bacamarte se sentiu quando o barbeiro ficou confuso? Pode ser que ele estivesse mais 'vitorioso' do que realmente queria, e isso afetasse como ele tratava o homem.\", \"Você viu algum padrão de repetição ou conexão entre as frases? Por exemplo, há alguma palavra ou ideia que aparece em diferentes partes do texto?\", \"O que você acha que a história poderia ter dito sobre a loucura se tivesse continuado com mais detalhes?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2b_fewshot_temp0",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 3,
+    "latencia_ms": 6274,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você reconheceu a emoção do conto e expressou isso de forma autêntica! A tristeza é uma emoção forte e você não hesitou em dizer que o conto te fez sentir isso. Além disso, você também notou a ironia das partes do meio e riu com isso. Isso mostra que você está começando a entender como as palavras podem ser usadas para criar diferentes efeitos emocionais.\",\n  \"perguntas_reflexivas\": [\"Quem diria que uma história triste poderia fazer alguém rir? O que é que faz com que você riu nas partes do meio, mesmo sabendo que o final vai ser triste?\", \"Você acha que o autor queria que o leitor se divirtesse nas partes mais 'leves' do conto, ou se trata de uma estratégia para tornar o impacto do final ainda maior?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2b_fewshot_temp0",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 4,
+    "latencia_ms": 8985,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você fez uma mudança interessante no início da sua crônica: o Camilo morreu no final, mas antes disso ele recebeu um bilhete do Vilela. Isso muda a ordem das coisas e faz com que o leitor pense sobre como as coisas poderiam ter sido diferentes se o Camilo não tivesse recebido esse bilhete. Sua escrita também tem uma lógica interessante, como quando você diz que ele conheceu a Rita primeiro de tudo, mas isso parece contraditório com o que aconteceu no final da história. Você conseguiu criar um contraste interessante entre as coisas que aconteceram antes e depois do morte do Camilo.\",\n  \"perguntas_reflexivas\": [\"O que acontece se a cartomante não tivesse dito que estava tudo certo? Será que o Camilo teria morrido de qualquer forma?\", \"Você usou 'do amigo' para falar da casa do Vilela. Isso é uma escolha interessante, mas também pode ser um pouco ambiguo. O que você quer dizer com isso? É só a casa do Vilela ou também inclui outras pessoas?\", \"Se o Camilo conheceu a Rita antes de morrer, e a cartomante já disse que estava tudo certo, como podemos explicar essa mudança na história?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2b_fewshot_temp0",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 5,
+    "latencia_ms": 6768,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você conseguiu transmitir a ideia de que a Casa Verde foi um lugar importante e que o personagem Bacamarte era uma figura intrigante. Sua descrição do povo de Itaguaí tendo medo também ajuda a criar uma atmosfera de tensão. No entanto, algumas frases parecem um pouco desorganizadas ou sem ligação lógica entre si. Por exemplo, como 'O povo de Itugaí tinha medo' está relacionado à Casa Verde? Seria bom explorar essa conexão mais a fundo.\",\n  \"perguntas_reflexivas\": [\"Quais são as palavras que você usou para descrever Bacamarte e como elas contribuem para a sua imagem no leitor?\", \"Como você pensa que o personagem Bacamarte está relacionado à Casa Verde? Será que há algum detalhe específico que você deixou de mencionar?\", \"Se você tivesse que escolher apenas uma palavra para descrever a atmosfera da história, qual seria e por quê?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2b_fewshot_temp0",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 6,
+    "latencia_ms": 8598,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você conseguiu capturar bem a atmosfera de medo e assustação que a Casa Verde transmite, especialmente com as palavras 'assustava o povo' e 'ficava cheia'. A ideia de que a Casa Verde foi esvaziada porque não fazia mais sentido é uma reflexão interessante sobre como as coisas podem mudar ao longo do tempo. Sua escrita também tem um ritmo rápido e direto, o que ajuda a manter o leitor engajado.\",\n  \"perguntas_reflexivas\": [\"O que aconteceu com os 'loucos' que ficavam na Casa Verde? Eles foram 'esvaziados', mas para onde eles foram? Será que isso tem algo a ver com a ideia de que a Casa Verde não faz mais sentido?\", \"Você usou o nome da casa como se fosse uma pessoa, dizendo que ela 'fazia' ou 'não fazia' mais sentido. Isso é uma forma interessante de dar vida às coisas inanimadas. Quais outras formas você poderia usar para falar sobre a Casa Verde?\", \"A frase 'A Casa Verde foi feita pelo Bacamarte' é muito curta, mas ela nos diz muito sobre o personagem e sua relação com a casa. O que você acharia se a frase fosse mais longa ou detalhada?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2b_fewshot_temp0",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 7,
+    "latencia_ms": 6338,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você conseguiu capturar a essência do personagem e sua situação, mostrando como ele fica cada vez mais isolado e humilhado ao longo da história. A transição entre o momento de solidão no elevador e a reação dos passantes na rua é particularmente eficaz em transmitir a vergonha e a humilhação do personagem.\",\n  \"perguntas_reflexivas\": [\"O que aconteceu com o aluguel? Será que ele vai pagar?\", \"Como você usou a repetição para enfatizar a situação do personagem? A repetição de 'ele' pode ser uma estratégia interessante aqui, mas também pode dar um tom um pouco mais formal. Você poderia ter usado 'ele mesmo', por exemplo, para dar um tom mais natural?\", \"O que você achou da escolha de começar com o personagem já pelado? Foi uma escolha eficaz para estabelecer a situação inicial do personagem?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2b_fewshot_temp0",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 8,
+    "latencia_ms": 7526,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você usou uma linguagem muito direta e eficaz para contar a história da moça tecelã, mostrando claramente como ela queria companhia e como isso mudou quando ele chegou. A sua descrição do palácio é muito viva e parece que ela realmente fez algo incrível com o tear.\",\n  \"perguntas_reflexivas\": [\"Você usou 'teceu' em todas as frases para falar sobre a ação da moça, mas se ela queria companhia, não seria mais fácil usar uma palavra como 'construir'?\", \"A frase 'Ela gostava dela mesma de novo' é muito interessante. O que você achou que a moça estava tentando dizer com isso? Será que ela está dizendo que ela se sente melhor agora que o marido não está mais lá, ou talvez algo mais?\", \"Você usou 'ele' e 'ela' para falar sobre as duas pessoas. Isso é uma escolha interessante. Por que você escolheu usar um pronome feminino para a moça tecelã em vez de outro?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2b_fewshot_temp0",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 9,
+    "latencia_ms": 8151,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você criou um clima de mistério e suspense desde o início, com a descrição da casa grande e a borboleta rara. Sua narrativa tem um ritmo rápido e é fácil de seguir. Você também fez uma boa escolha ao deixar muitas perguntas sem respostas, como quem morreu e por que o detetive achou uma pista pequena.\",\n  \"perguntas_reflexivas\": [\"Você usou a palavra 'atíria' para descrever a borboleta. O que você quer dizer com isso? A borboleta é rara, mas também pode ser um termo técnico em biologia. Você quer nos dizer se a rara-nessa tem algum significado especial aqui?\", \"A frase 'Ninguém viu nada' parece um pouco abrupta. Você poderia ter desenvolvido essa ideia um pouco mais, talvez com uma explicação para por que ninguém viu nada ou o que aconteceu depois disso.\", \"Você usou a palavra 'suspeito'. Isso é um termo legal, mas também pode ser um pouco forte. Você quer dizer se todos são suspeitos de algo específico ou se é mais uma questão de todos sendo suspeitos em geral?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2b_fewshot_temp0",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 10,
+    "latencia_ms": 7582,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você conseguiu capturar a atmosfera sombria e isolada do cenário do hospital, especialmente na frase 'O lugar era horrível, mas por isso ele queria ficar'. Isso mostra que você entendeu como o personagem se sente: não é apenas o local que é ruim, mas também a sensação de estar sozinho e sem saída. A parte interessante é como você usou 'assim ele desistiu de tudo no fim', que pode ser uma interpretação um pouco ambígua. Será que o personagem realmente desistiu de tudo ou está apenas se rendendo à situação? Isso pode ser uma questão de coerência para o leitor.\",\n  \"perguntas_reflexivas\": [\"O que você acha que é mais importante: o fato do lugar ser 'horrível' ou a sensação de sofrimento do personagem? Como essas duas coisas estão relacionadas?\", \"Você usou 'contudo' para separar as ideias. O que isso significa exatamente? Será que você quer dizer que há algo mais importante após o 'embora ele sofresse'?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2b_fewshot_temp0",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 11,
+    "latencia_ms": 6555,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você conseguiu manter a narrativa clara e direta, mostrando como as cartas da cartomante mudaram a perspectiva de Camilo. A transição entre o alívio inicial e a tristeza final é bem feita. Sua escrita também tem um bom ritmo, com frases curtas e concisas.\",\n  \"perguntas_reflexivas\": [\"O que aconteceu com os bilhetes anônimos enquanto Camilo estava com a cartomante? Será que eles continuaram a assustá-lo ou ele conseguiu esquecê-los?\", \"Como você pode usar o conectivo 'no entanto' para mostrar a contradição entre a previsão da cartomante e o que aconteceu em seguida?\", \"Se Camilo estava aliviado quando saiu da casa da cartomante, por que ele não foi direto para casa do amigo? Há algo que poderia ter sido feito de diferente naquela parte da história.\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2b_fewshot_temp0",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 12,
+    "latencia_ms": 7238,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você conseguiu capturar a essência da história de O Alienista, mostrando como Simão Bacamarte evoluiu sua abordagem para estudar a loucura. A transição do critério de casos extremos para recolher quase toda a cidade é particularmente interessante. Sua escrita também tem um tom sombrio e introspectivo, o que se ajusta bem ao tema do livro.\",\n  \"perguntas_reflexivas\": [\"O que aconteceu com os internos que foram libertados? Será que eles voltaram para a sociedade ou continuam vivendo em algum lugar fora da Casa Verde?\", \"Como você conseguiu transmitir a ideia de que Simão Bacamarte se tornou o único louco aos seus próprios olhos? Quais palavras ou frases poderiam ter sido usadas para enfatizar essa ideia?\", \"A transição do critério de estudo da loucura é um momento chave na história. Você conseguiu mostrar como isso afetou Simão Bacamarte e como ele se tornou cada vez mais isolado.\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  },
+  {
+    "experimento": "E2b_fewshot_temp0",
+    "modelo": "llama3.2:3b",
+    "cenario_id": 13,
+    "latencia_ms": 6593,
+    "resposta_ia": "{\n  \"pontos_fortes\": \"Você conseguiu capturar bem a tensão da situação: o homem está em uma situação desconfortável e sem saída, e isso é transmitido pela sua ação de descer pelo elevador. Sua escrita também tem um ritmo rápido que acompanha a confusão do personagem.\",\n  \"perguntas_reflexivas\": [\"O que aconteceu com o café enquanto o homem estava distraído? Será que ele ainda está lá, esperando por ele no banheiro?\", \"Você usou 'ela' para se referir à mulher que bateu na porta. Isso é uma escolha interessante: o que você acharia se tivesse usado um pronome masculino ou feminino? Como isso afetaria a dinâmica da cena?\", \"A frase 'Sem saída, desceu pelo elevador' é muito direta e pode parecer um pouco abrupta. Você poderia ter explorado mais a emoção do personagem antes de ele agir?\"]\n}",
+    "conforme": true,
+    "motivo": "OK",
+    "pf_tipo": "str_ok"
+  }
+]

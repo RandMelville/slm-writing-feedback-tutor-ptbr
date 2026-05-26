@@ -1,0 +1,94 @@
+
+--- E1_temp0 | llama3.2:1b | temp=0.0 | n=13 ---
+  cen= 1   3192ms  ✗ pf=list[4]
+  cen= 2   1373ms  ✗ pf=list[2]
+  cen= 3   1447ms  ✗ pf=list[2]
+  cen= 4   2376ms  ✗ pf=list[5]
+  cen= 5   2191ms  ✗ pf=list[2]
+  cen= 6   1560ms  ✗ pf=list[2]
+  cen= 7   6832ms  ✗ pf=list[5]
+  cen= 8   1141ms  ✗ pf=list[2]
+  cen= 9   2451ms  ✗ pf=list[5]
+  cen=10   1112ms  ✗ pf=list[2]
+  cen=11   2445ms  ✗ pf=list[3]
+  cen=12   2050ms  ✗ pf=list[2]
+  cen=13   1487ms  ✗ pf=list[3]
+  RESUMO: 0/13 conformes (0.0%)
+
+--- E1_temp0 | llama3.2:3b | temp=0.0 | n=13 ---
+  cen= 1   4711ms  ✗ pf=list[2]
+  cen= 2   3344ms  ✗ pf=list[2]
+  cen= 3   2717ms  ✗ pf=list[2]
+  cen= 4   2898ms  ✗ pf=list[2]
+  cen= 5   3474ms  ✗ pf=list[2]
+  cen= 6   3465ms  ✗ pf=list[2]
+  cen= 7   3528ms  ✗ pf=list[2]
+  cen= 8   2407ms  ✗ pf=list[2]
+  cen= 9   2877ms  ✗ pf=list[2]
+  cen=10   3443ms  ✗ pf=list[2]
+  cen=11   2517ms  ✗ pf=list[2]
+  cen=12   3027ms  ✗ pf=list[2]
+  cen=13   6156ms  ✗ pf=list[3]
+  RESUMO: 0/13 conformes (0.0%)
+
+--- E2_fewshot | llama3.2:1b | temp=0.2 | n=12 ---
+  cen= 2   6484ms  ✓ OK
+  cen= 3  ❌ HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=120)
+  cen= 4   8904ms  ✓ OK
+  cen= 5   5056ms  ✓ OK
+  cen= 6   6570ms  ✓ OK
+  cen= 7   7627ms  ✓ OK
+  cen= 8  15494ms  ✓ OK
+  cen= 9   2957ms  ✓ OK
+  cen=10   4917ms  ✓ OK
+  cen=11  71201ms  ✓ OK
+  cen=12   4555ms  ✓ OK
+  cen=13   4581ms  ✓ OK
+  RESUMO: 11/12 conformes (91.7%)
+
+--- E2_fewshot | llama3.2:3b | temp=0.2 | n=12 ---
+  cen= 2   7705ms  ✓ OK
+  cen= 3   7350ms  ✓ OK
+  cen= 4   8008ms  ✓ OK
+  cen= 5   7166ms  ✓ OK
+  cen= 6   8155ms  ✓ OK
+  cen= 7   7448ms  ✓ OK
+  cen= 8   5998ms  ✓ OK
+  cen= 9   8300ms  ✓ OK
+  cen=10   6798ms  ✓ OK
+  cen=11   8434ms  ✓ OK
+  cen=12   6944ms  ✓ OK
+  cen=13   8319ms  ✓ OK
+  RESUMO: 12/12 conformes (100.0%)
+
+--- E2b_fewshot_temp0 | llama3.2:1b | temp=0.0 | n=12 ---
+  cen= 2  10161ms  ✓ OK
+  cen= 3  ❌ HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=120)
+  cen= 4  ❌ HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=120)
+  cen= 5   6179ms  ✓ OK
+  cen= 6   5229ms  ✓ OK
+  cen= 7   4350ms  ✓ OK
+  cen= 8  ❌ HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=120)
+  cen= 9   5872ms  ✓ OK
+  cen=10   5534ms  ✓ OK
+  cen=11   5944ms  ✓ OK
+  cen=12   6433ms  ✓ OK
+  cen=13   5498ms  ✓ OK
+  RESUMO: 9/12 conformes (75.0%)
+
+--- E2b_fewshot_temp0 | llama3.2:3b | temp=0.0 | n=12 ---
+  cen= 2  10011ms  ✓ OK
+  cen= 3   6274ms  ✓ OK
+  cen= 4   8985ms  ✓ OK
+  cen= 5   6768ms  ✓ OK
+  cen= 6   8598ms  ✓ OK
+  cen= 7   6338ms  ✓ OK
+  cen= 8   7526ms  ✓ OK
+  cen= 9   8151ms  ✓ OK
+  cen=10   7582ms  ✓ OK
+  cen=11   6555ms  ✓ OK
+  cen=12   7238ms  ✓ OK
+  cen=13   6593ms  ✓ OK
+  RESUMO: 12/12 conformes (100.0%)
+
+✅ salvo em logs/contra_experimento_llama32_resultados.json (74 chamadas)

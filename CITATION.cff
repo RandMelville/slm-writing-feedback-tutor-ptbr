@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use this benchmark, dataset, or methodology, please cite the work as below."
+title: "A Diagnostic Evaluation of Small Language Models for Offline Socratic Tutoring in Brazilian Portuguese: A Study on Structural and Pedagogical Adherence under Public-School Infrastructure Constraints"
+abstract: >-
+  Diagnostic benchmark of eight open Small Language Models (≤3.8B parameters)
+  for Socratic tutoring of writing in Brazilian Portuguese, evaluated strictly
+  offline on CPU against a metalinguistic rubric derived from Koch's Textual
+  Linguistics. Includes a four-isolation falsification protocol on the Llama 3.2
+  family, supported by Fisher's exact tests on 2x2 conformance contingencies.
+authors:
+  - family-names: "Rebouças"
+    given-names: "Randerson Melville"
+    email: "randerson.melville@gmail.com"
+    affiliation: "Graduate Program in Informatics in Education, Federal University of Rio Grande do Sul (UFRGS)"
+type: article
+year: 2026
+keywords:
+  - Small Language Models
+  - Brazilian Portuguese
+  - Local Inference
+  - Socratic Tutoring
+  - Textual Linguistics
+  - Diagnostic Evaluation
+  - Educational AI
+license: MIT
+license-url: https://opensource.org/licenses/MIT

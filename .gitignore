@@ -14,17 +14,13 @@ env/
 # Jupyter
 .ipynb_checkpoints/
 
-# Pesos do modelo (grandes; usar Git LFS se quiser versionar)
-adapters/*.safetensors
-adapters/*.bin
+# Private artifacts of the planned fine-tuned model (NOT part of this benchmark)
+_privado_modelo_futuro/
 
-# Saídas regeneráveis a partir dos scripts
-analises/graficos/
-
-# Claude Code — configurações locais por máquina
+# Claude Code — local per-machine settings
 .claude/settings.local.json
 
-# Editores
+# Editors
 .idea/
 .vscode/
 *.swp
