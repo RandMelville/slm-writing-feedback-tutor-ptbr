@@ -2,11 +2,14 @@
 
 ---
 
-**Randerson Melville Rebouças**
+**Randerson Oliveira Melville Rebouças**
 
-Graduate Program in Informatics in Education — Federal University of Rio Grande do Sul (UFRGS)
-Porto Alegre, RS — Brazil
+PhD Candidate, Graduate Program in Informatics in Education (PPGIE)
+Federal University of Rio Grande do Sul (UFRGS) — Porto Alegre, RS, Brazil
 `randerson.melville@gmail.com`
+
+Advisor: Prof. Dr. Marcelo Magalhães Foohs (PPGIE/UFRGS)
+Co-advisor: Profa. Dra. Rosa Maria Vicari (PPGIE/UFRGS)
 
 ---
 
@@ -354,7 +357,7 @@ The simultaneous persistence of these two failure regimes — across models from
 
 ## Acknowledgments
 
-The author thanks the Graduate Program in Informatics in Education (PPGIE) at UFRGS for institutional support, and the Coordination for the Improvement of Higher Education Personnel (CAPES) for the doctoral scholarship funding.
+The author thanks his advisor, Prof. Dr. Marcelo Magalhães Foohs, and his co-advisor, Profa. Dra. Rosa Maria Vicari, both at the Graduate Program in Informatics in Education (PPGIE) of the Federal University of Rio Grande do Sul (UFRGS), for their guidance throughout this investigation. The author also thanks PPGIE/UFRGS for institutional support and the Coordination for the Improvement of Higher Education Personnel (CAPES) for the doctoral scholarship funding.
 
 ---
 
