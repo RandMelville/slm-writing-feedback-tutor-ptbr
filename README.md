@@ -21,15 +21,31 @@ Textual Linguistics (Koch, 2018, 2020), through 312 inference calls
 (8 models × 13 canonical scenarios × 3 repetitions) plus 76 additional calls
 across four falsification isolations.
 
-Three findings:
+### Selected base model
+
+**`qwen2.5:3b-instruct`** is the recommended base model for downstream
+pedagogical fine-tuning. Among the eight evaluated, it is the **only deployable
+model (≤ 3 B parameters) that simultaneously satisfies all non-functional
+requirements**: 100 % structural conformance to the JSON output contract
+under zero-shot regime (39/39 calls; Wilson 95 % CI [91.0 %; 100.0 %]),
+mean latency of 2,906 ms — comfortably below the 10 s threshold for synchronous
+classroom UX — and CV of 19.0 % indicating stable behavior across repetitions.
+Fisher's exact test confirms that its conformance is statistically
+indistinguishable from the 7–9 B reference-ceiling models (*p* = 1.000 n.s.),
+strengthening its selection as the operationally preferable base.
+
+### Three findings
 
 1. Five of eight models conform to the JSON output contract under zero-shot
    regime; three (Llama 3.2 1B, Llama 3.2 3B, Phi-3 Mini) fail at 100 %.
 2. The Llama 3.2 failure is a **reversible zero-shot bias**: a single
    one-shot demonstration restores conformance to 100 %
-   (Fisher exact: *p* < 0.001).
-3. Among deployable models, only `qwen2.5:3b-instruct` combines structural
-   conformance with latency below the 10 s HCI threshold.
+   (Fisher exact: *p* < 0.001), reclassifying the family as deployable
+   under prompt-engineering at higher context cost.
+3. Even the conformant `qwen2.5:3b-instruct` mobilizes Koch's metalinguistic
+   terminology in only 46.2 % of scenarios (Wilson 95 % CI [23.2 %; 70.9 %]),
+   evidencing that structural conformance and pedagogical adequacy are
+   logically independent dimensions.
 
 Full methodology, tables, and references are in
 [`paper/artigo_benchmark_slm.pdf`](paper/artigo_benchmark_slm.pdf) (also

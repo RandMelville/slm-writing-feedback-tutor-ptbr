@@ -148,9 +148,15 @@
 <section id="overview">
   <h2>1. The central finding, in plain terms</h2>
   <p>This study asked a precise question: <em>can off-the-shelf Small Language Models (≤ 3.8 B parameters) operate as Socratic tutors of writing in Brazilian Portuguese, under the same infrastructure constraints faced by a typical Brazilian public school?</em></p>
+
+  <div class="callout" style="border-left-color:#27ae60; background:#ecfdf5;">
+    <strong style="color:#065f46">Selected base model: <code>qwen2.5:3b-instruct</code>.</strong>
+    Among the eight evaluated, it is the only deployable model (≤ 3 B parameters) that simultaneously satisfies all non-functional requirements — 100 % structural conformance (39/39; Wilson 95 % CI [91.0 %; 100.0 %]), mean latency of 2,906 ms (below the 10 s UX threshold), CV of 19.0 % (stable across repetitions). Fisher's exact test confirms its conformance is statistically indistinguishable from the 7–9 B reference-ceiling models (<em>p</em> = 1.000 n.s.), strengthening its selection as the operationally preferable base.
+  </div>
+
   <p>The answer breaks into two parts. First, only <strong>5 out of 8 models</strong> obey the structured-output contract specified in natural language under zero-shot regime — the others either reformat the output as enumerated lists or substitute the schema entirely. Second, even the structurally conformant model (<code>qwen2.5:3b-instruct</code>) mobilizes the linguistic terminology required by the rubric in <strong>only 46 % of scenarios</strong>, drifting toward thematic-narrative commentary on the literary work cited rather than examining the student's own writing.</p>
   <div class="callout">
-    <strong>The unexpected nuance:</strong> when probed with a targeted four-isolation falsification protocol, the failure of the Llama 3.2 family — 78/78 divergent zero-shot — collapses entirely under <em>one</em> in-context demonstration: the same family reaches 100 % conformance with a single example pair (Fisher exact: <em>p</em> &lt; 10⁻¹¹). The disobedience is <em>real but reversible</em>; the family is capable, just biased.
+    <strong>The unexpected nuance:</strong> when probed with a targeted four-isolation falsification protocol, the failure of the Llama 3.2 family — 78/78 divergent zero-shot — collapses entirely under <em>one</em> in-context demonstration: the same family reaches 100 % conformance with a single example pair (Fisher exact: <em>p</em> &lt; 0.001). The disobedience is <em>real but reversible</em>; the family is capable, just biased.
   </div>
 </section>
 

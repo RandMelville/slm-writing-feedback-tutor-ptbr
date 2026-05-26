@@ -21,15 +21,31 @@ Linguística Textual de Koch (Koch, 2018, 2020), por meio de 312 chamadas
 de inferência (8 modelos × 13 cenários canônicos × 3 repetições) e 76
 chamadas adicionais distribuídas em quatro isolamentos de falsificação.
 
-Três achados:
+### Modelo-base selecionado
+
+**`qwen2.5:3b-instruct`** é o modelo-base recomendado para o ajuste fino
+pedagógico subsequente. Entre os oito avaliados, é o **único modelo deployável
+(≤ 3 B parâmetros) que satisfaz simultaneamente todos os requisitos não-funcionais**:
+100 % de conformidade estrutural ao contrato JSON em regime zero-shot
+(39/39 chamadas; IC Wilson 95 % [91,0 %; 100,0 %]), latência média de
+2.906 ms — confortavelmente abaixo do limiar de 10 s para UX síncrona em
+sala — e CV de 19,0 % indicando comportamento estável entre repetições.
+O teste exato de Fisher confirma que sua conformidade é estatisticamente
+indistinguível dos modelos teto de 7–9 B (*p* = 1,000 n.s.), reforçando
+sua escolha como base operacionalmente preferível.
+
+### Três achados
 
 1. Cinco dos oito modelos respeitam o contrato JSON em regime zero-shot;
    três (Llama 3.2 1B, Llama 3.2 3B, Phi-3 Mini) falham em 100 %.
 2. A falha da família Llama 3.2 é **viés zero-shot reversível**: uma única
    demonstração one-shot restaura a conformidade para 100 %
-   (Fisher exato: *p* < 0,001).
-3. Entre os modelos deployáveis, apenas o `qwen2.5:3b-instruct` combina
-   conformidade estrutural com latência abaixo do limiar de 10 s da IHC.
+   (Fisher exato: *p* < 0,001), reclassificando a família como deployável
+   sob engenharia de prompt a custo maior de contexto.
+3. Mesmo o conformante `qwen2.5:3b-instruct` mobiliza a terminologia
+   metalinguística de Koch em apenas 46,2 % dos cenários (IC Wilson 95 %
+   [23,2 %; 70,9 %]), evidenciando que conformidade estrutural e adequação
+   pedagógica são dimensões logicamente independentes.
 
 Metodologia, tabelas e referências completas em
 [`paper/artigo_benchmark_slm.pdf`](paper/artigo_benchmark_slm.pdf) (também
