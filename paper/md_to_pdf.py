@@ -22,13 +22,27 @@ def _bold_with_italic(m: re.Match) -> str:
     return f"<b>{inner}</b>"
 
 def md_inline(s: str) -> str:
-    """Inline markdown -> reportlab mini-HTML: ***bold-italic***, **bold**, *italic*, `code`."""
+    """Inline markdown -> reportlab mini-HTML: ***bold-italic***, **bold**, *italic*, `code`.
+
+    Backticks are processed first via a placeholder so asterisks inside `code`
+    are NOT interpreted as bold/italic markers.
+    """
     s = s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
-    # Triplo asterisco primeiro (bold+italic combinados)
+    # Stash backtick blocks to shield their content from asterisk rules
+    code_blocks: list[str] = []
+    def _stash(m: re.Match) -> str:
+        code_blocks.append(m.group(1))
+        return f"\x00CODE{len(code_blocks)-1}\x00"
+    s = re.sub(r"`([^`]+?)`", _stash, s)
+    # Process asterisk-based markup now
     s = re.sub(r"\*\*\*(.+?)\*\*\*", r"<b><i>\1</i></b>", s)
     s = re.sub(r"\*\*(.+?)\*\*", _bold_with_italic, s)
     s = _ITAL.sub(r"<i>\1</i>", s)
-    s = re.sub(r"`([^`]+?)`", r'<font name="Courier" size="9">\1</font>', s)
+    # Restore code blocks
+    def _restore(m: re.Match) -> str:
+        return f'<font name="Courier" size="9">{code_blocks[int(m.group(1))]}</font>'
+    s = re.sub(r"\x00CODE(\d+)\x00", _restore, s)
+    # Links last
     s = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", r'<link href="\2" color="blue">\1</link>', s)
     return s
 
