@@ -1,0 +1,529 @@
+\documentclass{sbc2023}%
+
+\usepackage{graphicx}
+%\usepackage[utf8]{inputenc}
+\usepackage[misc,geometry]{ifsym}
+\usepackage{fontspec}
+\usepackage{fontawesome}
+\usepackage{academicons}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{aas_macros}
+\usepackage[bottom]{footmisc}
+\usepackage{supertabular}
+\usepackage{afterpage}
+\usepackage{url}
+\usepackage{pifont}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{listings}
+
+\setcitestyle{square}
+
+% ---- Listings setup for JSON/Python excerpts (XeLaTeX, UTF-8) ----
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  breakatwhitespace=false,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  frame=single,
+  framesep=4pt,
+  xleftmargin=4pt,
+  xrightmargin=4pt
+}
+
+\definecolor{orcidlogo}{rgb}{0.37,0.48,0.13}
+\definecolor{unilogo}{rgb}{0.16, 0.26, 0.58}
+\definecolor{maillogo}{rgb}{0.58, 0.16, 0.26}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.0}
+\hypersetup{colorlinks,breaklinks,
+            linkcolor=darkblue,urlcolor=darkblue,
+            anchorcolor=darkblue,citecolor=darkblue}
+
+\jid{JBCS}
+\jtitle{Journal of the Brazilian Computer Society, 202X, XX:1, }
+\doi{10.5753/jbcs.202X.XXXXXX}
+\copyrightstatement{This work is licensed under a Creative Commons Attribution 4.0 International License}
+\jyear{202X}
+
+
+\title[SLMs for Offline Socratic Tutoring in Brazilian Portuguese]{A Diagnostic Evaluation of Small Language Models for Offline Socratic Tutoring in Brazilian Portuguese: A Study on Structural and Pedagogical Adherence under Public-School Infrastructure Constraints}
+
+% THE ORCID IS MANDATORY FOR EACH AUTHOR IN JBCS.
+% TODO: replace the 0000-... placeholders with each author's real ORCID before submission.
+\author[Rebouças et al. 202X]{
+\affil{\textbf{Randerson Oliveira Melville Rebouças}~\href{https://orcid.org/0000-0000-0000-0000}{\textcolor{orcidlogo}{\aiOrcid}}~\textcolor{blue}{\faEnvelopeO}~~[~\textbf{Federal University of Rio Grande do Sul}~|\href{mailto:randerson.melville@gmail.com}{~\textbf{\textit{randerson.melville@gmail.com}}}~]}
+
+\affil{\textbf{Marcelo Magalhães Foohs}~\href{https://orcid.org/0000-0000-0000-0000}{\textcolor{orcidlogo}{\aiOrcid}}~~[~\textbf{Federal University of Rio Grande do Sul}~|\href{mailto:mmfoohs@gmail.com}{~\textbf{\textit{mmfoohs@gmail.com}}}~]}
+
+\affil{\textbf{Rosa Maria Vicari}~\href{https://orcid.org/0000-0000-0000-0000}{\textcolor{orcidlogo}{\aiOrcid}}~~[~\textbf{Federal University of Rio Grande do Sul}~|\href{mailto:rosa@inf.ufrgs.br}{~\textbf{\textit{rosa@inf.ufrgs.br}}}~]}
+
+}
+
+\begin{document}
+
+\begin{frontmatter}
+\maketitle
+
+\begin{mail}
+Graduate Program in Informatics in Education (PPGIE), Universidade Federal do Rio Grande do Sul, Av. Paulo Gama, 110, Farroupilha, Porto Alegre, RS, 90040-060, Brazil.
+\end{mail}
+
+\begin{dates}
+% This information will be provided by the editor before publishing the paper
+\small{\textbf{Received:} DD Month YYYY~~~$\bullet$~~~\textbf{Accepted:} DD Month YYYY~~~$\bullet$~~~\textbf{Published:} DD Month YYYY}
+\end{dates}
+
+
+\begin{abstract}
+\textbf{Abstract.~}
+\noindent The adoption of generative Artificial Intelligence in educational contexts has been predominantly anchored in proprietary models dependent on broadband connectivity, an assumption incompatible with the material reality of most Brazilian public schools. This work conducts a controlled diagnostic evaluation of eight open Small Language Models (SLMs), executed strictly in a local, offline environment, against a metalinguistic rubric derived from Ingedore Koch's Textual Linguistics. A total of 312 primary inference calls were performed (8 models $\times$ 13 canonical scenarios $\times$ 3 repetitions) without applying any external grammatical coercion mechanism, plus 80 additional calls across four falsification isolations directed at the most expressive architectural finding. Categorical comparisons are supported by Fisher's exact test (with odds ratio and 95\% CI). Results reveal two distinct failure regimes: (i) \textbf{zero-shot structural non-adherence}, manifested as 100\% typological divergence in the Llama 3.2 family (1\,B and 3\,B) and Phi-3 Mini --- characterized, for the Llama 3.2 family, as a deterministic formatting bias inherited from instruction tuning for generalist commercial use, fully reversible by minimal in-context demonstration (\textit{one-shot}), which distinguishes it from compositional incapacity of the model; and (ii) \textbf{pedagogical superficiality}, observed in Qwen 2.5 3B-Instruct --- the only structurally conformant model in the deployable range under zero-shot --- whose responses mobilize Koch's rubric terminology in only 46\% of scenarios. We conclude that contemporary off-the-shelf generalist models are insufficient for fine-grained Socratic tutoring in Brazilian Portuguese under zero-shot regime, justifying the development of specialized models through supervised fine-tuning on curated pedagogical corpora.
+\end{abstract}
+
+\begin{keywords}
+Language Models; Basic Education; Brazilian Portuguese; Local Inference; Textual Linguistics; Diagnostic Evaluation
+\end{keywords}
+
+\end{frontmatter}
+
+
+\section{Introduction}
+\label{sec:intro}
+
+The incorporation of Large Language Models (LLMs) into educational contexts has constituted, over the past three years, one of the fastest-growing research fronts in Computers and Education. The specialized literature documents promising results in the use of proprietary models such as GPT-4, Claude, and Gemini for conversational tutoring, automated essay scoring, and formative \textit{feedback} generation \citep{kasneci2023chatgpt,tlili2023devil}. This production, however, has been predominantly anchored in infrastructural assumptions --- stable broadband access, no budget restriction for Application Programming Interface (API) calls, and contractual stability of foreign vendors --- that \textbf{do not correspond to the material reality of most of the Brazilian public-school network}.
+
+The historical TIC Educação series, conducted by the Regional Center for Studies on the Development of the Information Society \citep{cgibr2025tic}, evidences the persistence of profound connectivity inequalities in Brazilian public schools. Although the 2024 edition of the survey reports that 96\% of Brazilian schools now have internet access, effective student use remains deeply unequal: while 67\% of students in state schools use the internet for pedagogical activities assigned by teachers, in municipal schools that proportion falls to only 27\% --- confirming that institutional connectivity does not translate into effective pedagogical access at the student level. To this structural limit is added the issue of \textbf{student-data sovereignty}: the routine transmission of textual productions by underage students to commercial servers located in foreign jurisdictions configures a gray zone under the Brazilian General Data Protection Law \citep{brasil2018lgpd}, particularly at its interface with the Brazilian Statute for Children and Adolescents in Digital Environments \citep{brasil2025eca}.
+
+This double encirclement --- material connectivity precariousness and legal-ethical fragility of sensitive data traffic --- imposes that the adoption of generative AI in the Brazilian public school contemplate, as an inescapable non-functional requirement, the \textbf{strictly local and offline} execution of inference models. The technical window for such an approach was opened by the recent proliferation of Small Language Models (SLMs) in the 1- to 4-billion parameter range, made viable by aggressive quantization (Q4, Q5) and by lightweight \textit{runtimes} capable of executing inference over CPU on modest machines, without dependence on dedicated graphics acceleration \citep{abdin2024phi3,yang2024qwen25}.
+
+Recent literature on SLMs concentrates predominantly on general-purpose \textit{benchmarks}, in English, and directed at mathematical reasoning or code generation tasks. It remains open, however, whether \textbf{open off-the-shelf models, executed locally under simulated public-school infrastructure conditions, are natively capable of operating as Socratic tutors of writing in Brazilian Portuguese}, respecting structured-output contracts and non-prescriptivist pedagogical principles. The present study addresses this gap through a controlled diagnostic evaluation of eight off-the-shelf SLMs against a rubric derived from the Textual Linguistics of Ingedore Koch \citep{koch2018coesao,koch2020introducao}, under a rigorously local inference environment and without any external grammatical coercion mechanism.
+
+This work is guided by two related but distinct research questions --- one structural-quantitative, the other pedagogical-qualitative:
+
+\begin{itemize}
+\item \textbf{RQ1.} To what extent do contemporary open SLMs, executed locally in an offline environment, adhere to the structural output contract declared in natural language?
+\item \textbf{RQ2.} Among the structurally conformant models, to what extent do their responses mobilize Koch's metalinguistic rubric beyond the thematic-surface layer?
+\end{itemize}
+
+The article is organized as follows: Section~\ref{sec:related} reviews the relevant state of the art; Section~\ref{sec:method} details the experimental methodology adopted, with a level of description sufficient for integral reproducibility of the study; Section~\ref{sec:efficiency} reports computational efficiency; Section~\ref{sec:conformance} presents structural conformance, addressing \textbf{RQ1}; Section~\ref{sec:qualitative} conducts a qualitative analysis of pedagogical adherence in the best-classified model, addressing \textbf{RQ2}; and Section~\ref{sec:conclusion} synthesizes conclusions and outlines the subsequent agenda, returning explicitly to each research question.
+
+\section{Related Work}
+\label{sec:related}
+
+Systematic evaluation of language models for educational tasks articulates across three research fronts relevant to the present study. The first front comprises studies on the use of proprietary LLMs as tutors and formative evaluators. \citet{kasneci2023chatgpt} synthesize opportunities and challenges of ChatGPT in basic education, identifying significant potential but warning against systemic biases and infrastructural dependence. \citet{tlili2023devil} conduct a longitudinal case study on the pedagogical use of \textit{chatbots}, highlighting tensions between student engagement and conceptual fidelity. This literature, however, operates predominantly under an assumption of continuous connectivity --- a gap the present work addresses directly.
+
+The second front corresponds to technical literature on SLMs viable for local execution. \citet{abdin2024phi3}, describing Phi-3, posit the thesis of ``small and capable models'' through intensive training-data curation; \citet{yang2024qwen25} present the Qwen 2.5 family, with emphasis on multilingualism; \citet{grattafiori2024llama3} and the Gemma team \citep{gemma2024} describe, respectively, the Llama 3 and Gemma 2 families in their lightweight variants. These references configure the candidate universe of the present \textit{benchmark}, but their technical reports evaluate performance predominantly on Anglocentric \textit{benchmarks} and mathematical tasks, with no specific coverage of pedagogical tutoring in Brazilian Portuguese.
+
+The third front involves the emerging literature on \textbf{format bias} in models post-trained by preference. \citet{zheng2023judging} and \citet{wu2023style} demonstrate that human and model-judge evaluators exhibit systematic preference for long, listed, and well-formatted responses regardless of content quality, and that this reward signal becomes internalized in finalized models as a dominant attractor in the generation space. This theoretical body is mobilized, in Section~\ref{sec:conformance}, for the interpretation of the architectural findings of this study.
+
+The intersection of these three fronts --- educational application, local viability in Brazilian Portuguese, and post-training failure patterns --- remains, to the best of this investigation's knowledge, under-explored. The present article contributes to fill this gap through controlled empirical diagnosis.
+
+\section{Methodology}
+\label{sec:method}
+
+This section describes, with a level of detail directed at integral reproducibility, the experimental protocol adopted. The subsequent subsections document, in order: (i) the local \textit{offline} inference stack that emulates the school computational ceiling; (ii) the corpus of canonical scenarios and the metalinguistic rubric that anchors it; (iii) the sample matrix and HTTP hyperparameters transmitted on each call; (iv) the deterministic structural-conformance validator; (v) the inferential statistical framework applied to categorical comparisons; (vi) the criteria for metalinguistic pedagogical adherence; (vii) canonical examples of inputs and outputs observed in the corpus; (viii) the secondary falsification protocol; and (ix) reproducibility guarantees. The full statistical rationale, the complete inference payload sent to the server, and the source code of the structural validator are reported, respectively, in Appendices~\ref{app:stats} and~\ref{app:impl}, in conformance with the convention that separates scientific argument in the body from implementation documentation in the appendices.
+
+\subsection{Computational Environment and Local Offline Inference Stack}
+
+The entirety of the 312 inference calls was conducted in a \textbf{strictly local and offline} environment, without any communication with remote services during the collection phase. The choice deliberately emulates the computational ceiling available in Brazilian public-school computer labs: execution over a Central Processing Unit (CPU), without dedicated Graphics Processing Unit (GPU) acceleration, and with a Random Access Memory (RAM) restriction compatible with the typical installed base of school machines (8\,GB range).
+
+The inference orchestrator adopted was \textbf{Ollama}, a local HTTP server running on the \textit{loopback} interface (\texttt{localhost:11434}). Calls were made via synchronous POST requests to the \texttt{/api/chat} endpoint, with \texttt{Content-Type: application/json} header, in the client--server communication pattern natively exposed by the \textit{runtime}. Models were instantiated in Ollama's default quantization --- \texttt{Q4\_K\_M} for most architectural families evaluated --- a format compatible with the 8\,GB RAM limit and widely disseminated in modest-hardware local inference implementations. The client layer was developed in Python 3.11 using the \texttt{requests} library for HTTP transport and the \texttt{json} module of the standard library for serialization and deserialization of payloads.
+
+\subsection{Evaluation Instrument: Scenario Corpus and Metalinguistic Rubric}
+\label{sec:instrument}
+
+The evaluation rubric was derived from Koch's taxonomy of textual cohesion \citep{koch2018coesao,koch2020introducao} and her work on the teaching of writing \citep{kochelias2016escrever}, operationalized in \textbf{thirteen canonical scenarios} drafted by a specialist in Textual Linguistics. Each scenario consists of a short writing text in the school discursive genre (review, summary, retelling, opinion piece, chronicle), attributed to a hypothetical lower-secondary student (8th and 9th grades), and deliberately conveys a target cohesive phenomenon to be identified and problematized by the automated tutor. The scenarios are deliberately \textbf{synthetic}: rather than authentic student essays --- which typically superimpose several deviations and would make it impossible to attribute the model's response to a specific phenomenon --- each text is engineered by the specialist to isolate a single target phenomenon in controlled, verifiable form, as required for diagnostic evaluation. The choice of school genres and of canonical literary sources well established in the lower-secondary curriculum --- such as the review of Machado de Assis's \textit{A Cartomante} in scenario 1 --- is equally deliberate: it keeps each scenario \textbf{ecologically valid} for the 8th--9th grade Brazilian classroom, a text that could plausibly occur in that setting even though it is synthetically constructed. The taxonomy spans two axes:
+
+\begin{itemize}
+\item \textbf{Referential Cohesion}: ambiguity through inadequate pronominalization; excessive lexical repetition with suppression of ellipsis and substitution by hypernym or pro-form;
+\item \textbf{Sequential Cohesion}: contradictory use of argumentative operators; disorganization of temporal and spatial markers; extreme juxtaposition of clauses without establishment of logical-semantic relations.
+\end{itemize}
+
+Each model received a canonical \textit{system prompt}, identical across all experiments --- ensuring strict control of variable --- that defines: (i) the model's role as Socratic tutor for 8th--9th grade students of the Brazilian public school; (ii) five non-negotiable pedagogical constraints (do not provide a ready answer; do not rewrite the corrected text; value linguistic varieties and orality marks without acting as a ``grammar police''; focus on cohesion and coherence per Koch; bridge with Computational Thinking when appropriate); and (iii) the output format strictly specified as a JSON object with exactly two keys --- \texttt{pontos\_fortes} (type \texttt{string}, monolithic) and \texttt{perguntas\_reflexivas} (type \texttt{array} of \texttt{string}, with a pair of elements exemplified in the canonical schema). Keys are preserved verbatim in Brazilian Portuguese since they constitute the literal contract sent on every API call.
+
+\subsection{Experimental Protocol: Sample Matrix and Inference Hyperparameters}
+\label{sec:protocol}
+
+The sample matrix comprised \textbf{eight distinct language models}, distributed across two ranges:
+
+\begin{itemize}
+\item \textbf{Deployable range (analytical center of the study):} \texttt{qwen2.5:1.5b-instruct}, \texttt{qwen2.5:3b-instruct}, \texttt{llama3.2:1b}, \texttt{llama3.2:3b}, \texttt{gemma2:2b}, and \texttt{phi3:mini} (3.8\,B). The delimitation at up to 3.8 billion parameters corresponds to the memory envelope executable in Q4 quantization within the 8\,GB RAM target.
+\item \textbf{Reference ceiling (upper \textit{baseline}):} \texttt{llama3:8b} and \texttt{gemma2:9b}. These models are not deployment candidates, included as comparative references of attainable quality by the same architectural family at larger scales.
+\end{itemize}
+
+Each model $\times$ scenario pair was submitted to \textbf{three independent repetitions} ($n=3$), totaling $8 \times 13 \times 3 = \textbf{312 inference calls}$. Triple replication enables estimation of standard deviation and coefficient of variation (CV $=\sigma/\mu$) intra-model --- indispensable metrics to distinguish expected stochastic variability, deriving from the sampling parameter \texttt{temperature}, from systemic instruction instability.
+
+The HTTP payload sent to the server was rigorously uniform across all calls, transporting the canonical \textit{system prompt}, the scenario text in the \texttt{user} slot, and an options block configuring \texttt{temperature = 0.2}, \texttt{stream = false}, \texttt{format = "json"}, and a client-side \texttt{timeout = 120} seconds. The choice of \texttt{temperature = 0.2} establishes a compromise between contract adherence and the micro-variability necessary for meaningful CV estimation across repetitions; \texttt{stream = false} ensures a single, well-defined termination point for \textit{wall-clock} latency measurement; and \texttt{format = "json"} activates Ollama's native syntactic nudging toward parseable JSON output without enforcing any field-typology or key-cardinality schema --- a deliberate decision aimed at gauging each model's \textbf{native adherence} to the structural contract specified in natural language, under conditions representative of realistic school deployment. The complete payload and per-hyperparameter methodological rationale are reported in Appendix~\ref{app:impl}.
+
+\subsection{Structural Validation: Deterministic Conformance Criteria}
+\label{sec:validation}
+
+The binary conformance classification of each response was performed by a deterministic validator that decides, over the raw content returned by the model, whether the response integrally satisfies the contract declared in the \textit{system prompt}. The validator operates through four disjoint criteria, applied in sequence, in which the violation of any one suffices for divergence classification. \textbf{C1 --- JSON syntax}: the returned string must constitute a valid JSON document per the ECMA-404 specification, ensuring the decoder respected the syntactic regime induced by Ollama's \texttt{format = "json"} parameter. \textbf{C2 --- Root is object}: the outer structure must be a JSON object (nominal \textit{mapping}), since the declared contract prescribes two named keys; the typical violation at this level is the return of an \textit{array} at the root, a pattern inherited from tabular output regimes and incompatible with the individual tutoring interface. \textbf{C3 --- \texttt{pontos\_fortes} is monolithic non-empty string}: the canonical schema exemplifies this field as continuous prose, oriented to Socratic welcoming through recognition of textual merits; substituting prose with enumeration shifts the register from welcoming feedback to corrective evaluation, in direct violation of the ``do not act as grammar police'' directive. \textbf{C4 --- \texttt{perguntas\_reflexivas} is non-empty list of strings}: the contract explicitly declares the \texttt{array} of \texttt{string} type with a minimum pair of items; the validator adopts the permissive cardinality criterion $\geq 1$, with divergences at this level invariably manifesting as the appearance of types other than \texttt{string} (nested objects, \texttt{null} values).
+
+The choice for a deterministic classifier, rather than evaluation by a judge model, was deliberate: structural conformance is a syntactic-typological property decidable in finite time by type inspection, with no room for interpretive subjectivity, and delegation to an LLM judge would introduce undesired variance precisely on the dimension where the study seeks maximal objectivity. The full source code of the \texttt{divergente()} function, in the exact order of execution applied over the 312-record corpus, is reported in Appendix~\ref{app:impl}.
+
+\subsection{Inferential Statistical Framework}
+
+Categorical comparisons supporting the structural-conformance claims of this paper were operationalized through \textbf{Fisher's exact test} on 2$\times$2 contingency tables, complemented by \textbf{Wilson 95\% confidence intervals} for each observed proportion; the full statistical rationale --- including the four converging reasons for the choice of Fisher's exact test, the treatment of the odds ratio under zero-cell contingencies, and the APA-style significance thresholds --- is detailed in Appendix~\ref{app:stats}. Latency data, by contrast, are reported descriptively only (Section~\ref{sec:efficiency}), as the empirical separation between model classes is evident at the order-of-magnitude scale and does not require inferential support for interpretation.
+
+\subsection{Analysis Criteria: Efficiency and Metalinguistic Pedagogical Adherence}
+\label{sec:criteria}
+
+\paragraph{Computational efficiency.} Latency was measured in \textit{wall-clock} via \texttt{time.time()} in Python, including the entire local I/O stack between client and Ollama server. For each model, the following were computed: mean, standard deviation, median (p50), 95th percentile (p95), minimum, and maximum, in milliseconds. The coefficient of variation (CV) operates as a dimensionless measure of stability across repetitions. Input and output token counters were obtained from Ollama's native telemetry (\texttt{prompt\_eval\_count} and \texttt{eval\_count}), preserving fidelity of the measure relative to each model's specific tokenizer.
+
+\paragraph{Metalinguistic pedagogical adherence.} For the model best classified along the dimensions of efficiency and structural conformance, additional qualitative inspection was conducted, verifying the presence, in the response text, of terms from Koch's metalinguistic taxonomy --- cohesion, connector, pronoun, referential, sequential, ambiguity, repetition, synonym, ellipsis, argumentative operator, temporal marker, juxtaposition. The presence of at least one rubric term was considered a minimum indication of metalinguistic adherence; its absence classifies the response as operating in an exclusively thematic-surface layer.
+
+\subsection{Anatomy of Outputs: Canonical Examples from the Corpus}
+\label{sec:anatomy}
+
+To expose the nature of the contracts evaluated, this subsection illustrates, with literal material extracted from the corpus, the cohesive deviation embedded in a representative scenario, one conformant output, and two distinct modalities of divergent output.
+
+\textbf{Input --- scenario 1 (Referential Cohesion: excessive lexical repetition).} Synthetic text attributed to a hypothetical student, extracted literally from the canonical thirteen-scenario corpus (preserved in Brazilian Portuguese as the object of linguistic study):
+
+\begin{quotation}
+\textit{Resenha sobre A Cartomante: A cartomante falou pro Camilo que tava tudo bem. A cartomante leu as cartas. A cartomante sorriu pra ele. A cartomante deu certeza pra ele. Depois o Camilo foi pra casa do Vilela e morreu. A cartomante tinha errado tudo.}
+\end{quotation}
+
+The embedded target phenomenon is the lexical repetition of the noun phrase \textit{``a cartomante''} in four consecutive clauses --- a paradigmatic case of referential cohesion through repetition, in which the tutor would be expected to induce the student toward substitution by pronominal pro-form or hypernym, leading them to reflect on the referential chain without providing the corrected form outright.
+
+\textit{Translation note for non-Lusophone readers (not part of the experiment): ``Review of `The Fortune-Teller'. The fortune-teller told Camilo everything was fine. The fortune-teller read the cards. The fortune-teller smiled at him. The fortune-teller gave him certainty. Then Camilo went to Vilela's house and died. The fortune-teller had got it all wrong.''}
+
+\textbf{Conformant output --- \texttt{qwen2.5:3b-instruct}, repetition 1.} The model strictly respects the typology declared in the \textit{system prompt}: \texttt{pontos\_fortes} is returned as continuous prose and \texttt{perguntas\_reflexivas} as a pair of questions in a list of \textit{strings}.
+
+\begin{lstlisting}
+{
+  "pontos_fortes": "O texto tem uma estrutura boa, com um inicio claro e uma conclusao que ressalta a importancia da leitura.",
+  "perguntas_reflexivas": [
+    "Como voce imagina o que aconteceria se a cartomante tivesse acertado tudo?",
+    "Por que e importante ler entre as linhas nos livros?"
+  ]
+}
+\end{lstlisting}
+
+Note that structural adherence does not entail pedagogical adequacy: the conformant response above shifts to the thematic plane of the literary work (importance of reading), without mobilizing any metalinguistic terminology --- a phenomenon discussed qualitatively in Section~\ref{sec:qualitative}.
+
+\textbf{Divergent output, modality A --- \texttt{llama3.2:1b}, repetition 1 (typological violation of \texttt{pontos\_fortes}).} The model emits syntactically valid, parseable JSON endowed with both expected keys; divergence manifests exclusively as substitution of the monolithic prose by itemized enumeration, in direct violation of C3 of the \texttt{divergente()} algorithm:
+
+\begin{lstlisting}
+{
+  "pontos_fortes": [
+    "A Cartomante falou pro Camilo que tava tudo bem.",
+    "A Cartomante leu as cartas.",
+    "A Cartomante sorriu pra ele.",
+    "A Cartomante deu certeza pra ele."
+  ],
+  "perguntas_reflexivas": [
+    "Ela falou, mas nao disse nada.",
+    "O que a Cartomante fez?",
+    "Por que a Cartomante sorriu?"
+  ]
+}
+\end{lstlisting}
+
+\textbf{Divergent output, modality B --- \texttt{phi3:mini}, repetition 1 (integral schema substitution and pedagogical inversion).} The model abandons the declared canonical schema and imposes a structure of its own built around nested objects with unsolicited keys (\texttt{erro}, \texttt{correção}, \texttt{texto\_original}, \texttt{texto\_proposto}), simultaneously violating C3 (type of \texttt{pontos\_fortes}) and the anti-prescriptivist pedagogical directive of the \textit{system prompt}. Illustrative excerpt:
+
+\begin{lstlisting}
+{
+  "pontos_fortes": [
+    {
+      "erro": "A palavra 'tava' e uma forma coloquial da conjugacao do verbo estar, que pode ser considerada informal e menos adequada para um texto academico. A alternativa seria usar a forma correta 'estava'.",
+      "correcao": {
+        "texto_original": "A cartomante falou pro Camilo que tava tudo bem.",
+        "texto_proposto": "A cartomante falou para Camilo que estava tudo bem."
+      }
+    },
+    {
+      "erro": "O uso de 'leu' e um erro comum na conjugacao do verbo ler no passado, pois a forma correta seria 'lera'.",
+      "correcao": { "texto_original": "A cartomante leu as cartas.", "...": "..." }
+    }
+  ]
+}
+\end{lstlisting}
+
+Note the double anomaly: (i) the model classifies the legitimate colloquialism \textit{``tava''} as an error to be corrected, in violation of the explicit directive to value linguistic varieties; and (ii) it \textbf{hallucinates a non-existent grammatical rule} by prescribing the form \textit{``lera''} (pluperfect indicative) as replacement for the form \textit{``leu''} (simple past), correctly employed by the student --- confusing distinct verbal aspects and introducing an error into the original text under pretext of correction. This case confirms the multidimensional collapse pattern that will be discussed in Subsection~\ref{sec:phi3}.
+
+\subsection{Secondary Falsification Protocol via Counter-Experiment}
+\label{sec:falsification}
+
+In addition to the main protocol described in the previous subsections, a secondary falsification protocol was designed and executed, specifically directed at the most expressive architectural finding of the study --- the systematic divergence observed in the Llama 3.2 family (1B and 3B). The methodological motivation is twofold: (a) rule out competing hypotheses that would reduce the finding to an instrumental artifact --- configuration error, stochastic instability, interference of the Python client layer --- and (b) characterize the precise nature of the observed bias, distinguishing \textit{compositional incapacity} from \textit{disobedience under zero-shot regime}. The protocol was operationalized in three disjoint isolations, conducted on the same canonical scenarios as the main protocol and under the same local Ollama inference stack:
+
+\begin{enumerate}
+\item \textbf{E1 --- Stochasticity isolation.} Repetition of 26 calls (2 models $\times$ 13 scenarios $\times$ 1 repetition) with \texttt{temperature = 0.0}, a deterministic regime in which the decoder adopts strict greedy sampling. Eventual stability of the failure here rules out the hypothesis of sampling variability as cause.
+\item \textbf{E2 --- In-context demonstration isolation.} Repetition of 24 calls (2 models $\times$ 12 scenarios $\times$ 1 repetition) preceded, in the message sequence, by a \texttt{user}/\texttt{assistant} pair exhibiting scenario 1 and its canonical gold response in strict schematic format. Scenario 1 is consumed as demonstration; the remaining twelve are evaluated under minimal contextual anchoring (\textit{one-shot in-context learning}). Eventual reversal of divergence here demonstrates that the compositional capacity of the model is intact and isolates the bias as an obedience phenomenon under zero-shot regime.
+\item \textbf{E2b --- Joint isolation.} Combination of E1 and E2: in-context demonstration under \texttt{temperature = 0.0}, across 24 calls, to verify whether the reversal observed in E2 is stable when all source of stochastic variability is suppressed.
+\item \textbf{E3 --- Client-layer isolation.} Repetition of the base calls via the \texttt{curl} command-line utility, with the same JSON payload sent directly to the Ollama endpoint, without mediation of the Python \texttt{requests} library. Eventual persistence of failure here rules out interference of the client transport layer as cause.
+\end{enumerate}
+
+The two primary isolations (E1 and E2) operate on theoretically independent axes --- sampling temperature and contextual anchoring --- and their combination in E2b plus the instrumental isolation of E3 total 80 additional calls under the same canonical SYSTEM\_PROMPT, under the same local Ollama, over the same scenarios of the main corpus. Results are reported in Subsection~\ref{sec:robustness}.
+
+\subsection{Reproducibility and Artifact Availability}
+
+The complete corpus of the 312 calls --- including \textit{prompts} sent, raw responses in \texttt{resposta\_ia}, telemetry metrics (\texttt{tokens\_input}, \texttt{tokens\_output}, \texttt{latencia\_ms}), and execution metadata (\texttt{modelo\_testado}, \texttt{cenario\_id}, \texttt{rep}) --- was preserved in two structured JSON files of 312 homogeneous records, in long-matrix format. Collection, deterministic classification, and aggregation scripts were developed in Python 3.11, using only the standard library and the packages \texttt{requests}, \texttt{pandas}, \texttt{matplotlib}, and \texttt{scipy}. The full source code and raw data are publicly available in the authors' repository, in conformance with the Open Science practices recommended by the Brazilian Computer Society.
+
+\section{Computational Efficiency}
+\label{sec:efficiency}
+
+Table~\ref{tab:efficiency} synthesizes the aggregated efficiency metrics per model ($n=39$ calls per row), ordered by increasing mean latency.
+
+\begin{table*}
+\caption{Efficiency metrics per model.}
+\centering
+\begin{tabular}{@{}lrrrrr@{}}
+\hline\hline
+Model & Mean latency (ms) & Std. dev. (ms) & p95 (ms) & CV & Output tokens (mean) \\
+\hline
+\texttt{qwen2.5:1.5b-instruct} & 2,299 & 474 & 3,234 & 20.6\% & 118.8 \\
+\texttt{llama3.2:1b} & 2,389 & 1,423 & 6,391 & 59.6\% & 119.5 \\
+\texttt{qwen2.5:3b-instruct} & 2,906 & 552 & 4,486 & 19.0\% & 104.6 \\
+\texttt{llama3.2:3b} & 3,020 & 695 & 4,721 & 23.0\% & 108.9 \\
+\texttt{gemma2:2b} & 3,744 & 720 & 5,080 & 19.2\% & 121.8 \\
+\texttt{gemma2:9b} & 8,681 & 1,425 & 11,130 & 16.4\% & 126.9 \\
+\texttt{llama3:8b} & 10,523 & 19,708 & 19,326 & 187.3\% & 144.7 \\
+\texttt{phi3:mini} & 14,769 & 12,228 & 43,717 & 82.8\% & 471.2 \\
+\hline\hline
+\end{tabular}
+\label{tab:efficiency}
+\end{table*}
+
+The classical Human--Computer Interaction literature establishes three system-response thresholds relevant to user experience: up to 100\,ms for the sensation of instantaneity; up to 1\,s for preservation of cognitive flow; and up to \textbf{10\,s for maintenance of the user's directed attention in sequential tasks} \citep{nielsen1993usability,card1991infovis}. This last threshold is the operational criterion adopted in this study for pedagogical viability in synchronous classroom use --- above it, the student disengages from the task while waiting for the tutor's response, compromising the continuity of metalinguistic reflection.
+
+In light of this criterion, it is observed that the \textbf{Qwen 2.5 family leads markedly on the efficiency dimension}, with mean latencies of 2.299\,s (1.5\,B variant) and 2.906\,s (3\,B variant). Both models sit at less than one third of the UX threshold, and their coefficients of variation (CV $\approx$ 19--21\%) indicate that the observed variability is predominantly stochastic --- attributable to the \texttt{temperature = 0.2} parameter --- rather than deriving from systemic instability. The 95th percentile of latency remains, in both cases, below 4.5 seconds, ensuring that even executions in the upper extreme of the distribution do not break the time contract with the user.
+
+In contrast, the \texttt{phi3:mini} model configures a \textbf{paradigmatic case of computational infeasibility for the synchronous educational scenario}. Its mean latency of 14.769\,s exceeds the HCI threshold by more than 47\%, and analysis of the distribution reveals that the problem is structural, not point-wise: the standard deviation of 12,228\,ms (CV of 82.8\%) and p95 of 43,717\,ms evidence markedly bimodal behavior, with prolonged-generation episodes that can exceed three quarters of a minute in extreme cases. Compounding this temporal instability is a mean output verbosity of \textbf{471.2 tokens} --- between 3.9 and 4.5 times higher than the other models evaluated, which oscillate between 104 and 145 tokens. Such verbosity itself configures a pedagogical failure: effective Socratic responses in educational context are recognized as brief and focal \citep{paulelder2007socratic}, and the textual inflation observed in Phi-3 indicates a misalignment between the model's generation regime and the communicational requirements of the task.
+
+It is also worth registering anomalous behavior of the \texttt{llama3:8b} model at the upper extreme of the distribution, with CV of 187.3\% and absolute maximum of approximately 130 seconds in isolated execution. Although situated in the comparative-ceiling range of the study and therefore outside the candidate set for deployment, the finding recommends caution in the adoption of 7--8 billion parameter models in comparative research based on temporal metrics.
+
+\section{Structural Conformance and Architectural Findings}
+\label{sec:conformance}
+
+The dimension of conformance to the structural contract specified in natural language --- requirement of a JSON object with keys \texttt{pontos\_fortes} (type \texttt{string}) and \texttt{perguntas\_reflexivas} (type \texttt{array} of \texttt{string}) --- produces the most expressive finding of this study. Table~\ref{tab:conformance} consolidates the conformance rates observed, accompanied by Wilson 95\% confidence intervals and the two-sided Fisher exact \textit{p}-value for each model relative to \texttt{qwen2.5:3b-instruct} as the reference model.
+
+\begin{table*}
+\caption{Structural conformance per model, with Wilson 95\% CI and Fisher exact test against the reference model.}
+\centering
+\begin{tabular}{@{}lrrccc@{}}
+\hline\hline
+Model & $k/n$ & Conf. rate & Wilson 95\% CI & Tier & Fisher vs. Qwen 3B \\
+\hline
+\texttt{qwen2.5:3b-instruct} & 39/39 & 100.0\% & [91.0\%; 100.0\%] & deployable & reference \\
+\texttt{gemma2:9b} & 39/39 & 100.0\% & [91.0\%; 100.0\%] & ceiling & $p=1.000$ (n.s.) \\
+\texttt{llama3:8b} & 39/39 & 100.0\% & [91.0\%; 100.0\%] & ceiling & $p=1.000$ (n.s.) \\
+\texttt{qwen2.5:1.5b-instruct} & 38/39 & 97.4\% & [86.8\%; 99.5\%] & deployable & $p=1.000$ (n.s.) \\
+\texttt{gemma2:2b} & 38/39 & 97.4\% & [86.8\%; 99.5\%] & deployable & $p=1.000$ (n.s.) \\
+\texttt{llama3.2:1b} & 0/39 & 0.0\% & [0.0\%; 9.0\%] & deployable & \textbf{***}~$p<0.001$ \\
+\texttt{llama3.2:3b} & 0/39 & 0.0\% & [0.0\%; 9.0\%] & deployable & \textbf{***}~$p<0.001$ \\
+\texttt{phi3:mini} & 0/39 & 0.0\% & [0.0\%; 9.0\%] & deployable & \textbf{***}~$p<0.001$ \\
+\hline\hline
+\end{tabular}
+\label{tab:conformance}
+\end{table*}
+
+\noindent\textit{Note.} $k=$ conformant responses; $n=39$ calls per model. \textbf{***}~$p<0.001$, two-sided Fisher exact, $\alpha=0.05$. When a cell of the contingency table is zero, the odds ratio is not finitely estimable; the reported $p$-value derives from the exact hypergeometric distribution with continuity correction. Wilson 95\% CIs computed without normal approximation.
+
+The distribution is clearly bimodal: five models exhibit integral or near-integral adherence (97.4--100.0\%, Wilson 95\% CI: [86.8\%; 100.0\%]), while three models collapse entirely (0.0\%, Wilson 95\% CI: [0.0\%; 9.0\%]), with no intermediate instances. Fisher's exact test confirms that the conformance rates of the Llama 3.2 family (both 1B and 3B variants) and of Phi-3 Mini differ from the reference model at $p<0.001$ each, while the four other conformant models --- including the 7--9\,B reference-ceiling pair --- are statistically indistinguishable from the reference ($p=1.000$ n.s.). This last observation is methodologically important: the deployable model \texttt{qwen2.5:3b-instruct} is not detectably inferior in structural conformance to the larger reference-ceiling models, which strengthens its selection as the operationally preferable base. Such polarization suggests that conformance to the contract \textbf{is not a monotonic function of the parameter count}, but rather an architectural-behavioral property of the family and of the instruction-tuning regime.
+
+\subsection{The Family Failure of the Llama 3.2 Line}
+\label{sec:llama-failure}
+
+Qualitative inspection of the outputs of the two Llama 3.2 variants (1\,B and 3\,B) reveals a rigorously identical failure pattern: the emitted JSON is, across all 78 calls, syntactically valid and parseable; divergence manifests exclusively as a \textbf{typological violation} of the \texttt{pontos\_fortes} field, returned consistently as an \textit{array} of \textit{strings} (typically enumerating two to four items) in place of the specified monolithic \texttt{string} type. The perfect symmetry between the two family sizes --- in parallel with the full conformance of the Qwen 2.5 family at analogous sizes under identical \textit{prompt} --- rules out hypotheses of insufficient capacity or stochasticity and displaces the explanation toward post-training.
+
+As reported in Table~\ref{tab:conformance}, the pairwise comparison of the Llama 3.2 family against the reference model \texttt{qwen2.5:3b-instruct} yields $p<0.001$ for both variants (1B and 3B), while the matched-scale Qwen 2.5 family is statistically indistinguishable from the reference ($p=1.000$ n.s.). The cross-family separation, at matched scale and under identical natural-language specification, is therefore not a borderline result subject to interpretation: it is one of the most categorical statistical contrasts observable in 2$\times$2 categorical experimentation. As noted in the table caption, the odds ratio is not finitely estimable when one cell of the contingency table is zero; the exact \textit{p}-value alone, derived from the hypergeometric distribution, suffices to falsify the null hypothesis of homogeneous conformance rates between families at any conventional significance threshold.
+
+This pattern finds coherent interpretation in light of the literature on \textbf{format bias} in preference-post-trained models. \citet{zheng2023judging} and \citet{wu2023style} document that implicit format-based rewards --- operating either through human evaluators or judge models --- induce systematic inflation of stylistic markers such as lists, \textit{bullet points}, bold headings, and enumerations, at the expense of \textit{prompt} fidelity. The operational motivation of this bias is direct: responses structured as marked items are perceived as more professional and readable by human evaluators in general-purpose assistant interfaces, and the reward signal internalizes this preference as a dominant attractor in the generation space.
+
+\citet{liu2025socratic}, in the framework of \textbf{GuideEval}, offer the behavioral-theoretical complement necessary to the interpretation of the finding: the framework decomposes the tutorial competence of a model into three distinct phases --- Perception of the student's cognitive state, Orchestration of the tutorial response, and Elicitation of reflection --- and demonstrates that failures in the Orchestration phase typically manifest as rigidity toward format instruction, with the model retreating to output patterns strongly entrenched in post-training. In terms of Liu et al.'s scheme, the anomaly observed in the Llama 3.2 line is precisely an Orchestration failure: the model \textit{perceives} the task correctly (assisting the student) and \textit{would elicit} questions, but the intermediate stage of behavioral modulation of the response collapses to the enumeration attractor conditioned by its generalist post-training. The present study contributes to the literature on two aspects. \textbf{First}, it demonstrates that the formatting bias is \textbf{resistant to explicit counter-specification in natural language under zero-shot regime}: the \textit{system prompt} univocally declares the expected type, and yet the enumeration attractor prevails in 100\% of the calls. \textbf{Second}, it evidences that the bias constitutes an \textbf{architectural signature consistent across scales} of the same family --- a fact that suggests the origin of the phenomenon in the institutional post-training procedure adopted by the team responsible for the 3.2 line, rather than in particularities of an isolated \textit{checkpoint}. The operational implication, however, requires the rigorous qualification provided by Subsection~\ref{sec:robustness}: in the absence of external syntactic coercion \textbf{and under pure zero-shot regime} --- the standard conditions of most economically viable educational deployments ---, the Llama 3.2 family is not deployable as structured-tutoring infrastructure in Brazilian Portuguese; under minimal contextual anchoring by demonstration (\textit{one-shot}), however, conformance is fully recovered, which reclassifies the finding as a \textbf{reversible zero-shot bias} rather than as the model's categorial compositional incapacity.
+
+\subsection{The Multidimensional Collapse of Phi-3 Mini}
+\label{sec:phi3}
+
+The failure of \texttt{phi3:mini} is qualitatively distinct and more severe. Analysis of the outputs reveals that the model not only typologically violates the \texttt{pontos\_fortes} field --- emitted in 100\% of calls as an \textit{array} ---, but \textbf{entirely replaces the declared schema} with its own structure, built around unsolicited fields \texttt{erro}, \texttt{correção}, \texttt{texto\_original}, and \texttt{texto\_proposto}. Additionally, 20.5\% of calls present \texttt{perguntas\_reflexivas} as \texttt{NoneType} or composed of nested non-\textit{string} elements, configuring progressive deterioration of contract fidelity as generation advances. The Fisher exact comparison of Phi-3 Mini against the reference model (Table~\ref{tab:conformance}) yields $p<0.001$, of the same magnitude as the Llama 3.2 family contrasts, justifying its analytical bracketing in the same regime of zero-shot non-adherence.
+
+More grave, however, is the \textbf{pedagogical inversion} of the \textit{prompt}: the model, trained predominantly on English-language corpora for general-purpose assistant use cases, assumes a corrective-prescriptivist posture in flagrant violation of the explicit directive of the \textit{system prompt} --- ``value linguistic varieties and orality marks'' ---, producing, for instance, outputs in which it classifies the legitimate colloquialism \textit{``tava''} as an error to be corrected to \textit{``estava''} and, in sequence, \textbf{hallucinates a non-existent grammatical rule} by prescribing the form \textit{``lera''} (pluperfect) as replacement for the form \textit{``leu''} (simple past), correctly employed by the student.
+
+This double-violation pattern --- structural and pedagogical --- confirms the general hypothesis of \citet{wu2023style} on the imperfect transferability of instruction habits across distinct linguistic-pragmatic domains. The model, optimized for an Anglocentric conversational regime in which explicit correction is virtuous, transports this habit into a pedagogical-linguistic context in Brazilian Portuguese in which it is harmful, and does so even under counter-instruction in natural language. The combination observed in Phi-3 --- structural collapse, pedagogical inversion, temporal instability, and quadruple verbosity relative to peers --- configures a testimonial case of the transferability limit of Anglocentric SLMs to educational tasks in Brazilian Portuguese, even when the model is nominally declared multilingual by its developers.
+
+The phenomenon of Phi-3's inflated verbosity --- 471 mean tokens against the 104 to 145 range of the other models --- additionally finds echo in \textbf{MathTutorBench} by \citet{macina2025mathtutorbench}, which systematizes, in an adjacent domain (mathematical tutoring), the finding that off-the-shelf models tend to superimpose thematic expertise over pedagogical competence, transforming the tutorial act into an extended expository monologue rather than brief oriented maieutics. Phi-3's verbal excess observed in this study is therefore not a particularity of tokenization or instance noise --- it is a local manifestation of a systemic pattern of post-trained generalist models, which conflate output volume with tutorial quality, in direct prejudice of the focal and dialogic regime that defines Socratic maieutics \citep{paulelder2007socratic}.
+
+\subsection{Robustness Analysis of the Llama 3.2 Architectural Finding via Controlled Counter-Experiment}
+\label{sec:robustness}
+
+The perfect uniformity of divergence observed in the Llama 3.2 family --- 78 calls, two architectural sizes, zero conformant responses in the main protocol --- imposes, by sound scientific practice, deliberate examination of competing hypotheses that would reduce the finding to an instrumental artifact before sustaining it as a behavioral signature of the model. To this end, the secondary protocol described in Subsection~\ref{sec:falsification} was integrally executed, totaling 80 additional calls under the same local inference stack. Table~\ref{tab:robustness} synthesizes the outcomes, accompanied by Wilson 95\% CIs and the two-sided Fisher exact \textit{p}-value of each isolation against the zero-shot baseline.
+
+\begin{table*}
+\caption{Structural conformance of the Llama 3.2 family under falsification isolations.}
+\centering
+\begin{tabular}{@{}lcccc@{}}
+\hline\hline
+Isolation & Llama 3.2 1B & Llama 3.2 3B & Wilson 95\% CI (3B) & Fisher vs. baseline \\
+\hline
+Baseline (zero-shot, $t=0.2$) & 0/39 (0.0\%) & 0/39 (0.0\%) & [0.0\%; 9.0\%] & --- \\
+\textbf{E1} (zero-shot, $t=0.0$) & 0/13 (0.0\%) & 0/13 (0.0\%) & [0.0\%; 22.8\%] & $p=1.000$ (n.s.) \\
+\textbf{E2} (one-shot, $t=0.2$) & \textbf{11/12 (91.7\%)}\textsuperscript{1} & \textbf{12/12 (100.0\%)} & [75.8\%; 100.0\%] & \textbf{***}~$p<0.001$ \\
+\textbf{E2b} (one-shot, $t=0.0$) & \textbf{9/12 (75.0\%)}\textsuperscript{2} & \textbf{12/12 (100.0\%)} & [75.8\%; 100.0\%] & \textbf{***}~$p<0.001$ \\
+\textbf{E3} (curl, zero-shot) & failure reproduced & failure reproduced & --- & --- \\
+\hline\hline
+\end{tabular}
+\label{tab:robustness}
+\end{table*}
+
+\noindent\textit{Note.} \textsuperscript{1}~The single non-conformance of the 1B in E2 derives from HTTP timeout, not from a structural violation of the response actually returned. \textsuperscript{2}~Idem for 3 of 12 of the 1B in E2b --- timeouts associated with the context-budget increase introduced by the demonstrative pair of one-shot, with no implication on the typological conformance of the completed calls. \textbf{***}~$p<0.001$, two-sided Fisher exact, $\alpha=0.05$. Fisher comparisons reported for the 3B variant against its own zero-shot baseline (0/39); the 1B variant exhibits the same direction of effect under the same conventional thresholds.
+
+The joint reading of the four isolations sustains three interlinked conclusions, of falsificationist nature, on the nature of the finding.
+
+\textbf{First conclusion --- the bias is deterministic, not stochastic.} In E1, the complete suppression of sampling variability by \texttt{temperature = 0.0} produces no conformance; on the contrary, the 3B model converges to the structural attractor \texttt{pontos\_fortes = list[str], cardinality = 2} in 12 of the 13 scenarios, exhibiting the near-degeneration profile typical of bias encoded in the weight space. Hypotheses that would attribute divergence to sampling noise or instability across repetitions are therefore falsified.
+
+\textbf{Second conclusion --- the bias is in the model, not in the client stack.} In E3, transmission of the same JSON payload to the Ollama endpoint via \texttt{curl}, eliminating any mediation by the Python \texttt{requests} library, integrally reproduces the typological-divergence pattern observed in the main protocol --- \texttt{pontos\_fortes} returned as a list, JSON syntactically valid, other keys consistent. Hypotheses that would attribute divergence to interference of the client transport layer, HTTP headers, payload encoding, or \texttt{messages} array serialization are therefore falsified.
+
+\textbf{Third conclusion --- the bias is one of zero-shot obedience, not of compositional incapacity.} In E2, the precedence of a single \texttt{user}/\texttt{assistant} pair exhibiting the canonical gold response for scenario 1 produces total reversal of divergence: the 3B model reaches 12/12 conformance in the twelve subsequent scenarios, and the 1B model reaches 11/12 (with the single exception attributable to transport \textit{timeout}, not format failure). The stability of this reversal is confirmed in E2b, in which the combination of \textit{one-shot} with \texttt{temperature = 0.0} preserves 100\% conformance in the 3B. The reversal is corroborated by Fisher's exact test on the 2$\times$2 condition-by-conformance contingency (Table~\ref{tab:robustness}): for both the Llama 3.2 3B variant (12/12 conformant under one-shot vs. 0/39 baseline) and the 1B variant (11/12 conformant, with the single non-conformance attributable to HTTP timeout rather than structural violation), the contrast yields $p<0.001$. By contrast, the determinism-isolation E1 (0/13 vs. 0/39 baseline) yields $p=1.000$ n.s., confirming that the bias is invariant to sampling temperature. The epistemic inference is direct: the Llama 3.2 family models \textbf{possess the compositional capacity} to produce \texttt{pontos\_fortes} as monolithic string respecting the declared schema; what is compromised is obedience to this specification when provided exclusively in natural language under zero-shot regime, without contextual demonstration. The enumeration attractor is dominant only in the absence of a contrary demonstrative anchor.
+
+This set of conclusions repositions the Subsection~\ref{sec:llama-failure} finding with added precision. The Llama 3.2 family does not exhibit categorial incapacity to operate as a structured tutor --- it exhibits a \textbf{reversible zero-shot bias}, in the strict sense of \citet{liu2025socratic}: failure in the Orchestration phase of the tutorial response when the operational regime does not provide a demonstrative reference, with full recovery when such reference is provided. This characterization has three implications:
+
+\begin{enumerate}
+\item \textbf{Methodological implication for the paper.} The choice of \texttt{qwen2.5:3b-instruct} as base model for subsequent pedagogical fine-tuning remains justified --- among the models evaluated, it is the only one conformant under zero-shot, and zero-shot is the regime of lowest engineering cost in the classroom. But the justification is no longer ``Llama 3.2 is not deployable'' and becomes ``Qwen 2.5 3B is the only one that dispenses additional prompting engineering to guarantee structural contract''.
+\item \textbf{Operational implication for alternative deployments.} A valid intermediate route is established for schools or municipal networks that, for pedagogical or technical-sovereignty reasons, prefer the Llama 3.2 family: the additional engineering cost consists of keeping a $\sim$300-token demonstrative pair in the context per call, a moderate budget increase but with an observable latency penalty, as registered by the \textit{timeouts} in E2/E2b over the 1B.
+\item \textbf{Implication for the literature on format bias.} The present study contributes controlled experimental evidence that the bias documented by \citet{zheng2023judging}, \citet{wu2023style}, and \citet{liu2025socratic} \textbf{is not absolute}: it is a function of the operational regime adopted. This empirical refinement, derived from a directed falsification protocol, offers a basis for future studies on the computational economy of educational \textit{prompt engineering} as a mitigator of post-training bias in off-the-shelf SLMs.
+\end{enumerate}
+
+\section{Qualitative Analysis: Pedagogical Adherence of the Conformant Model}
+\label{sec:qualitative}
+
+The joint reading of Sections~\ref{sec:efficiency} and~\ref{sec:conformance} isolates \texttt{qwen2.5:3b-instruct} as the unique configuration among the \textit{deployable} models simultaneously satisfying all non-functional requirements: mean latency of 2.906\,s (below the HCI threshold), controlled variability (CV $=19.0\%$), and full adherence (0/39) to the JSON contract without recourse to external coercion. This result, however, \textbf{does not authorize optimistic inference about the model's pedagogical adequacy}, as demonstrated in the additional qualitative inspection below.
+
+Applying the metalinguistic criterion described in Subsection~\ref{sec:criteria} to the 13 responses of the first repetition of \texttt{qwen2.5:3b-instruct}, it is observed that only 6 of 13 responses (46.2\%; Wilson 95\% CI: [23.2\%; 70.9\%]) mobilize any terminology of the cohesion taxonomy --- pronominalization, lexical repetition, connective, argumentative operator, temporal marker, juxtaposition. Table~\ref{tab:metalinguistic} reports the observed proportion alongside the interpretation of the confidence bounds.
+
+\begin{table}[!ht]
+\caption{Metalinguistic adherence of \texttt{qwen2.5:3b-instruct} (Wilson 95\% CI).}
+\centering
+\begin{tabular}{@{}ll@{}}
+\hline\hline
+Metric & Result \\
+\hline
+Scenarios mobilizing Koch terminology & 6/13 (46.2\%) \\
+Wilson 95\% CI & [23.2\%; 70.9\%] \\
+Upper bound (optimistic) & 70.9\%: absence in $\geq 29\%$ \\
+Lower bound (pessimistic) & 23.2\%: absence in $\geq 77\%$ \\
+Classification & Partial and unstable adherence \\
+\hline\hline
+\end{tabular}
+\label{tab:metalinguistic}
+\end{table}
+
+\noindent\textit{Note.} The width of the CI ([23.2\%; 70.9\%]) reflects the small $n$ of canonical scenarios ($n=13$) and constitutes an acknowledged limitation of this analysis; nevertheless, even the upper bound of the interval implies absence of metalinguistic terminology in at least 29\% of scenarios, preserving the characterization of partial and unstable adherence regardless of where the true rate lies within the interval.
+
+In the seven remaining scenarios (53.8\%), the model shifts the interlocution to the \textbf{thematic-narrative plane of the literary work cited} by the student (characters, plot, setting), commenting elements of the literary source rather than evaluating the textuality of the production. As an illustration, the response to the scenario on Referential Cohesion --- in which the student text repeats eight times the noun phrase \textit{``a cartomante''} across four consecutive sentences --- merely observes ``good structure, clear beginning, and conclusion that highlights the importance of reading'', without any mention of the excessive lexical repetition that constituted the target phenomenon of the scenario.
+
+This constitutes a \textbf{categorial task failure}: the model conflates \textit{what the student wrote} with \textit{what the student wrote about}, and loses the central pedagogical object of the Socratic intervention oriented by metalinguistic rubric. Even in scenarios in which some taxonomy term is evoked, the approach is predominantly declarative --- the model \textit{names} the linguistic phenomenon without leading the student to \textit{reflect} on how it operates in the produced text, contradicting the dialogic Socratic structure prescribed by the rubric \citep{paulelder2007socratic}.
+
+The reading of this finding finds direct theoretical support in \textbf{MathTutorBench} by \citet{macina2025mathtutorbench}, which documents, in an adjacent educational domain, the existence of a \textbf{systematic trade-off between thematic expertise and pedagogical competence} in off-the-shelf models: the same model capable of correctly discussing the content of a literary work or problem tends to fail as a tutor when faced with the task of leading the student through progressive questioning, retreating to an expository-thematic regime. The behavior here observed in \texttt{qwen2.5:3b-instruct} is a local manifestation of this phenomenon: the model is proficient at conversing \textit{about} ``A Cartomante'' as a literary work --- produces reasonable commentary on structure, reading, and plot --- but fails to sustain the metalinguistic-Socratic stance that would reposition the focus on the student's text as a linguistic artifact open to problematization in light of Koch's taxonomy. Complementarily, the GuideEval framework of \citet{liu2025socratic} categorizes this failure mode as joint deficiency in the Perception phases (the model does not detect the target cohesive phenomenon) and Elicitation (even when it detects, it does not conduct questioning that makes the student operate on the text itself), confirming that adherence to format and pedagogical adequacy constitute logically independent dimensions of a model's tutorial competence.
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+This study conducted a controlled diagnostic evaluation of eight open Small Language Models, executed locally under infrastructure restrictions compatible with the material reality of the Brazilian public school, against a metalinguistic rubric derived from the textual-cohesion taxonomy of Ingedore Koch. \textbf{With respect to RQ1 (native structural adherence)}, the structural-conformance dimension produced a sharp result: among models in the \textit{deployable} range (up to 3.8 billion parameters), only \textbf{Qwen 2.5 3B-Instruct} combines integral adherence to the JSON contract declared in natural language, mean latency comfortably situated below the Human--Computer Interaction threshold for synchronous tasks, and low variability across repetitions --- constituting the only evaluated configuration that simultaneously satisfies, without recourse to external grammatical coercion, all non-functional requirements for educational deployment.
+
+\textbf{With respect to RQ2 (mobilization of the metalinguistic rubric)}, however, the reading of this result does not authorize optimistic inference about the model's pedagogical adequacy. Systematic qualitative inspection of responses evidences that, although structurally conformant, the model presents \textbf{partial and unstable adherence to Koch's metalinguistic rubric}, mobilizing it in only 46\% of scenarios and operating predominantly in a thematic-surface layer in the remaining 54\%.
+
+This finding, articulated with the architectural findings discussed in Section~\ref{sec:conformance} and the falsification protocol reported in Subsection~\ref{sec:robustness}, sustains the central conclusion of the study: \textbf{the open language models contemporaneously available off-the-shelf, within their range of computational viability for Brazilian public schools, are insufficient for the task of Socratic tutoring of writing in Brazilian Portuguese grounded in a fine metalinguistic rubric, under zero-shot regime}. The insufficiency manifests in two distinct regimes: (i) \textbf{regime of zero-shot structural non-adherence}, exhibited by the Llama 3.2 and Phi-3 families, in which the model violates the syntactic-typological contract even under explicit natural-language specification --- characterized, in the case of the Llama 3.2 family, by an obedience bias demonstrably reversible via minimal contextual anchoring (\textit{one-shot}), and therefore distinguishable from compositional incapacity; and (ii) \textbf{regime of structural adherence with pedagogical superficiality}, exemplified by Qwen 2.5 3B-Instruct, in which the model respects the format but operates predominantly in a thematic-surface layer, without systematically mobilizing the theoretical taxonomy required by the task.
+
+The simultaneous persistence of these two failure regimes --- across models from architecturally distinct families, trained by diverse institutions, and optimized for predominantly Anglophone markets --- converges to the diagnosis that the task of Socratic tutoring in Brazilian Portuguese for basic education \textbf{is not addressed in zero-shot regime by off-the-shelf generalist models} and demands, as necessary scientific unfolding, the development of \textbf{specialized models through supervised fine-tuning on curated pedagogical corpora in Brazilian Portuguese}, aligned with the metalinguistic rubric specific to the school domain. The alternative route via \textit{prompt engineering} with demonstrative anchoring, made viable by the reversibility documented in Subsection~\ref{sec:robustness}, remains technically available, but presupposes an operational regime whose costs in context budget and latency must be weighed against the savings obtained in training. Such unfolding, outside the scope of the present diagnosis, constitutes the subsequent research agenda of this investigation.
+
+
+\appendix
+
+\section{Statistical Rationale}
+\label{app:stats}
+
+This appendix details the inferential framework summarized in Subsection~\ref{sec:method}. Categorical comparisons supporting the structural-conformance claims of the paper --- that conformance rates differ from a reference model and that \textit{one-shot} demonstration reverses the Llama 3.2 family bias --- were operationalized through \textbf{Fisher's exact test} on 2$\times$2 contingency tables, complemented by \textbf{Wilson 95\% confidence intervals} for each observed proportion. Fisher's exact test was selected for four converging reasons: (i) the structural-conformance data is intrinsically binary (conformant vs. divergent); (ii) cells with extreme proportions (0/39 and 39/39) are observed, in which the asymptotic $\chi^2$ approximation is invalid (expected frequency below 5 in at least one cell); (iii) the test produces exact two-sided \textit{p}-values by combinatorial enumeration of more extreme tables, with no distributional assumption; and (iv) when a cell of the contingency table is zero, the conditional maximum-likelihood odds ratio is not finitely estimable, but the \textit{p}-value derived from the exact hypergeometric distribution remains valid as the reportable effect, in line with standard practice for categorical comparisons under extreme proportion regimes.
+
+Wilson 95\% CIs supplement each rate with its uncertainty band, computed analytically without assuming normality of the proportion --- a property especially relevant near the extremes of the unit interval, where the normal approximation underlying the Wald interval would produce bounds outside [0, 1]. All inferential computations were performed with \texttt{scipy.stats.fisher\_exact} (two-sided alternative) and a closed-form Wilson interval implementation, both reported in \texttt{src/inferential\_statistics.py}. Significance is reported in APA-style notation throughout the paper: $p<0.001$~\texttt{***}, $p<0.01$~\texttt{**}, $p<0.05$~\texttt{*}, $p\geq 0.05$~n.s., with $\alpha=0.05$ as the conventional rejection threshold.
+
+\section{Implementation Details}
+\label{app:impl}
+
+This appendix documents the implementation artifacts referenced in Subsections~\ref{sec:protocol} and~\ref{sec:validation}. The materials are provided to support integral reproducibility of the study; the executable form, together with the raw inference corpus, is available in the public repository indicated in Section~\ref{sec:method}.
+
+\paragraph{B.1 --- HTTP payload sent to Ollama.} All 312 main-protocol calls and the 80 falsification-protocol calls transported to the server a JSON payload structured in rigorously uniform fashion across models, schematically reproduced below:
+
+\begin{lstlisting}[language=Python]
+payload = {
+    "model": <model identifier>,
+    "messages": [
+        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "user",   "content": <scenario text>},
+    ],
+    "stream":  False,
+    "format":  "json",
+    "options": {"temperature": 0.2},
+}
+\end{lstlisting}
+
+Each hyperparameter was selected by explicit methodological motivation and acts on a distinct dimension of the generation process's stochasticity:
+
+\begin{enumerate}
+\item \texttt{temperature = 0.2}. The parameter scales logits prior to \textit{softmax} sampling and governs the concentration of the probability distribution over the vocabulary. Values close to 0 collapse the distribution into a near-deterministic regime (quasi-greedy prediction); values above 1 flatten it, favoring lexical diversity. The choice of 0.2 establishes a compromise: rigorous enough to induce adherence to the structural contract declared in natural language by the \textit{system prompt}, without suppressing the micro-variability necessary for meaningful estimation of intra-model CV across repetitions. Values near 0 would render infeasible the differentiation of systemic versus stochastic variance --- the central axis of the instruction-stability analysis.
+\item \texttt{stream = false}. Deactivates the progressive \textit{token-by-token} transmission regime (\textit{server-sent events}) and imposes synchronous mode, in which the server retains the entire response until stopping and returns it in a single HTTP body. The justification is metrological: the \textit{wall-clock} latency meter based on \texttt{time.time()} requires well-defined start and end points, and reception in a single chunk eliminates ambiguity about the inference termination moment. The synchronous mode is also the regime expected in real school usage, in which the student awaits the complete response before proceeding.
+\item \texttt{format = "json"}. Signals to Ollama the intent of JSON output. Operationally, the server restricts the decoder to a logit mask compatible with tokens structurally valid for JSON, exerting probabilistic \textit{nudging} over the generation. Critical methodological decision: this parameter \textbf{does not enforce a schema} --- it merely guarantees that the output will be syntactically parseable as JSON, but \textbf{imposes nothing on field typology, presence of required keys, or list cardinality}. The choice to keep it active, without complementation by strict grammatical coercion (BNF grammars, regex validation, or \textit{constrained decoding}), reflects the intent to gauge the model's \textbf{native adherence} to the structural contract specified in natural language, under conditions representative of the realistic school-deployment scenario --- in which there are no engineering resources to implement layers of syntactic coercion over every inference.
+\item \texttt{timeout = 120} seconds. Client-side waiting limit, dimensioned to accommodate even the most prolonged generations of verbose models without masking genuine server failures.
+\end{enumerate}
+
+\paragraph{B.2 --- Source code of the \texttt{divergente()} structural validator.} The binary conformance classification of each response was performed by the deterministic function below --- operationalized in \texttt{src/mine\_benchmark.py} --- that decides, over the raw content returned in \texttt{message.content}, whether the response integrally satisfies the contract declared in the \textit{system prompt}. The classifier logic is reproduced below, in the exact order of execution adopted over the 312-record corpus:
+
+\begin{lstlisting}[language=Python]
+def divergente(raw_response: str) -> bool:
+    # C1 - JSON syntax
+    try:
+        parsed = json.loads(raw_response)
+    except json.JSONDecodeError:
+        return True
+
+    # C2 - Root type
+    if not isinstance(parsed, dict):
+        return True
+
+    # C3 - Type and cardinality of `pontos_fortes`
+    pf = parsed.get("pontos_fortes")
+    if not (isinstance(pf, str) and pf.strip()):
+        return True
+
+    # C4 - Type and cardinality of `perguntas_reflexivas`
+    pr = parsed.get("perguntas_reflexivas")
+    if not isinstance(pr, list) or len(pr) == 0 \
+       or any(not isinstance(x, str) for x in pr):
+        return True
+
+    return False
+\end{lstlisting}
+
+The function operates on the raw content preserved in the \texttt{resposta\_ia} attribute of each of the 312 records of the collection corpus. The four conditions (C1--C4) are documented in narrative form in Subsection~\ref{sec:validation}.
+
+
+\section*{Declarations}
+
+\begin{contributions}
+Following the CRediT Taxonomy (\href{https://credit.niso.org/}{https://credit.niso.org/}): \textbf{Randerson O. M. Rebouças} --- Conceptualization, Methodology, Software, Investigation, Data curation, Formal analysis, Visualization, Writing (original draft). \textbf{Marcelo Magalhães Foohs} --- Supervision, Validation, Writing (review \& editing). \textbf{Rosa Maria Vicari} --- Supervision, Conceptualization (pedagogical-linguistic rubric), Validation, Writing (review \& editing). All authors read and approved the final manuscript.
+% TODO: confirm the role split (who supervised; who authored the 13 canonical scenarios).
+\end{contributions}
+
+\begin{interests}
+The authors declare that they have no competing interests.
+\end{interests}
+
+\begin{acknowledgements}
+The authors thank the Graduate Program in Informatics in Education (PPGIE) of the Federal University of Rio Grande do Sul (UFRGS) for the institutional environment that made this research possible.
+\end{acknowledgements}
+
+\begin{funding}
+The authors received no specific funding for this work.
+\end{funding}
+
+\begin{materials}
+All materials required to reproduce this study are publicly available. The source code (collection, classification, aggregation, and inferential-statistics scripts) is released under the MIT License, and the data --- the 13 canonical scenarios, the 312-record primary inference corpus, and the 80-record falsification corpus --- under the Creative Commons Attribution 4.0 (CC BY 4.0) License. A permanent, citable archive of the release is deposited on Zenodo (DOI: 10.5281/zenodo.20388847), with the development repository hosted at \href{https://github.com/RandMelville/slm-socratic-tutor-ptbr}{https://github.com/RandMelville/slm-socratic-tutor-ptbr}.
+\end{materials}
+
+
+\bibliographystyle{apalike-sol}
+\bibliography{references}
+
+\end{document}

@@ -12,7 +12,7 @@ Há **dois projetos distintos** que se alimentam, mas não se misturam:
 
 | | **Tese — Plataforma Criativa** | **Bento (este diretório)** |
 |---|---|---|
-| Onde | Programa de doutorado UFRGS | `/Users/randersonmelville/Documents/doutorado/bento/` |
+| Onde | Programa de doutorado UFRGS | `/Users/randersonmelville/Documents/doutorado/slm-socratic-tutor-ptbr/` (pasta renomeada de `bento/` em 2026-06-10 p/ casar com o repo GitHub; "Bento" permanece o codinome do modelo fine-tuned futuro) |
 | Entregável | Plataforma educacional + tese acadêmica | Benchmark + modelo no Hugging Face (apoio do piloto) |
 | Foco | Pedagogia, Linguística Textual (Koch), Pensamento Computacional, design da plataforma | Engenharia de LLM: benchmark de open-source + fine-tuning de tutor socrático |
 | Público | Banca + comunidade educacional | Comunidade ML/NLP + escolas-piloto |
