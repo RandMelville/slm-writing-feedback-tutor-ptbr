@@ -160,10 +160,10 @@
   ],
   "table4_metalinguistic_adherence": {
     "model": "qwen2.5:3b-instruct",
-    "scenarios_with_koch_terms": 6,
-    "total_scenarios": 13,
-    "rate_pct": 46.2,
-    "ci95_low": 23.2,
-    "ci95_high": 70.9
+    "scenarios_with_koch_terms": 20,
+    "total_scenarios": 39,
+    "rate_pct": 51.3,
+    "ci95_low": 36.2,
+    "ci95_high": 66.1
   }
 }

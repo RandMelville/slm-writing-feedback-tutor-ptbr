@@ -44,7 +44,8 @@ strengthening its selection as the operationally preferable base.
    (Fisher exact: *p* < 0.001), reclassifying the family as deployable
    under prompt-engineering at higher context cost.
 3. Even the conformant `qwen2.5:3b-instruct` mobilizes Koch's metalinguistic
-   terminology in only 46.2 % of scenarios (Wilson 95 % CI [23.2 %; 70.9 %]),
+   terminology in only 51.3 % of runs (20/39; Wilson 95 % CI [36.2 %; 66.1 %])
+   and does so unstably (only 1 of 13 scenarios across all three repetitions),
    evidencing that structural conformance and pedagogical adequacy are
    logically independent dimensions.
 

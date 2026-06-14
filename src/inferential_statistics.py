@@ -150,8 +150,8 @@ def main():
                          "p_value": f_3b["p"] if f_3b else None},
         })
 
-    # === Table 4: metalinguistic adherence — qwen2.5:3b-instruct, 6/13 ===
-    k4, n4 = 6, 13
+    # === Table 4: metalinguistic adherence — qwen2.5:3b-instruct, 20/39 (3 reps) ===
+    k4, n4 = 20, 39
     ci4_lo, ci4_hi = wilson_ci(k4, n4)
     table4 = {
         "model": REFERENCE_MODEL,

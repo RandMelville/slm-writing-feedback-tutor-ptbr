@@ -172,16 +172,17 @@ render(
     caption="Table 4. Metalinguistic adherence of qwen2.5:3b-instruct (Wilson 95 % CI).",
     headers=["Metric", "Result"],
     rows=[
-        ["Scenarios mobilizing Koch terminology", "6 / 13 (46.2 %)"],
-        ["Wilson 95 % CI",                        "[23.2 %; 70.9 %]"],
-        ["Upper bound (optimistic)",              "70.9 %: absence in ≥ 29 % of scenarios"],
-        ["Lower bound (pessimistic)",             "23.2 %: absence in ≥ 77 % of scenarios"],
-        ["Classification",                        "Partial and unstable adherence (sustained by CI)"],
+        ["Responses mobilizing Koch terminology", "20 / 39 (51.3 %)"],
+        ["Wilson 95 % CI",                        "[36.2 %; 66.1 %]"],
+        ["Cross-repetition stability (per scen.)", "1/13 always, 1/13 never, 11/13 variable"],
+        ["Upper bound (optimistic)",              "66.1 %: absence in ≥ 34 % of cases"],
+        ["Lower bound (pessimistic)",             "36.2 %: absence in ≥ 64 % of cases"],
+        ["Classification",                        "Partial and unstable adherence"],
     ],
-    note="Note. The width of the CI ([23.2 %; 70.9 %]) reflects the small n of canonical scenarios (n = 13) and "
-         "constitutes an acknowledged limitation of this analysis; nevertheless, even the upper bound of the "
-         "interval implies absence of metalinguistic terminology in at least 29 % of scenarios, preserving the "
-         "characterization of partial and unstable adherence regardless of where the true rate lies within the interval.",
+    note="Note. The width of the CI ([36.2 %; 66.1 %]) reflects the still-modest sample (13 canonical scenarios "
+         "over 3 repetitions, n = 39) and constitutes an acknowledged limitation; even its upper bound implies "
+         "absence of metalinguistic terminology in at least 34 % of cases. The 'unstable' characterization is not "
+         "rhetorical: only 1 of 13 scenarios mobilizes the rubric across all three repetitions.",
     out_path=OUT_DIR / "table_4.png",
     col_widths=[2.8, 4.2],
     figsize=(9.5, None),
