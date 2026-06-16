@@ -27,6 +27,12 @@ benchmark_slm_reboucas_foohs_v*.docx
 /data/human_baseline/*_COMENTARIOS.docx
 /data/human_baseline/Nota de esclarecimento*.docx
 
+# Baseline send-artifacts (regeneráveis) e originais de logo redundantes
+/data/human_baseline/Convite_Baseline_PPGIE.pdf
+/data/human_baseline/email_para_orientador.txt
+/data/human_baseline/*.gif
+/data/human_baseline/*.webp
+
 # Claude Code — local per-machine settings
 .claude/settings.local.json
 
