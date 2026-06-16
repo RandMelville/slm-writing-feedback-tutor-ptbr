@@ -21,7 +21,7 @@ pessoais ou sensíveis: apenas qualificação profissional relevante para a tare
 4. **Experiência com ensino e correção de redação / produção textual:**
    ( ) sim, regularmente   ( ) sim, ocasionalmente   ( ) pouca ou nenhuma
 
-5. **Familiaridade com feedback formativo (não-corretivo) / abordagem socrática:**
+5. **Familiaridade com feedback formativo / mediação pedagógica:**
    ( ) muita   ( ) alguma   ( ) pouca
 
 6. **(Opcional) Formação:** _________________________________________

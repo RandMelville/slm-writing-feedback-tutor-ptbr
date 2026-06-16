@@ -9,9 +9,9 @@ Artificial como tutores de escrita para alunos do 8º e 9º ano da escola públi
 ## O que pedimos
 
 Sua colaboração consiste em responder a **13 textos curtos e fictícios** (simulando
-produções de alunos), assumindo o papel de um(a) **tutor(a) socrático(a)**: para cada
-texto, escrever o que ele já faz bem e 2–3 perguntas que ajudem o aluno a melhorar
-sozinho. Leva cerca de **30 a 45 minutos**, em horário de sua conveniência.
+produções de alunos): para cada texto, escrever a devolutiva que daria ao aluno para
+ajudá-lo a aprimorar a escrita, na forma que considerar adequada. Leva cerca de **30 minutos**, em horário de sua
+conveniência.
 
 Suas respostas servirão como **referência humana especializada** (um "padrão-ouro")
 para avaliar o desempenho da IA na mesma tarefa.

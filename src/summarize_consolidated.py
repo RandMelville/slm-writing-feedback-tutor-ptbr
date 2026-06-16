@@ -26,7 +26,7 @@ for src in SRCS:
 
 
 def divergente(resp: str) -> bool:
-    """True se a resposta não bate o padrão socrático esperado."""
+    """True se a resposta não bate o padrão estruturado esperado."""
     try:
         d = json.loads(resp or "")
     except Exception:

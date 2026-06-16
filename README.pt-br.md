@@ -1,14 +1,13 @@
-# Avaliação Diagnóstica de Modelos de Linguagem de Pequeno Porte para Tutoria Socrática Offline em Língua Portuguesa: um Estudo de Aderência Estrutural e Pedagógica sob Restrições de Infraestrutura Escolar Pública
+# Avaliação Diagnóstica de Modelos de Linguagem de Pequeno Porte para Tutoria de Feedback de Escrita Offline em Língua Portuguesa: um Estudo de Aderência Estrutural e Pedagógica sob Restrições de Infraestrutura Escolar Pública
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20388847.svg)](https://doi.org/10.5281/zenodo.20388847)
-[![Paper](https://img.shields.io/badge/paper-PDF-blue)](paper/artigo_benchmark_slm.pdf)
-[![Relatório](https://img.shields.io/badge/relat%C3%B3rio-interativo-purple)](https://randmelville.github.io/slm-socratic-tutor-ptbr/report/)
+[![Relatório](https://img.shields.io/badge/relat%C3%B3rio-interativo-purple)](https://randmelville.github.io/slm-writing-feedback-tutor-ptbr/report/)
 [![Python](https://img.shields.io/badge/python-3.11+-blue)](https://www.python.org)
 [![Código](https://img.shields.io/badge/c%C3%B3digo-MIT-green)](LICENSE)
 [![Dados](https://img.shields.io/badge/dados-CC--BY%204.0-green)](LICENSE-DATA)
 
 Benchmark diagnóstico de oito Modelos de Linguagem de Pequeno Porte abertos
-(≤ 3,8 B parâmetros) para tutoria socrática de escrita em Português do Brasil,
+(≤ 3,8 B parâmetros) para tutoria de feedback de escrita em Português do Brasil,
 executados estritamente offline em CPU. Inclui protocolo de falsificação em
 quatro isolamentos sobre a família Llama 3.2, com suporte de testes exatos
 de Fisher em contingências 2×2 e intervalos de confiança de Wilson 95 %.
@@ -52,7 +51,7 @@ Metodologia, tabelas e referências completas em
 [`paper/artigo_benchmark_slm.pdf`](paper/artigo_benchmark_slm.pdf) (também
 disponível em [`DOCX`](paper/artigo_benchmark_slm.docx) e
 [`Markdown`](paper/artigo_benchmark_slm.md)). Um
-[relatório HTML interativo](https://randmelville.github.io/slm-socratic-tutor-ptbr/report/)
+[relatório HTML interativo](https://randmelville.github.io/slm-writing-feedback-tutor-ptbr/report/)
 também está disponível, com os resultados por modelo e o protocolo de
 falsificação em formato navegável.
 
@@ -65,8 +64,8 @@ falsificação em formato navegável.
 ## Instalação
 
 ```bash
-git clone https://github.com/RandMelville/slm-socratic-tutor-ptbr.git
-cd slm-socratic-tutor-ptbr
+git clone https://github.com/RandMelville/slm-writing-feedback-tutor-ptbr.git
+cd slm-writing-feedback-tutor-ptbr
 pip install -r requirements.txt
 ```
 
@@ -103,7 +102,7 @@ report/     Relatório HTML interativo auto-contido
 ```bibtex
 @article{reboucas2026slmsocratic,
   title     = {A Diagnostic Evaluation of Small Language Models for Offline
-               Socratic Tutoring in Brazilian Portuguese: A Study on Structural
+               Writing-Feedback Tutoring in Brazilian Portuguese: A Study on Structural
                and Pedagogical Adherence under Public-School Infrastructure
                Constraints},
   author    = {Reb{\'o}u{\c{c}}as, Randerson Oliveira Melville and Foohs, Marcelo Magalh{\~a}es and Vicari, Rosa Maria},

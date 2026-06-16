@@ -20,6 +20,13 @@ _privado_modelo_futuro/
 # Local DOCX drafts (not for public versioning unless explicitly added)
 benchmark_slm_reboucas_foohs_v*.docx
 
+# Internal / private — do NOT publish (repo is public)
+/REFINAR.docx
+/Questoes_Rosa_Diagnostico.docx
+/paper/jbcs/PLANO_REVISAO.md
+/data/human_baseline/*_COMENTARIOS.docx
+/data/human_baseline/Nota de esclarecimento*.docx
+
 # Claude Code — local per-machine settings
 .claude/settings.local.json
 

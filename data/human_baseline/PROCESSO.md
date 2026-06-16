@@ -54,8 +54,8 @@ painel de forma agregada e anônima no artigo:
 
 1. `carta_convite.md` — convite + termos de colaboração (não é TCLE).
 2. `perfil_anotador.md` — ficha de perfil (preenche antes).
-3. `INSTRUCOES_ANOTADOR.md` — folha explicativa (papel socrático, o que olhar, exemplo).
-4. `template_coleta.md` — os 13 cenários com os dois campos para preencher.
+3. `INSTRUCOES_ANOTADOR.md` — guia mínimo (a tarefa e o foco em textualidade).
+4. `template_coleta.md` — os 13 cenários com um campo livre de devolutiva por cenário.
 
 > A folha **não revela** o fenômeno-alvo de cada cenário, de propósito: revelar
 > enviesaria o julgamento e destruiria o valor do padrão-ouro.
