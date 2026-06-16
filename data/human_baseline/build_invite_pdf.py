@@ -61,21 +61,41 @@ def build_styles():
 
 
 def render_md(md_text, styles):
-    """Converte carta_convite.md em flowables, pulando o H1 (título virá no topo)."""
+    """Converte carta_convite.md em flowables, pulando o H1 (título virá no topo).
+
+    Linhas de prosa consecutivas (markdown com quebra manual) são unidas num único
+    parágrafo justificado; só blank lines, títulos e itens de lista separam blocos.
+    """
     flow = []
+    buf = []
+
+    def flush():
+        if buf:
+            flow.append(Paragraph(inline(" ".join(buf)), styles["body"]))
+            buf.clear()
+
     for raw in md_text.splitlines():
         line = raw.rstrip()
-        if not line.strip():
+        s = line.strip()
+        if not s:
+            flush()
             continue
         if line.startswith("# "):
+            flush()
             continue  # título tratado à parte
         if line.startswith("## "):
+            flush()
             flow.append(Paragraph(inline(line[3:]), styles["h2"]))
         elif re.match(r"^\s*[-*]\s+", line):
+            flush()
             flow.append(Paragraph("• " + inline(re.sub(r"^\s*[-*]\s+", "", line)),
                                   styles["bullet"]))
+        elif re.match(r"^\s*\d+\.\s+", line):
+            flush()
+            flow.append(Paragraph(inline(s), styles["body"]))
         else:
-            flow.append(Paragraph(inline(line), styles["body"]))
+            buf.append(s)
+    flush()
     return flow
 
 
