@@ -12,7 +12,7 @@ OUT = ROOT / "data" / "human_readable_report.txt"
 
 
 def divergent(resp: str) -> bool:
-    """True if the response does not match the expected Socratic schema."""
+    """True if the response does not match the expected structured schema."""
     try:
         d = json.loads(resp or "")
     except Exception:
@@ -68,7 +68,7 @@ lines.append("\n## 2. Systemic Failures Identified\n")
 llama32_3b = agg.get("llama3.2:3b", {})
 phi3 = agg.get("phi3:mini", {})
 lines.append(
-    f"- **Llama 3.2 3B — full collapse of the Socratic schema ({llama32_3b.get('div_rate',0)*100:.0f}% divergence, "
+    f"- **Llama 3.2 3B — full collapse of the structured schema ({llama32_3b.get('div_rate',0)*100:.0f}% divergence, "
     f"{llama32_3b.get('div',0)}/{llama32_3b.get('n',0)} responses).** "
     "The model emits syntactically valid JSON but returns `pontos_fortes` as a **list** instead of a **string**, "
     "violating the contract declared in the SYSTEM_PROMPT in 100% of cases under zero-shot regime. "
@@ -107,7 +107,7 @@ if qwen:
     )
     lines.append(
         "- **Headroom for pedagogical LoRA**: by selecting a model that already respects the schema, "
-        "fine-tuning capacity can focus on the Socratic Koch rubric (theoretical focus, pedagogical distancing, "
+        "fine-tuning capacity can focus on the Koch metalinguistic rubric (theoretical focus, pedagogical distancing, "
         "Computational Thinking bridge) rather than spending adapter capacity fixing format — essential leverage "
         "given the still-small dataset (13 -> ~200-500 audited examples)."
     )

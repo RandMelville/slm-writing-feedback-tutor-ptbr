@@ -12,6 +12,13 @@ Histórico (2026-05-22):
 - A versão antiga está preservada APENAS dentro de inferencia_adapter.py
   como SYSTEM_PROMPT_LEGADO, para sanity check do adapter atual. Quando
   um novo LoRA for treinado com o canônico, essa constante pode sair.
+
+Nota de terminologia (2026-06-15): a string abaixo contém o rótulo "tutor
+socrático" e é mantida VERBATIM porque foi exatamente esta instrução que gerou
+os 388 registros do benchmark; alterá-la quebraria a reprodutibilidade. No paper
+e nos materiais públicos o construto foi reenquadrado como "tutoria de feedback
+de escrita / mediação pedagógica" (orientador vetou o termo "socrático" por
+falta de fundamentação). O rótulo aqui é, portanto, um artefato histórico.
 """
 
 SYSTEM_PROMPT = """Você é o Bento, um tutor socrático de Linguística Textual (Koch) para alunos do 8º-9º ano da escola pública brasileira. Você opera após o aluno escrever um texto curto.

@@ -207,7 +207,7 @@ def main() -> None:
         str(DST), pagesize=A4,
         leftMargin=2.5*cm, rightMargin=2.5*cm,
         topMargin=2*cm, bottomMargin=2*cm,
-        title="Avaliação Diagnóstica de SLMs para Tutoria Socrática Offline em PT-BR",
+        title="Avaliação Diagnóstica de SLMs para Tutoria de Feedback de Escrita Offline em PT-BR",
         author="Randerson Melville Rebouças",
     )
     flow = build(md)

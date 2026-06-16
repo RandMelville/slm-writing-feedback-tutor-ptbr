@@ -1,38 +1,34 @@
-# Instruções para o(a) professor(a) anotador(a)
+# Guia para o(a) professor(a) colaborador(a)
 
-Obrigado por colaborar. Sua participação aqui é como **referência especializada**: você
-produz o "padrão-ouro" humano contra o qual vamos comparar respostas de modelos de
-linguagem (IA). Você **não** é sujeito de pesquisa, e não coletamos nenhum dado pessoal
-sobre você. Os textos abaixo são **fictícios** (não são de alunos reais).
+Obrigado por colaborar. A tarefa é curta e a leitura deste guia leva ~2 minutos.
 
-## O que você vai fazer
+## A tarefa
 
-Para cada um dos 13 textos curtos (simulando produções de alunos do 8º–9º ano), você
-vai escrever a resposta que daria **como um tutor socrático**, preenchendo dois campos:
+Você vai ler **13 textos curtos e fictícios** (simulando produções de alunos do 8º
+e 9º ano) e, para cada um, escrever a **devolutiva que você daria ao aluno para
+ajudá-lo a aprimorar a escrita**.
 
-1. **Pontos fortes** — um parágrafo curto, acolhedor, dizendo o que o texto já faz bem.
-2. **Perguntas reflexivas** — 2 ou 3 perguntas que levem o aluno a *descobrir sozinho*
-   o que pode melhorar.
+Se precisar de um foco: **priorize aspectos de textualidade** (coesão, coerência e
+progressão textual). No mais, responda **como você responderia na sua sala**, do seu
+jeito. Não há gabarito nem resposta "certa", e não estamos avaliando você: suas
+respostas servem como **referência humana especializada** para comparar com o
+desempenho de modelos de IA na mesma tarefa.
 
-## A postura que pedimos (a "rubrica")
+## Como responder
 
-- **Nunca dê a resposta pronta nem reescreva o texto corrigido.** O objetivo é o aluno
-  pensar, não copiar a correção.
-- **Linguagem acolhedora e adequada à idade** (13–14 anos). Fale *com* o aluno ("você"),
-  não *sobre* o aluno.
-- **Foque em coesão e coerência** (repetição, pronomes ambíguos, conectivos, marcadores
-  de tempo) — não em ortografia ou "erro de gramática".
-- **Valorize as variedades linguísticas e a oralidade.** Não aja como policial gramatical.
-- **(Opcional) Ponte com o Pensamento Computacional.** *Se* couber naturalmente, uma das
-  perguntas pode comparar a escrita com ideias de lógica/sequência/condição (ex.: "se isso,
-  então aquilo", uma "variável" que se repete). Só faça se sair natural — não force.
+Para cada texto, escreva no `template_coleta.md` a devolutiva em prosa normal. Pode
+ter o tamanho e a forma que você achar adequados. Tempo estimado: ~30 minutos para
+os 13.
 
-> Importante: **não tente adivinhar "o erro certo" de cada texto.** Responda como você
-> responderia na sala. É exatamente esse julgamento natural que queremos registrar.
+- Os textos são **fictícios**: não há alunos reais nem dados pessoais.
+- A participação é **voluntária** e pode ser interrompida a qualquer momento.
 
-## Como entregar
+## Como seus dados serão usados
 
-Preencha o arquivo `template_coleta.md` (uma cópia por anotador). Escreva em prosa
-normal, nos espaços indicados. Nós convertemos para o formato técnico depois.
+- Suas respostas entram no estudo de forma **anonimizada**, por código (Anotador A,
+  B ou C); seu nome não aparece junto delas.
+- O conjunto poderá ser publicado junto ao material aberto do estudo, sob licença
+  Creative Commons (CC BY 4.0), sempre de forma anônima por código.
+- Se desejar, seu nome pode constar nos **agradecimentos** do artigo.
 
-Tempo estimado: ~30–45 min para os 13.
+Qualquer dúvida, fale com a equipe antes de começar. Obrigado pela colaboração!
