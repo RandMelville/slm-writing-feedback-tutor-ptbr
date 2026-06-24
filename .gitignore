@@ -41,3 +41,6 @@ benchmark_slm_reboucas_foohs_v*.docx
 .vscode/
 *.swp
 *~
+
+# Respostas brutas do baseline (contêm nomes reais — PII, não publicar)
+/Refer*respostas*.xlsx
