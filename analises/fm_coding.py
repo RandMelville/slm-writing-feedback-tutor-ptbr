@@ -31,31 +31,31 @@ FUNCS = {
 CODING = {
     # FM02/FM04 ampliadas na v0.2 (pos-kappa): "nomear insuficiencia" e "indicar
     # o que desenvolver / estrategia" passam a contar; "explicar como pergunta" segue FM03.
-    "P1": {
+    "E1": {
         1: [1, 2, 4, 6], 2: [1, 2, 4, 6], 3: [1, 2, 3, 4, 6], 4: [1, 2, 4, 6],
         5: [1, 2, 4, 5, 6], 6: [1, 2, 4, 6], 7: [1, 2, 4, 5, 6], 8: [1, 2, 3],
         9: [1, 2, 4, 6], 10: [1, 2, 3, 4, 6], 11: [1], 12: [1], 13: [1],
     },
-    # P2 recodificado apos correcao do Prof. Marcelo (2026-06-24):
+    # E2 recodificado apos correcao do Prof. Marcelo (2026-06-24):
     # perguntas austeras = FM03 (nao FM02); estrategias "reler/anotar/substituir" e
     # orientacao de o-que-especificar-para-o-leitor = FM04. Registro sem afeto, mas
     # com forte reflexao e andaime procedimental — nao "puramente diagnostico".
-    "P2": {
+    "E2": {
         1: [2, 4, 6], 2: [2, 6], 3: [2, 3], 4: [2, 4, 6], 5: [2, 3, 6], 6: [2, 3],
         7: [2, 4, 6], 8: [2, 3, 4, 6], 9: [2, 3], 10: [2, 3, 4, 6], 11: [2, 4],
         12: [1, 2, 3], 13: [2, 3, 6],
     },
-    "P3": {
+    "E3": {
         1: [2, 4, 6], 2: [2, 4, 6], 3: [2, 4, 6], 4: [2, 4, 6], 5: [2, 4, 6],
         6: [2, 4, 6], 7: [2, 4, 6], 8: [1], 9: [2, 4, 6], 10: [1, 2, 4, 6], 11: [1],
         12: [1], 13: [1],
     },
-    "P4": {
+    "E4": {
         1: [1, 2, 4, 7, 8], 2: [1, 2, 4, 6, 7, 8], 3: [1, 2, 4, 7, 8], 4: [1, 2, 4, 6, 8],
         5: [1, 2, 4, 7, 8], 6: [1, 2, 4, 6, 8], 7: [1, 2, 4, 6, 7, 8], 8: [1, 2, 4, 7, 8],
         9: [1, 2, 4, 7, 8], 10: [1, 2, 4, 7, 8], 11: [1, 2, 4, 7], 12: [1], 13: [1],
     },
-    "P5": {
+    "E5": {
         1: [1, 2, 3, 4, 6, 7, 8], 2: [1, 2, 3, 4, 6, 7, 8], 3: [1, 2, 3, 4, 6, 7, 8],
         4: [1, 2, 3, 4], 5: [1, 2, 3, 4, 7, 8], 6: [1, 2, 4, 6, 7, 8], 7: [1, 4, 5, 7, 8],
         8: [1, 2, 3, 4, 7, 8], 9: [1, 2, 3, 4, 5, 6, 7, 8], 10: [1, 2, 3, 4, 5, 6, 7, 8],
@@ -63,7 +63,7 @@ CODING = {
     },
 }
 
-MISALIGNED = {("P4", 10)}  # devolutiva fala do C9; isolar em contagens por foco
+MISALIGNED = {("E4", 10)}  # devolutiva fala do C9; isolar em contagens por foco
 
 rows = []
 for prof, cens in CODING.items():

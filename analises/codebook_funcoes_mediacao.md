@@ -4,7 +4,7 @@
 > Mudança v0.1→v0.2: FM02 e FM04 ampliadas após a rodada de concordância (κ) com o Prof. Marcelo —
 > as duas funções de menor κ. Ver nota nas próprias definições e em `fm_resultados.md` §6.
 > Taxonomia proposta pelo Prof. Marcelo (FM01–FM08), operacionalizada sobre o corpus de referência especializada.
-> Corpus: 5 professores (P1–P5) × 13 cenários = 65 devolutivas. Fonte: `data/baseline_humano/respostas_professores.jsonl`.
+> Corpus: 5 professores (E1–E5) × 13 cenários = 65 devolutivas. Fonte: `data/baseline_humano/respostas_professores.jsonl`.
 
 ---
 
@@ -51,9 +51,9 @@ o vetor de 8 κ é o resultado honesto.
   organização, vocabulário).
 - **Exclusão:** encorajamento genérico voltado ao futuro ("continue se dedicando", "estás no
   caminho certo") **sem** nomear uma competência → isso é FM08, não FM01.
-- **Âncora (P5/C1):** *"Parabéns! Você identificou um dos acontecimentos mais importantes do conto:
+- **Âncora (E5/C1):** *"Parabéns! Você identificou um dos acontecimentos mais importantes do conto:
   a confiança de Camilo nas palavras da cartomante e o desfecho inesperado da história."*
-- **Caso-limite (P4/C1):** *"Continue se dedicando, pois já demonstraste compreender a história."* —
+- **Caso-limite (E4/C1):** *"Continue se dedicando, pois já demonstraste compreender a história."* —
   a 2ª oração nomeia uma competência (compreensão) → FM01; o "continue se dedicando" isolado seria
   só FM08.
 
@@ -67,9 +67,9 @@ o vetor de 8 κ é o resultado honesto.
 - **Exclusão:** levar o aluno a *descobrir* o problema por uma pergunta aberta → FM03. Pedir
   reescrita sem indicar o que está inadequado → FM06. Texto-teto elogiado sem apontar insuficiência
   → não marcar.
-- **Âncora (P2/C2):** *"Você usou \"ele\" muitas vezes, sem deixar claro a quem se referia o pronome
+- **Âncora (E2/C2):** *"Você usou \"ele\" muitas vezes, sem deixar claro a quem se referia o pronome
   a cada vez."*
-- **Caso-limite (P1/C3):** *"A palavra \"portanto\" não parece adequada. Por qual palavra você
+- **Caso-limite (E1/C3):** *"A palavra \"portanto\" não parece adequada. Por qual palavra você
   poderia substituí-la?"* — "portanto não parece adequada" é FM02; "por qual palavra você poderia
   substituí-la?" é FM03. Mesma devolutiva, duas funções.
 
@@ -80,9 +80,9 @@ o vetor de 8 κ é o resultado honesto.
   "A personagem estava realmente feliz?").
 - **Exclusão:** pergunta retórica que já contém a correção dentro de si → conta como FM02 (o
   problema foi nomeado, só que em forma interrogativa).
-- **Âncora (P2/C3):** *"O que exatamente te fez rir? Por que o final é chocante? Por que era óbvio
+- **Âncora (E2/C3):** *"O que exatamente te fez rir? Por que o final é chocante? Por que era óbvio
   que ia acontecer aquilo?"*
-- **Caso-limite (P1/C10):** *"(se era horrível, o natural seria ele querer sair, então o \"mas\" não
+- **Caso-limite (E1/C10):** *"(se era horrível, o natural seria ele querer sair, então o \"mas\" não
   cabe aqui)"* — embora pareça reflexão, a resposta já está dada no parêntese → FM02, não FM03.
 
 ### FM04 — Oferecer pista
@@ -94,9 +94,9 @@ o vetor de 8 κ é o resultado honesto.
 - **Exclusão:** apresentar uma frase já reescrita do aluno → FM05. Apenas mandar reescrever sem dar
   o caminho → FM06. **Fronteira com FM03:** a mesma orientação dada **como diretiva** é FM04; dada
   **como pergunta aberta** ("o que você achou das atitudes de X?") é FM03.
-- **Âncora (P1/C1):** *"para evitar essa repetição, usar o nome da cartomante, ou usar \"ela\" ou
+- **Âncora (E1/C1):** *"para evitar essa repetição, usar o nome da cartomante, ou usar \"ela\" ou
   \"a mulher\"."*
-- **Caso-limite (P5/C4):** *"Você pode utilizar marcadores temporais como: Primeiro... Depois...
+- **Caso-limite (E5/C4):** *"Você pode utilizar marcadores temporais como: Primeiro... Depois...
   Mais tarde... Finalmente..."* — oferece ferramentas (pista), mas **não** monta a frase do aluno →
   FM04, não FM05.
 
@@ -105,10 +105,10 @@ o vetor de 8 κ é o resultado honesto.
   próprio trecho do aluno).
 - **Inclusão:** o especialista escreve um exemplo que materializa o conserto.
 - **Exclusão:** apenas nomear palavras/recursos a usar, sem montar o exemplo → FM04.
-- **Âncora (P5/C13):** *"Sugestão de ampliação: \"Sem saída, desceu pelo elevador; logo depois,
+- **Âncora (E5/C13):** *"Sugestão de ampliação: \"Sem saída, desceu pelo elevador; logo depois,
   percebeu que a confusão só aumentava, pois os moradores começaram a observá-lo com espanto...\""* —
   reescreve a frase do próprio aluno.
-- **Caso-limite (P1/C7):** *"Tente usar palavras que indiquem o tempo para unir as frases, como por
+- **Caso-limite (E1/C7):** *"Tente usar palavras que indiquem o tempo para unir as frases, como por
   exemplo: \"Assim que abriu a porta, o bonde passou.\""* — é exemplo-modelo (FM05), ainda que não
   seja a frase exata do aluno; a fronteira com FM04 é a presença de uma frase pronta.
 
@@ -117,8 +117,8 @@ o vetor de 8 κ é o resultado honesto.
 - **Inclusão:** "vamos reescrever", "o texto precisa ser reescrito", "reorganize seguindo a ordem".
 - **Exclusão:** desafio de **acrescentar** conteúdo novo (opinião, análise, detalhe) que não estava
   lá → FM07.
-- **Âncora (P1/C1):** *"Vamos reescrever esse trecho a partir dessas dicas?!"*
-- **Caso-limite (P2/C2):** *"O texto precisa ser reescrito."* — FM06 puro (sem pista, sem modelo);
+- **Âncora (E1/C1):** *"Vamos reescrever esse trecho a partir dessas dicas?!"*
+- **Caso-limite (E2/C2):** *"O texto precisa ser reescrito."* — FM06 puro (sem pista, sem modelo);
   útil para mostrar que FM06 pode ocorrer sozinho.
 
 ### FM07 — Desafiar ampliação
@@ -127,9 +127,9 @@ o vetor de 8 κ é o resultado honesto.
 - **Inclusão:** "acrescente sua opinião", "aprofunde sua análise", "desenvolva mais", "desafio para
   a reescrita: acrescentar...".
 - **Exclusão:** consertar um problema existente → FM06. Reescrever para o aluno → FM05.
-- **Âncora (P5/C1):** *"Desafio para a reescrita: acrescentar uma frase avaliando a história e
+- **Âncora (E5/C1):** *"Desafio para a reescrita: acrescentar uma frase avaliando a história e
   utilizar menos repetições."* (a 1ª metade é FM07; "menos repetições" é FM06.)
-- **Caso-limite (P1/C9):** *"O desafio que vou te dar é transformar essas 10 frases em 3 ou 4 frases
+- **Caso-limite (E1/C9):** *"O desafio que vou te dar é transformar essas 10 frases em 3 ou 4 frases
   mais longas e conectadas."* — reestruturar o que existe → FM06; só seria FM07 se pedisse conteúdo
   novo. Fronteira a observar de perto na codificação.
 
@@ -139,15 +139,15 @@ o vetor de 8 κ é o resultado honesto.
 - **Inclusão:** "estás no caminho certo", "vamos seguir em frente", "você consegue", convite à
   continuidade.
 - **Exclusão:** elogio que nomeia uma competência específica demonstrada no texto → FM01.
-- **Âncora (P5/C10):** *"Você teve um ótimo começo! Vamos seguir em frente!"*
-- **Caso-limite (P4/C2):** *"Continues te dedicando, pois está no caminho certo."* — afirmação
+- **Âncora (E5/C10):** *"Você teve um ótimo começo! Vamos seguir em frente!"*
+- **Caso-limite (E4/C2):** *"Continues te dedicando, pois está no caminho certo."* — afirmação
   prospectiva da capacidade, sem nomear o que foi feito → FM08, não FM01.
 
 ---
 
 ## Sinalização de qualidade de dados (antes de qualquer contagem)
 
-- **P4 / Cenário 10 — desalinhamento:** a devolutiva fala da "investigação realizada pelo detetive"
+- **E4 / Cenário 10 — desalinhamento:** a devolutiva fala da "investigação realizada pelo detetive"
   (conteúdo do C9, *O Caso da Borboleta*), não de *Cemitério dos Vivos* (C10). Provável erro de
   cópia. **Isolar esta célula** e, se possível, confirmar com o respondente antes de contar por foco.
   A codificação de FMs pode prosseguir (as funções não dependem do conteúdo correto), mas a célula

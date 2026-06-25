@@ -18,7 +18,7 @@ Nenhuma FM ficou vazia; todas emergem das devolutivas reais. Frequência sobre a
 
 Média de **3,8 funções por devolutiva** (de 1 a 8). Nomear o problema (FM02), oferecer pista (FM04)
 e propor revisão (FM06) são o **núcleo operacional** quase universal; **modelar (FM05) é raro** — só
-P1 e P5 chegam a reescrever um trecho do aluno.
+E1 e E5 chegam a reescrever um trecho do aluno.
 
 ## 2. Há perfis distintos de mediação (a variação vira dado)
 
@@ -26,30 +26,30 @@ P1 e P5 chegam a reescrever um trecho do aluno.
 
 | Prof | FM01 | FM02 | FM03 | FM04 | FM05 | FM06 | FM07 | FM08 | FM/dev |
 |---|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| P1 | 100 | 77 | 23 | 69 | 15 | 69 | **0** | **0** | 3,5 |
-| P2 | **8** | 100 | 62 | 46 | 0 | 62 | **0** | **0** | 2,8 |
-| P3 | 38 | 69 | **0** | 69 | 0 | 69 | **0** | **0** | 2,5 |
-| P4 | 100 | 85 | **0** | 85 | 0 | 31 | 69 | 77 | 4,5 |
-| P5 | 100 | 69 | 85 | 77 | 31 | 54 | **92** | **85** | 5,9 |
+| E1 | 100 | 77 | 23 | 69 | 15 | 69 | **0** | **0** | 3,5 |
+| E2 | **8** | 100 | 62 | 46 | 0 | 62 | **0** | **0** | 2,8 |
+| E3 | 38 | 69 | **0** | 69 | 0 | 69 | **0** | **0** | 2,5 |
+| E4 | 100 | 85 | **0** | 85 | 0 | 31 | 69 | 77 | 4,5 |
+| E5 | 100 | 69 | 85 | 77 | 31 | 54 | **92** | **85** | 5,9 |
 
-![Figura 1. Funções de mediação por professor (% dos 13 cenários). O núcleo operacional (FM02 nomear, FM04 pista, FM06 revisar) é quase universal; o que distingue os perfis são FM01 (ausente em P2), FM03 (só P2 e P5), FM05 (só P1 e P5) e a camada FM07/FM08 (só P4 e P5).](fm_frequencia.png)
+![Figura 1. Funções de mediação por professor (% dos 13 cenários). O núcleo operacional (FM02 nomear, FM04 pista, FM06 revisar) é quase universal; o que distingue os perfis são FM01 (ausente em E2), FM03 (só E2 e E5), FM05 (só E1 e E5) e a camada FM07/FM08 (só E4 e E5).](fm_frequencia.png)
 
 Lendo as linhas:
 
-- **P2 — austero e reflexivo, sem afeto.** FM02 em 100% e **FM03 em 62%** (devolve o
+- **E2 — austero e reflexivo, sem afeto.** FM02 em 100% e **FM03 em 62%** (devolve o
   problema em forma de pergunta: *"Por que, de repente, ela desfez o marido?"*), com estratégia
   concreta (FM04 46%: *"reler o conto e anotar a sequência"*, *"substituir pelo pronome objeto"*).
   O que ele *não* faz é a camada afetiva: quase nenhum elogio (8%), nunca desafia ampliação nem
   reforça autonomia. Registro seco e centrado no leitor. 2,8 funções/devolutiva.
-- **P3 — telegráfico.** Só o núcleo operacional (FM02/FM04/FM06, todos 69%), sem reflexão, sem
+- **E3 — telegráfico.** Só o núcleo operacional (FM02/FM04/FM06, todos 69%), sem reflexão, sem
   modelagem, sem camada afetivo-expansiva. O mais enxuto, 2,5.
-- **P1 — núcleo + reconhecimento + modelagem, sem expansão.** Reconhece (100%), nomeia, dá pista,
+- **E1 — núcleo + reconhecimento + modelagem, sem expansão.** Reconhece (100%), nomeia, dá pista,
   propõe revisão, e é um dos dois que modelam (FM05) — porém **FM07=FM08=0**: nunca empurra o aluno
   a ir além nem fecha afirmando autonomia. 3,5.
-- **P4 — afetivo-expansivo.** Forte em FM01 (100%), FM07 (69%) e FM08 (77%); também nomeia e aponta
+- **E4 — afetivo-expansivo.** Forte em FM01 (100%), FM07 (69%) e FM08 (77%); também nomeia e aponta
   caminho (FM02/FM04 85%), mas **não usa pergunta reflexiva (FM03=0) nem modela (FM05=0)**, e propõe
   revisão pouco (31%). 4,5.
-- **P5 — andaime completo.** Alto em tudo; único que combina reflexão (85%), modelagem (31%) e a
+- **E5 — andaime completo.** Alto em tudo; único que combina reflexão (85%), modelagem (31%) e a
   camada expansiva (FM07 92%, FM08 85%). 5,9 funções/devolutiva.
 
 ## 3. Um núcleo comum e quatro diferenciadores
@@ -60,16 +60,16 @@ devolutiva (fora os textos-teto puramente elogiados) passa por ele.
 
 O que **distingue** os perfis não é esse núcleo — é a presença/ausência de quatro coisas:
 
-- **FM01 reconhecer** — comum, mas **ausente no P2**.
-- **FM03 reflexão** — só **P2 e P5** (provocação seca no primeiro, andaime no segundo); P3/P4 não usam.
-- **FM05 modelar** — só **P1 e P5**.
-- **FM07/FM08 ampliar + autonomia** — só **P4 e P5**.
+- **FM01 reconhecer** — comum, mas **ausente no E2**.
+- **FM03 reflexão** — só **E2 e E5** (provocação seca no primeiro, andaime no segundo); E3/E4 não usam.
+- **FM05 modelar** — só **E1 e E5**.
+- **FM07/FM08 ampliar + autonomia** — só **E4 e E5**.
 
-Daí os perfis: P5 tem tudo; P2 = núcleo + reflexão, sem afeto; P4 = núcleo + afeto + expansão, sem
-reflexão/modelagem; P1 = núcleo + reconhecimento + modelagem, sem expansão; P3 = núcleo nu.
+Daí os perfis: E5 tem tudo; E2 = núcleo + reflexão, sem afeto; E4 = núcleo + afeto + expansão, sem
+reflexão/modelagem; E1 = núcleo + reconhecimento + modelagem, sem expansão; E3 = núcleo nu.
 
 Isso aterrissa a pergunta do Marcelo ("quais funções queremos que o sistema reproduza?"): o
-repertório completo só aparece no perfil P5; os demais são recortes. Qual perfil a plataforma deve
+repertório completo só aparece no perfil E5; os demais são recortes. Qual perfil a plataforma deve
 espelhar, em complementaridade à professora, passa a ser uma decisão empírica e explícita.
 
 ## 4. A fronteira diretiva × pergunta
@@ -77,17 +77,17 @@ espelhar, em complementaridade à professora, passa a ser uma decisão empírica
 Quando o professor quer que o aluno acrescente opinião ou aprofunde, ele faz isso de dois modos, e
 o modo decide a função: **como diretiva** ("acrescente uma breve opinião sobre Camilo") conta como
 apontar caminho (FM04) sobre uma lacuna nomeada (FM02); **como pergunta** ("o final foi
-surpreendente?") conta como provocar reflexão (FM03). É o que separa, num mesmo texto-teto, o P4
-(diretiva → FM02+FM04) do P5 (pergunta → FM03). Essa distinção foi a principal lição da rodada de
+surpreendente?") conta como provocar reflexão (FM03). É o que separa, num mesmo texto-teto, o E4
+(diretiva → FM02+FM04) do E5 (pergunta → FM03). Essa distinção foi a principal lição da rodada de
 κ e está fixada no codebook v0.2.
 
 ## 5. Honestidade metodológica
 
 1. **Correções incorporadas (Prof. Marcelo, 2026-06-24).** (a) Terminologia: saiu a palavra
-   "diagnóstico" (não consta em nenhuma FM); a análise usa só o vocabulário das funções. (b) O P2,
+   "diagnóstico" (não consta em nenhuma FM); a análise usa só o vocabulário das funções. (b) O E2,
    antes lido como "puramente diagnóstico", foi recodificado (FM03 23→62%, FM04 8→46%) após viés
    sistemático meu de subler perguntas e estratégias austeras.
-2. **P4/C10 desalinhada** (conteúdo do C9) segue marcada; codificável por função, mas isolada em
+2. **E4/C10 desalinhada** (conteúdo do C9) segue marcada; codificável por função, mas isolada em
    qualquer contagem por foco.
 3. **FM02/FM04 retêm subjetividade.** Foram as funções de menor κ (§6); a v0.2 as tornou mais
    inclusivas. Mesmo o especialista mostrou inconsistência residual em itens quase idênticos — a
