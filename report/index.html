@@ -1,488 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SLM Socratic Tutor Benchmark — Interactive Report</title>
-<style>
-  :root {
-    --primary: #1f4e79;
-    --accent: #e67e22;
-    --good: #27ae60;
-    --warn: #f39c12;
-    --bad: #c0392b;
-    --gray-bg: #f5f7fa;
-    --gray-border: #d6dde4;
-    --text: #1f2937;
-    --muted: #6b7280;
-    --code-bg: #f3f4f6;
-  }
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-         color: var(--text); line-height: 1.55; margin: 0; background: white; }
-  .container { max-width: 1120px; margin: 0 auto; padding: 24px; }
-  header { background: linear-gradient(135deg, #1f4e79 0%, #2c6da3 100%);
-           color: white; padding: 56px 24px 40px; }
-  header .container { padding: 0; }
-  header h1 { font-size: 30px; margin: 0 0 8px; font-weight: 700; }
-  header .subtitle { font-size: 17px; opacity: 0.92; margin: 0 0 12px; }
-  header .meta { font-size: 14px; opacity: 0.85; }
-  header .meta a { color: #cfe5ff; }
-
-  nav.tabs { background: var(--gray-bg); border-bottom: 1px solid var(--gray-border);
-             position: sticky; top: 0; z-index: 10; }
-  nav.tabs .container { padding: 0 24px; display: flex; gap: 4px; overflow-x: auto; }
-  nav.tabs a { display: inline-block; padding: 14px 18px; text-decoration: none;
-               color: var(--text); font-size: 14px; font-weight: 500;
-               border-bottom: 3px solid transparent; white-space: nowrap; }
-  nav.tabs a:hover { color: var(--primary); }
-  nav.tabs a.active { border-bottom-color: var(--primary); color: var(--primary); }
-
-  section { padding: 40px 0; border-bottom: 1px solid #eee; }
-  section h2 { font-size: 24px; margin: 0 0 12px; color: var(--primary); }
-  section h3 { font-size: 18px; margin: 24px 0 10px; color: var(--text); }
-  section p { margin: 12px 0; }
-  p, li { font-size: 15px; }
-
-  .callout { border-left: 4px solid var(--accent); background: #fff7ed;
-             padding: 14px 18px; margin: 16px 0; border-radius: 4px; }
-  .callout strong { color: #b45309; }
-
-  table.data { border-collapse: collapse; width: 100%; margin: 16px 0;
-               font-size: 14px; }
-  table.data th, table.data td { border: 1px solid var(--gray-border);
-                                  padding: 8px 12px; text-align: left; vertical-align: top; }
-  table.data th { background: var(--gray-bg); font-weight: 600; cursor: pointer;
-                  user-select: none; }
-  table.data th:hover { background: #e8edf3; }
-  table.data th.sorted-asc::after  { content: " ▲"; font-size: 11px; }
-  table.data th.sorted-desc::after { content: " ▼"; font-size: 11px; }
-  table.data td.num { text-align: right; font-variant-numeric: tabular-nums; }
-  table.data tr:hover td { background: #fafbfc; }
-  table.data .tier-deployable { color: var(--primary); }
-  table.data .tier-ceiling    { color: var(--muted); font-style: italic; }
-
-  .badge { display: inline-block; padding: 2px 8px; font-size: 12px; font-weight: 600;
-           border-radius: 10px; }
-  .badge-good { background: #d1fae5; color: #065f46; }
-  .badge-warn { background: #fef3c7; color: #92400e; }
-  .badge-bad  { background: #fee2e2; color: #991b1b; }
-
-  pre { background: var(--code-bg); padding: 12px 16px; border-radius: 4px;
-        overflow-x: auto; font-size: 13px; line-height: 1.5;
-        border: 1px solid var(--gray-border); }
-  code { font-family: "SF Mono", Monaco, Consolas, monospace; font-size: 13px; }
-  p code, li code, td code { background: var(--code-bg); padding: 1px 5px; border-radius: 3px; }
-
-  .filter-bar { background: var(--gray-bg); padding: 12px 16px; border-radius: 6px;
-                margin: 12px 0; display: flex; gap: 16px; align-items: center;
-                flex-wrap: wrap; font-size: 14px; }
-  .filter-bar label { user-select: none; cursor: pointer; }
-  .filter-bar input { margin-right: 4px; }
-
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
-  @media (max-width: 720px) { .grid-2 { grid-template-columns: 1fr; } }
-  .card { background: white; border: 1px solid var(--gray-border); border-radius: 6px;
-          padding: 16px; }
-  .card h4 { margin: 0 0 8px; font-size: 15px; color: var(--primary); }
-
-  svg.pipeline { display: block; margin: 0 auto; max-width: 100%; }
-  svg.pipeline rect { stroke: var(--primary); stroke-width: 1.5; fill: white; }
-  svg.pipeline rect.highlight { fill: var(--primary); }
-  svg.pipeline rect.success   { fill: var(--good); stroke: var(--good); }
-  svg.pipeline rect.bad       { fill: var(--bad); stroke: var(--bad); }
-  svg.pipeline text { font-family: -apple-system, sans-serif; font-size: 12px; fill: var(--text); }
-  svg.pipeline text.on-fill { fill: white; font-weight: 600; }
-  svg.pipeline path { stroke: var(--text); stroke-width: 1.2; fill: none; }
-
-  .fisher-row { display: grid; grid-template-columns: 1fr 80px 100px 120px; gap: 12px;
-                padding: 10px 12px; border-bottom: 1px solid #eee; align-items: center;
-                font-size: 14px; }
-  .fisher-row:hover { background: #fafbfc; }
-  .fisher-row.head { font-weight: 600; background: var(--gray-bg); }
-  .fisher-p { font-family: "SF Mono", Monaco, monospace; font-variant-numeric: tabular-nums; }
-  .fisher-bar { background: linear-gradient(to right, var(--good) 0%, var(--good) var(--w), #eee var(--w), #eee 100%);
-                height: 6px; border-radius: 3px; }
-
-  .step { display: flex; gap: 12px; margin: 12px 0; padding: 12px;
-          background: var(--gray-bg); border-left: 3px solid var(--primary); border-radius: 0 4px 4px 0; }
-  .step-num { background: var(--primary); color: white; width: 32px; height: 32px;
-              border-radius: 50%; display: flex; align-items: center; justify-content: center;
-              font-weight: 700; flex-shrink: 0; }
-
-  footer { background: var(--gray-bg); padding: 30px 24px; color: var(--muted);
-           text-align: center; font-size: 13px; }
-  footer a { color: var(--primary); }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>SLM Writing-Feedback Benchmark (PT-BR) — manuscript under revision</title>
+  <style>
+    :root { --ink:#1a2230; --muted:#5b6675; --accent:#30638e; --line:#e2e6ec; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+           color:var(--ink); line-height:1.55; background:#f7f9fb; }
+    .wrap { max-width:720px; margin:0 auto; padding:64px 24px 80px; }
+    h1 { font-size:1.5rem; line-height:1.3; margin:0 0 .4rem; }
+    .sub { color:var(--muted); font-size:1.02rem; margin:0 0 1.8rem; }
+    .badge { display:inline-block; font-size:.8rem; font-weight:600; letter-spacing:.02em;
+             color:#fff; background:var(--accent); padding:4px 10px; border-radius:999px; margin-bottom:1.6rem; }
+    p { margin:0 0 1rem; }
+    .card { background:#fff; border:1px solid var(--line); border-radius:12px; padding:22px 24px; margin:1.4rem 0; }
+    a { color:var(--accent); }
+    .links a { display:inline-block; margin-right:1.2rem; font-weight:600; }
+    footer { color:var(--muted); font-size:.86rem; margin-top:2.4rem; border-top:1px solid var(--line); padding-top:1.2rem; }
+  </style>
 </head>
 <body>
+  <main class="wrap">
+    <span class="badge">Manuscript under revision</span>
+    <h1>A Diagnostic Evaluation of Small Language Models for Offline Writing-Feedback Tutoring in Brazilian Portuguese</h1>
+    <p class="sub">Structural conformance and a repertoire of mediation functions, under public-school infrastructure constraints.</p>
 
-<header>
-  <div class="container">
-    <h1>A Diagnostic Evaluation of Small Language Models for Offline Socratic Tutoring in Brazilian Portuguese: A Study on Structural and Pedagogical Adherence under Public-School Infrastructure Constraints</h1>
-    <p class="subtitle">8 open SLMs × 13 canonical scenarios × 3 repetitions = 312 calls — plus a 76-call falsification protocol — all strictly offline on CPU.</p>
-    <p class="meta">
-      Randerson Oliveira Melville Rebouças · Marcelo Magalhães Foohs · Rosa Maria Vicari ·
-      PPGIE/UFRGS · 2026 ·
-      <a href="../paper/artigo_benchmark_slm.pdf">PDF</a> ·
-      <a href="../paper/artigo_benchmark_slm.docx">DOCX</a> ·
-      <a href="https://github.com/RandMelville/slm-socratic-tutor-ptbr">GitHub</a>
+    <div class="card">
+      <p><strong>Status.</strong> This manuscript is currently under revision for submission to the
+      <em>Journal of the Brazilian Computer Society</em> (JBCS / SBC). The previous interactive
+      report has been retired because it no longer reflects the current version of the study. A
+      complete report will be republished here once the article is accepted.</p>
+    </div>
+
+    <p>The study evaluates eight open Small Language Models, run locally and offline, on their
+      ability to give cohesion-and-coherence writing feedback to lower-secondary students, and
+      complements the technical benchmark with a specialist human reference coded into eight
+      mediation functions that ground its pedagogical dimension.</p>
+
+    <p class="links">
+      <a href="https://github.com/RandMelville/slm-writing-feedback-tutor-ptbr">Code &amp; data repository</a>
+      <a href="https://zenodo.org/records/20710684">Archived artifacts (Zenodo)</a>
     </p>
-  </div>
-</header>
 
-<nav class="tabs">
-  <div class="container">
-    <a href="#overview">Overview</a>
-    <a href="#methodology">Methodology</a>
-    <a href="#results">Results</a>
-    <a href="#falsification">Falsification</a>
-    <a href="#statistics">Statistics</a>
-    <a href="#reproduce">Reproduce</a>
-  </div>
-</nav>
-
-<div class="container">
-
-<section id="overview">
-  <h2>1. The central finding, in plain terms</h2>
-  <p>This study asked a precise question: <em>can off-the-shelf Small Language Models (≤ 3.8 B parameters) operate as Socratic tutors of writing in Brazilian Portuguese, under the same infrastructure constraints faced by a typical Brazilian public school?</em></p>
-
-  <div class="callout" style="border-left-color:#27ae60; background:#ecfdf5;">
-    <strong style="color:#065f46">Selected base model: <code>qwen2.5:3b-instruct</code>.</strong>
-    Among the eight evaluated, it is the only deployable model (≤ 3 B parameters) that simultaneously satisfies all non-functional requirements — 100 % structural conformance (39/39; Wilson 95 % CI [91.0 %; 100.0 %]), mean latency of 2,906 ms (below the 10 s UX threshold), CV of 19.0 % (stable across repetitions). Fisher's exact test confirms its conformance is statistically indistinguishable from the 7–9 B reference-ceiling models (<em>p</em> = 1.000 n.s.), strengthening its selection as the operationally preferable base.
-  </div>
-
-  <p>The answer breaks into two parts. First, only <strong>5 out of 8 models</strong> obey the structured-output contract specified in natural language under zero-shot regime — the others either reformat the output as enumerated lists or substitute the schema entirely. Second, even the structurally conformant model (<code>qwen2.5:3b-instruct</code>) mobilizes the linguistic terminology required by the rubric in <strong>only about half of the runs (51.3 %)</strong>, and even then unstably (only 1 of 13 scenarios across all three repetitions), drifting toward thematic-narrative commentary on the literary work cited rather than examining the student's own writing.</p>
-  <div class="callout">
-    <strong>The unexpected nuance:</strong> when probed with a targeted four-isolation falsification protocol, the failure of the Llama 3.2 family — 78/78 divergent zero-shot — collapses entirely under <em>one</em> in-context demonstration: the same family reaches 100 % conformance with a single example pair (Fisher exact: <em>p</em> &lt; 0.001). The disobedience is <em>real but reversible</em>; the family is capable, just biased.
-  </div>
-</section>
-
-<section id="methodology">
-  <h2>2. How the experiment was constructed</h2>
-  <p>The pipeline is deliberately spare — no GPU, no cloud, no grammar coercion. The goal is to measure what off-the-shelf SLMs natively do when handed a pedagogical contract in plain Portuguese, under conditions a Brazilian public school could afford.</p>
-
-  <h3>Five design choices that shape every number that follows</h3>
-  <div class="step">
-    <div class="step-num">1</div>
-    <div><strong>Local and offline.</strong> Every call goes to a local <a href="https://ollama.com">Ollama</a> server at <code>localhost:11434</code>, with models quantized to <code>Q4_K_M</code>. No network, no proprietary API. This emulates the computational ceiling of a typical public-school computer lab in Brazil.</div>
-  </div>
-  <div class="step">
-    <div class="step-num">2</div>
-    <div><strong>Single canonical SYSTEM_PROMPT.</strong> All 312 calls receive identical instructions, covering role (Socratic tutor for 8th–9th grade), pedagogical constraints (no ready answers, value linguistic varieties), and output schema (JSON with <code>pontos_fortes</code> as string and <code>perguntas_reflexivas</code> as a list of strings).</div>
-  </div>
-  <div class="step">
-    <div class="step-num">3</div>
-    <div><strong>Thirteen canonical scenarios.</strong> Drafted by a specialist in Koch's Textual Linguistics. Each scenario embeds one cohesive phenomenon to be diagnosed: referential repetition, ambiguous pronominalization, contradictory connectives, temporal-marker disorganization, juxtaposition without logical anchoring.</div>
-  </div>
-  <div class="step">
-    <div class="step-num">4</div>
-    <div><strong>Three repetitions per pair.</strong> <code>temperature = 0.2</code>. The replication enables a coefficient-of-variation estimate, which distinguishes expected sampling noise from systemic instruction instability.</div>
-  </div>
-  <div class="step">
-    <div class="step-num">5</div>
-    <div><strong>Deterministic four-condition validator.</strong> The function <code>divergente()</code> classifies each response by JSON syntax, root type, <code>pontos_fortes</code> typology, and <code>perguntas_reflexivas</code> cardinality+typology. No LLM judge — the property being measured is syntactic-typological and admits no interpretive subjectivity.</div>
-  </div>
-
-  <h3>The experimental pipeline</h3>
-  <svg class="pipeline" width="980" height="280" viewBox="0 0 980 280">
-    <defs>
-      <marker id="arrow" viewBox="0 -5 10 10" refX="8" refY="0" markerWidth="6" markerHeight="6" orient="auto">
-        <path d="M0,-5L10,0L0,5" fill="#1f2937"/>
-      </marker>
-    </defs>
-    <rect x="20" y="30" width="160" height="60" rx="6"/>
-    <text x="100" y="55" text-anchor="middle">13 canonical scenarios</text>
-    <text x="100" y="72" text-anchor="middle" font-size="10" fill="#6b7280">Koch 2018, 2020</text>
-
-    <rect x="220" y="30" width="160" height="60" rx="6"/>
-    <text x="300" y="55" text-anchor="middle">8 SLMs via Ollama</text>
-    <text x="300" y="72" text-anchor="middle" font-size="10" fill="#6b7280">CPU, Q4_K_M, offline</text>
-
-    <rect x="420" y="30" width="160" height="60" rx="6"/>
-    <text x="500" y="55" text-anchor="middle">312 inference calls</text>
-    <text x="500" y="72" text-anchor="middle" font-size="10" fill="#6b7280">n=3 reps per pair</text>
-
-    <rect x="620" y="30" width="160" height="60" rx="6" class="highlight"/>
-    <text x="700" y="55" text-anchor="middle" class="on-fill">divergente()</text>
-    <text x="700" y="72" text-anchor="middle" font-size="10" fill="#cfe5ff">4-condition validator</text>
-
-    <rect x="820" y="30" width="140" height="60" rx="6" class="success"/>
-    <text x="890" y="55" text-anchor="middle" class="on-fill">Fisher exact 2×2</text>
-    <text x="890" y="72" text-anchor="middle" font-size="10" fill="#d1fae5">7 contingencies</text>
-
-    <path d="M180,60 L220,60" marker-end="url(#arrow)"/>
-    <path d="M380,60 L420,60" marker-end="url(#arrow)"/>
-    <path d="M580,60 L620,60" marker-end="url(#arrow)"/>
-    <path d="M780,60 L820,60" marker-end="url(#arrow)"/>
-
-    <rect x="220" y="160" width="160" height="60" rx="6" class="bad"/>
-    <text x="300" y="185" text-anchor="middle" class="on-fill">Llama 3.2 fails</text>
-    <text x="300" y="202" text-anchor="middle" font-size="10" fill="#fee2e2">78/78 zero-shot</text>
-
-    <rect x="420" y="160" width="160" height="60" rx="6"/>
-    <text x="500" y="180" text-anchor="middle">4 isolations</text>
-    <text x="500" y="197" text-anchor="middle" font-size="10" fill="#6b7280">E1, E2, E2b, E3</text>
-    <text x="500" y="212" text-anchor="middle" font-size="10" fill="#6b7280">80 additional calls</text>
-
-    <rect x="620" y="160" width="160" height="60" rx="6" class="success"/>
-    <text x="700" y="180" text-anchor="middle" class="on-fill">Bias is reversible</text>
-    <text x="700" y="197" text-anchor="middle" font-size="10" fill="#d1fae5">one-shot → 100%</text>
-    <text x="700" y="212" text-anchor="middle" font-size="10" fill="#d1fae5">conformance recovered</text>
-
-    <path d="M300,90 L300,160" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
-    <path d="M380,190 L420,190" marker-end="url(#arrow)"/>
-    <path d="M580,190 L620,190" marker-end="url(#arrow)"/>
-  </svg>
-
-  <h3>The validator algorithm, in actual Python</h3>
-  <pre><code>def divergente(raw_response: str) -> bool:
-    try:
-        parsed = json.loads(raw_response)
-    except json.JSONDecodeError:
-        return True                                      # C1: invalid JSON
-
-    if not isinstance(parsed, dict):
-        return True                                      # C2: root not object
-
-    pf = parsed.get("pontos_fortes")
-    if not (isinstance(pf, str) and pf.strip()):
-        return True                                      # C3: wrong type or empty
-
-    pr = parsed.get("perguntas_reflexivas")
-    if not isinstance(pr, list) or len(pr) == 0 \
-       or any(not isinstance(x, str) for x in pr):
-        return True                                      # C4: wrong type, empty, or non-string
-
-    return False</code></pre>
-  <p>This function is the gatekeeper. Every "divergent" cell in every chart below comes from this exact code, applied to the raw model output preserved in the data files.</p>
-</section>
-
-<section id="results">
-  <h2>3. Results — interactive explorer</h2>
-  <p>Sort by clicking any column. Filter by tier or by zero-shot divergence using the controls below.</p>
-
-  <div class="filter-bar">
-    <span><strong>Tier:</strong></span>
-    <label><input type="checkbox" class="filter-tier" value="deployable" checked> Deployable (≤ 3.8 B)</label>
-    <label><input type="checkbox" class="filter-tier" value="ceiling" checked> Reference ceiling (7–9 B)</label>
-    <span style="margin-left: auto"><strong>Conformance:</strong></span>
-    <label><input type="checkbox" class="filter-conf" value="good" checked> 🟢 ≤ 5 %</label>
-    <label><input type="checkbox" class="filter-conf" value="bad" checked> 🔴 100 %</label>
-  </div>
-
-  <table class="data" id="results-table">
-    <thead>
-      <tr>
-        <th data-sort="model">Model</th>
-        <th data-sort="tier">Tier</th>
-        <th data-sort="lat_mean" class="num">Mean latency (ms)</th>
-        <th data-sort="lat_p95" class="num">p95 (ms)</th>
-        <th data-sort="lat_cv" class="num">CV (%)</th>
-        <th data-sort="tok_mean" class="num">Tokens out</th>
-        <th data-sort="div_pct" class="num">Divergence</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-
-  <h3>How to read this table</h3>
-  <p>The three structurally divergent models (<strong>100 %</strong> column) make the JSON output unusable for downstream parsing — the contract specified in the SYSTEM_PROMPT is violated in <em>every single call</em>. The two ceiling models (Llama 3 8B, Gemma 2 9B) confirm that obedience is achievable at scale, but neither fits the 8 GB RAM ceiling of a public-school machine. <code>qwen2.5:3b-instruct</code> is the only deployable model that combines structural obedience with latency below 10 s.</p>
-
-  <p><code>phi3:mini</code> is the most pathological outlier on three axes simultaneously: 100 % divergence, p95 latency of 43.7 seconds, and verbosity nearly four times higher than peers (471 tokens vs. ~120). Microsoft's marketing of the model as "strong in structured reasoning" did not survive a Brazilian Portuguese socratic-tutoring prompt.</p>
-</section>
-
-<section id="falsification">
-  <h2>4. The falsification protocol — why Llama 3.2 isn't actually "broken"</h2>
-  <p>A 78/78 failure rate is too uniform to accept at face value. Before publishing the architectural claim, four competing hypotheses were tested in isolation, totaling 80 additional calls under the same Ollama stack. Each isolation falsifies one alternative explanation.</p>
-
-  <div class="grid-2">
-    <div class="card">
-      <h4>E1 — Stochasticity isolated</h4>
-      <p>Repeat at <code>temperature = 0</code>. If the failure were sampling noise, it would change. <strong>Result:</strong> 0 / 26 conformant. Identical to baseline. <span class="badge badge-bad">Hypothesis falsified.</span></p>
-    </div>
-    <div class="card">
-      <h4>E2 — Compositional incapacity isolated</h4>
-      <p>Prepend a single <code>user</code>/<code>assistant</code> demonstration of the canonical schema. If the model lacked the capacity, it would still fail. <strong>Result:</strong> 23 / 23 conformant. <span class="badge badge-good">Hypothesis falsified.</span></p>
-    </div>
-    <div class="card">
-      <h4>E3 — Python client layer isolated</h4>
-      <p>Send the identical JSON payload via <code>curl</code>, bypassing the Python <code>requests</code> library entirely. <strong>Result:</strong> failure reproduced verbatim. <span class="badge badge-bad">Hypothesis falsified.</span></p>
-    </div>
-    <div class="card">
-      <h4>E2b — Reversal stability isolated</h4>
-      <p>Combine one-shot with <code>temperature = 0</code>. If the E2 reversal were noise, it would collapse. <strong>Result:</strong> 21 / 24 conformant (3 timeouts excluded). <span class="badge badge-good">Hypothesis falsified.</span></p>
-    </div>
-  </div>
-
-  <h3>What the four isolations jointly establish</h3>
-  <p>The Llama 3.2 family does have the compositional capacity to obey the schema. What is missing is <em>obedience under zero-shot instruction in natural language</em> — an attractor of the post-training process. The architecture is fine; the alignment isn't. Adding a single demonstration in context overrides the attractor and restores conformance to 100 %.</p>
-
-  <table class="data" id="cx-table">
-    <thead>
-      <tr>
-        <th>Condition</th>
-        <th>Model</th>
-        <th class="num">Conformant / N</th>
-        <th class="num">Timeouts</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-</section>
-
-<section id="statistics">
-  <h2>5. Inferential statistics — Fisher's exact, seven contingencies</h2>
-  <p>Each categorical claim of the paper is backed by a 2×2 Fisher exact test (two-sided). The test is chosen over χ² because the data exhibits cells with zero count — the asymptotic χ² approximation is invalid under such degeneracy. Fisher's exact computes the probability by combinatorial enumeration of more extreme outcomes; no distributional assumption is required.</p>
-
-  <div id="fisher-results"></div>
-
-  <h3>How to interpret these <em>p</em>-values</h3>
-  <p>The first five contrasts (F1–F5) reach probabilities below <code>10⁻²¹</code> — these are not "borderline significant", they are among the most categorical statistical separations observable in 2×2 experimentation. The two paired-condition reversals (F6, F7) at <code>10⁻¹¹</code> and <code>10⁻¹²</code> confirm that the recovery under one-shot is overwhelmingly unlikely under the null hypothesis of no effect.</p>
-  <p>Note that the odds ratio is formally degenerate (one cell is zero) for all seven contrasts. The reportable effect is the <em>p</em>-value alone, in line with standard practice for categorical comparisons under extreme proportion regimes.</p>
-</section>
-
-<section id="reproduce">
-  <h2>6. Reproduce in four commands</h2>
-  <p>Requires Python 3.11+, <a href="https://ollama.com">Ollama</a> installed locally, ~8 GB of RAM and ~30 GB of disk for the eight model weights.</p>
-  <pre><code># 1) Pull all eight models locally
-ollama pull qwen2.5:1.5b-instruct qwen2.5:3b-instruct \
-            llama3.2:1b llama3.2:3b \
-            gemma2:2b gemma2:9b \
-            llama3:8b phi3:mini
-
-# 2) Install Python dependencies
-pip install -r requirements.txt
-
-# 3) Run the main benchmark (8 × 13 × 3 = 312 calls)
-python src/benchmark_local.py
-
-# 4) Reproduce the inferential analysis (Fisher exact on 7 contingencies)
-python src/inferential_statistics.py</code></pre>
-  <p>For the falsification protocol on the Llama 3.2 family (4 isolations, 80 calls):</p>
-  <pre><code>python src/counter_experiment_llama32.py</code></pre>
-  <p>All raw data, scripts, the paper in three formats, and this interactive report are versioned at <a href="https://github.com/RandMelville/slm-socratic-tutor-ptbr">github.com/RandMelville/slm-socratic-tutor-ptbr</a>.</p>
-</section>
-
-</div>
-
-<footer>
-  <p>Randerson Oliveira Melville Rebouças · Marcelo Magalhães Foohs · Rosa Maria Vicari · PPGIE/UFRGS · CC-BY 4.0 (data) / MIT (code)</p>
-</footer>
-
-<script>
-const DATA = {"models": [{"model": "qwen2.5:1.5b-instruct", "n": 39, "lat_mean": 2299, "lat_std": 474, "lat_p95": 3234, "lat_cv": 20.6, "tok_mean": 118.8, "div": 1, "div_pct": 2.6, "tier": "deployable"}, {"model": "llama3.2:1b", "n": 39, "lat_mean": 2389, "lat_std": 1423, "lat_p95": 6391, "lat_cv": 59.6, "tok_mean": 119.5, "div": 39, "div_pct": 100.0, "tier": "deployable"}, {"model": "qwen2.5:3b-instruct", "n": 39, "lat_mean": 2906, "lat_std": 552, "lat_p95": 4486, "lat_cv": 19.0, "tok_mean": 104.6, "div": 0, "div_pct": 0.0, "tier": "deployable"}, {"model": "llama3.2:3b", "n": 39, "lat_mean": 3020, "lat_std": 695, "lat_p95": 4721, "lat_cv": 23.0, "tok_mean": 108.9, "div": 39, "div_pct": 100.0, "tier": "deployable"}, {"model": "gemma2:2b", "n": 39, "lat_mean": 3744, "lat_std": 720, "lat_p95": 5080, "lat_cv": 19.2, "tok_mean": 121.8, "div": 1, "div_pct": 2.6, "tier": "deployable"}, {"model": "gemma2:9b", "n": 39, "lat_mean": 8681, "lat_std": 1425, "lat_p95": 11130, "lat_cv": 16.4, "tok_mean": 126.9, "div": 0, "div_pct": 0.0, "tier": "ceiling"}, {"model": "llama3:8b", "n": 39, "lat_mean": 10523, "lat_std": 19708, "lat_p95": 19326, "lat_cv": 187.3, "tok_mean": 144.7, "div": 0, "div_pct": 0.0, "tier": "ceiling"}, {"model": "phi3:mini", "n": 39, "lat_mean": 14769, "lat_std": 12228, "lat_p95": 43717, "lat_cv": 82.8, "tok_mean": 471.2, "div": 39, "div_pct": 100.0, "tier": "deployable"}], "counter_experiment": [{"experiment": "E1_temp0", "model": "llama3.2:1b", "n": 13, "conf": 0, "timeouts": 0}, {"experiment": "E1_temp0", "model": "llama3.2:3b", "n": 13, "conf": 0, "timeouts": 0}, {"experiment": "E2_fewshot", "model": "llama3.2:1b", "n": 11, "conf": 11, "timeouts": 1}, {"experiment": "E2_fewshot", "model": "llama3.2:3b", "n": 12, "conf": 12, "timeouts": 0}, {"experiment": "E2b_fewshot_temp0", "model": "llama3.2:1b", "n": 9, "conf": 9, "timeouts": 3}, {"experiment": "E2b_fewshot_temp0", "model": "llama3.2:3b", "n": 12, "conf": 12, "timeouts": 0}], "fisher": [{"label": "F1: Llama 3.2 1B vs Qwen 2.5 1.5B", "A": "0/39", "B": "38/39", "p": 2.93933777765373e-21, "table": [[0, 39], [38, 1]]}, {"label": "F2: Llama 3.2 3B vs Qwen 2.5 3B", "A": "0/39", "B": "39/39", "p": 7.348344444134326e-23, "table": [[0, 39], [39, 0]]}, {"label": "F3: Llama 3.2 3B vs Gemma 2 2B", "A": "0/39", "B": "38/39", "p": 2.93933777765373e-21, "table": [[0, 39], [38, 1]]}, {"label": "F4: Phi-3 mini vs Qwen 2.5 3B", "A": "0/39", "B": "39/39", "p": 7.348344444134326e-23, "table": [[0, 39], [39, 0]]}, {"label": "F5: Phi-3 mini vs Llama 3 8B", "A": "0/39", "B": "39/39", "p": 7.348344444134326e-23, "table": [[0, 39], [39, 0]]}, {"label": "F6: Llama 3.2 1B  zero-shot vs one-shot (E2)", "A": "0/39", "B": "11/11", "p": 2.6771081881634835e-11, "table": [[0, 39], [11, 0]]}, {"label": "F7: Llama 3.2 3B  zero-shot vs one-shot (E2)", "A": "0/39", "B": "12/12", "p": 6.299078089796432e-12, "table": [[0, 39], [12, 0]]}]};
-
-// ---------- Models table ----------
-const tbody = document.querySelector("#results-table tbody");
-let sortKey = "lat_mean";
-let sortDir = 1;
-const filters = { tier: new Set(["deployable","ceiling"]), conf: new Set(["good","bad"]) };
-
-function tierClass(t) { return "tier-" + t; }
-function divBadge(p) {
-  if (p === 0) return `<span class="badge badge-good">0 %</span>`;
-  if (p <= 5)  return `<span class="badge badge-warn">${p.toFixed(1)} %</span>`;
-  return `<span class="badge badge-bad">${p.toFixed(1)} %</span>`;
-}
-function renderTable() {
-  const rows = DATA.models
-    .filter(m => filters.tier.has(m.tier))
-    .filter(m => filters.conf.has(m.div_pct <= 5 ? "good" : "bad"))
-    .sort((a,b) => {
-      const va = a[sortKey], vb = b[sortKey];
-      if (typeof va === "number") return sortDir * (va - vb);
-      return sortDir * String(va).localeCompare(String(vb));
-    });
-  tbody.innerHTML = rows.map(m => `
-    <tr>
-      <td><code>${m.model}</code></td>
-      <td class="${tierClass(m.tier)}">${m.tier}</td>
-      <td class="num">${m.lat_mean.toLocaleString()}</td>
-      <td class="num">${m.lat_p95.toLocaleString()}</td>
-      <td class="num">${m.lat_cv.toFixed(1)}</td>
-      <td class="num">${m.tok_mean.toFixed(1)}</td>
-      <td class="num">${divBadge(m.div_pct)} <small style="color:#6b7280">${m.div}/${m.n}</small></td>
-    </tr>`).join("");
-  document.querySelectorAll("#results-table th").forEach(th => {
-    th.classList.remove("sorted-asc", "sorted-desc");
-    if (th.dataset.sort === sortKey) th.classList.add(sortDir === 1 ? "sorted-asc" : "sorted-desc");
-  });
-}
-document.querySelectorAll("#results-table th").forEach(th => {
-  th.addEventListener("click", () => {
-    if (sortKey === th.dataset.sort) sortDir *= -1;
-    else { sortKey = th.dataset.sort; sortDir = 1; }
-    renderTable();
-  });
-});
-document.querySelectorAll(".filter-tier").forEach(cb => {
-  cb.addEventListener("change", () => {
-    if (cb.checked) filters.tier.add(cb.value); else filters.tier.delete(cb.value);
-    renderTable();
-  });
-});
-document.querySelectorAll(".filter-conf").forEach(cb => {
-  cb.addEventListener("change", () => {
-    if (cb.checked) filters.conf.add(cb.value); else filters.conf.delete(cb.value);
-    renderTable();
-  });
-});
-
-// ---------- Counter-experiment table ----------
-const cxBody = document.querySelector("#cx-table tbody");
-const labelMap = {
-  "E1_temp0": "E1: temperature = 0 (zero-shot)",
-  "E2_fewshot": "E2: one-shot demo (temp = 0.2)",
-  "E2b_fewshot_temp0": "E2b: one-shot + temp = 0",
-};
-cxBody.innerHTML = DATA.counter_experiment.map(r => `
-  <tr>
-    <td>${labelMap[r.experiment] || r.experiment}</td>
-    <td><code>${r.model}</code></td>
-    <td class="num">${r.conf} / ${r.n} <small style="color:#6b7280">(${(100*r.conf/r.n).toFixed(1)} %)</small></td>
-    <td class="num">${r.timeouts}</td>
-  </tr>`).join("");
-
-// ---------- Fisher results ----------
-const fisherDiv = document.getElementById("fisher-results");
-function fmtP(p) {
-  if (p < 1e-15) return "&lt; 10⁻¹⁵";
-  if (p < 1e-3) return p.toExponential(2);
-  return p.toFixed(4);
-}
-fisherDiv.innerHTML = `
-  <div class="fisher-row head">
-    <span>Comparison</span>
-    <span class="num">A conf.</span>
-    <span class="num">B conf.</span>
-    <span class="num">p (two-sided)</span>
-  </div>
-` + DATA.fisher.map(r => `
-  <div class="fisher-row">
-    <span>${r.label}</span>
-    <span class="num">${r.A}</span>
-    <span class="num">${r.B}</span>
-    <span class="num fisher-p">${fmtP(r.p)}</span>
-  </div>`).join("");
-
-// ---------- Tabs (highlight active section in nav) ----------
-const sections = document.querySelectorAll("section[id]");
-const navLinks = document.querySelectorAll("nav.tabs a");
-function updateActive() {
-  let active = sections[0].id;
-  for (const s of sections) {
-    if (s.getBoundingClientRect().top < 80) active = s.id;
-  }
-  navLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + active));
-}
-window.addEventListener("scroll", updateActive);
-updateActive();
-
-renderTable();
-</script>
-
+    <footer>
+      Reproducible artifacts are released openly: code under the MIT License and data under
+      CC&nbsp;BY&nbsp;4.0. For questions, contact the corresponding author via the repository.
+    </footer>
+  </main>
 </body>
 </html>
