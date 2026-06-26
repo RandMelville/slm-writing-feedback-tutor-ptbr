@@ -1,6 +1,6 @@
 # Avaliação Diagnóstica de Modelos de Linguagem de Pequeno Porte para Tutoria de Feedback de Escrita Offline em Língua Portuguesa: um Estudo de Aderência Estrutural e Pedagógica sob Restrições de Infraestrutura Escolar Pública
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20388847.svg)](https://doi.org/10.5281/zenodo.20388847)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20388846.svg)](https://doi.org/10.5281/zenodo.20388846)
 [![Relatório](https://img.shields.io/badge/relat%C3%B3rio-interativo-purple)](https://randmelville.github.io/slm-writing-feedback-tutor-ptbr/report/)
 [![Python](https://img.shields.io/badge/python-3.11+-blue)](https://www.python.org)
 [![Código](https://img.shields.io/badge/c%C3%B3digo-MIT-green)](LICENSE)
@@ -107,13 +107,13 @@ report/     Relatório HTML interativo auto-contido
                Constraints},
   author    = {Reb{\'o}u{\c{c}}as, Randerson Oliveira Melville and Foohs, Marcelo Magalh{\~a}es and Vicari, Rosa Maria},
   year      = {2026},
-  doi       = {10.5281/zenodo.20388847},
-  url       = {https://doi.org/10.5281/zenodo.20388847},
+  doi       = {10.5281/zenodo.20388846},
+  url       = {https://doi.org/10.5281/zenodo.20388846},
   publisher = {Zenodo}
 }
 ```
 
-O DOI [`10.5281/zenodo.20388847`](https://doi.org/10.5281/zenodo.20388847)
+O DOI [`10.5281/zenodo.20388846`](https://doi.org/10.5281/zenodo.20388846)
 aponta para um arquivo permanente e citável desta release no Zenodo.
 
 Um arquivo de citação legível por máquina está disponível em

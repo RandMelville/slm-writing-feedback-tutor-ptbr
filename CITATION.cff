@@ -1,12 +1,12 @@
 cff-version: 1.2.0
 message: "If you use this benchmark, dataset, or methodology, please cite the work as below."
 title: "A Diagnostic Evaluation of Small Language Models for Offline Writing-Feedback Tutoring in Brazilian Portuguese: A Study on Structural and Pedagogical Adherence under Public-School Infrastructure Constraints"
-doi: "10.5281/zenodo.20388847"
+doi: "10.5281/zenodo.20388846"
 identifiers:
   - type: doi
-    value: "10.5281/zenodo.20388847"
+    value: "10.5281/zenodo.20388846"
     description: "Concept DOI (always resolves to the latest archived release on Zenodo)"
-url: "https://doi.org/10.5281/zenodo.20388847"
+url: "https://doi.org/10.5281/zenodo.20388846"
 repository-code: "https://github.com/RandMelville/slm-writing-feedback-tutor-ptbr"
 abstract: >-
   Diagnostic benchmark of eight open Small Language Models (≤3.8B parameters)
