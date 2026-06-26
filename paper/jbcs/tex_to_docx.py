@@ -281,6 +281,10 @@ def build():
     print("OK ->", OUT)
 
 def process_body(doc, body):
+    # remove font-size / alignment switches that are typeset-only (avoid leaking
+    # e.g. "\footnotesize" as loose text between \begin{table*} and \begin{tabular})
+    body = re.sub(r"(?m)^\s*\\(footnotesize|small|scriptsize|normalsize|"
+                  r"large|Large|LARGE|centering)\s*$", "", body)
     lines = body.split('\n')
     mode = 'normal'
     tbuf, caption, cbuf, qbuf, fbuf = [], '', [], [], []

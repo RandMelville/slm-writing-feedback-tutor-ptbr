@@ -109,21 +109,20 @@ fig, ax = plt.subplots(figsize=(8, 3.4))
 x = range(len(fm_cols))
 w = 0.4
 ax.bar([i - w/2 for i in x], [model_prev[c] for c in fm_cols], w,
-       label="Modelo (qwen2.5:3b, n=39)", color="#d1495b")
+       label="Model (qwen2.5:3b, n=39)", color="#d1495b")
 ax.bar([i + w/2 for i in x], [HUMAN_PREV[c] for c in fm_cols], w,
-       label="Especialistas (n=65)", color="#30638e")
+       label="Specialists (n=65)", color="#30638e")
 ax.set_xticks(list(x))
 ax.set_xticklabels(fm_cols, fontsize=9)
-ax.set_ylabel("% das devolutivas")
+ax.set_ylabel("% of feedback turns")
 ax.set_ylim(0, 100)
-ax.set_title("Funcoes de mediacao: modelo conformante x repertorio humano", fontsize=10)
 ax.legend(fontsize=8)
 for i, c in enumerate(fm_cols):
     ax.text(i - w/2, model_prev[c] + 1, f"{model_prev[c]:.0f}", ha="center", fontsize=7)
     ax.text(i + w/2, HUMAN_PREV[c] + 1, f"{HUMAN_PREV[c]:.0f}", ha="center", fontsize=7)
 fig.tight_layout()
-fig.savefig(ROOT / "analises" / "fm_modelo_vs_humano.png", dpi=140)
+fig.savefig(ROOT / "analises" / "fm_modelo_vs_humano.png", dpi=140, bbox_inches="tight")
 paper_dir = ROOT / "paper" / "jbcs"
 if paper_dir.exists():
-    fig.savefig(paper_dir / "fm_modelo_vs_humano.png", dpi=140)
+    fig.savefig(paper_dir / "fm_modelo_vs_humano.png", dpi=140, bbox_inches="tight")
 print("\nCSV e figura salvos em analises/ (e copia em paper/jbcs/).")
