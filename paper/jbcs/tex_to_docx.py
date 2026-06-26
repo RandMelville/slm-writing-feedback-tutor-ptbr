@@ -11,7 +11,7 @@ Saida: paper/jbcs/benchmark_slm_jbcs.docx
 """
 import re, os
 from docx import Document
-from docx.shared import Pt, RGBColor
+from docx.shared import Pt, RGBColor, Inches
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 TEX = os.path.join(HERE, "main.tex")
@@ -30,44 +30,66 @@ CITE = {
     "koch2018coesao": ("Koch", "2018"),
     "koch2020introducao": ("Koch", "2020"),
     "kochelias2016escrever": ("Koch & Elias", "2016"),
+    "landis1977measurement": ("Landis & Koch", "1977"),
     "liu2025socratic": ("Liu et al.", "2025"),
     "macina2025mathtutorbench": ("Macina et al.", "2025"),
     "nielsen1993usability": ("Nielsen", "1993"),
     "paulelder2007socratic": ("Paul & Elder", "2007"),
     "tlili2023devil": ("Tlili et al.", "2023"),
+    "vygotsky1978mind": ("Vygotsky", "1978"),
+    "wood1976scaffolding": ("Wood et al.", "1976"),
     "wu2023style": ("Wu & Aji", "2023"),
     "yang2024qwen25": ("Yang et al.", "2024"),
     "zheng2023judging": ("Zheng et al.", "2023"),
+    "machado1896cartomante": ("Machado de Assis", "1896"),
+    "machado1882alienista": ("Machado de Assis", "1882"),
+    "sabino1960homemnu": ("Sabino", "1960"),
+    "colasanti1982tecela": ("Colasanti", "1982"),
+    "almeida1975borboleta": ("Almeida", "1975"),
+    "limabarreto1956cemiterio": ("Lima Barreto", "1956"),
 }
 REF = {
     "sec:intro": "1", "sec:related": "2", "sec:method": "3", "sec:efficiency": "4",
-    "sec:conformance": "5", "sec:qualitative": "6", "sec:conclusion": "7",
+    "sec:conformance": "5", "sec:qualitative": "6", "sec:mediation": "7",
+    "sec:threats": "8", "sec:conclusion": "9",
     "sec:instrument": "3.2", "sec:protocol": "3.3", "sec:validation": "3.4",
     "sec:criteria": "3.6", "sec:falsification": "3.8", "sec:llama-failure": "5.1",
-    "sec:phi3": "5.2", "sec:robustness": "5.3", "app:stats": "A", "app:impl": "B",
-    "tab:efficiency": "1", "tab:conformance": "2", "tab:robustness": "3",
-    "tab:metalinguistic": "4",
+    "sec:phi3": "5.2", "sec:robustness": "5.3", "sec:fm-kappa": "7.4",
+    "sec:fm-model": "7.5", "sec:fm-role": "7.6", "app:stats": "A", "app:impl": "B",
+    "tab:scenarios": "1", "tab:efficiency": "2", "tab:conformance": "3",
+    "tab:robustness": "4", "tab:metalinguistic": "5", "tab:fm-freq": "6",
+    "tab:fm-profiles": "7", "tab:fm-kappa": "8", "tab:fm-model": "9",
+    "fig:fm": "1", "fig:fm-model": "2",
 }
 SUP = {"1": "¹", "2": "²", "3": "³", "***": "***", "*": "*",
        "**": "**", "a": "a"}
 
 REFERENCES = [
     "Abdin, M., et al. (2024). Phi-3 technical report: A highly capable language model locally on your phone. arXiv:2404.14219. https://doi.org/10.48550/arXiv.2404.14219",
+    "Almeida, L. M. de. (1975). O caso da borboleta Atiria (Serie Vaga-Lume). Atica. (Originalmente publicado em 1951 como Atiria, a borboleta, Melhoramentos)",
     "Brasil. (2018). Lei no 13.709, de 14 de agosto de 2018: Lei Geral de Protecao de Dados Pessoais (LGPD). Presidencia da Republica.",
     "Brasil. (2025). Lei no 15.211, de 22 de setembro de 2025: Estatuto Digital da Crianca e do Adolescente (ECA Digital). Presidencia da Republica.",
     "Card, S. K., Robertson, G. G., & Mackinlay, J. D. (1991). The information visualizer, an information workspace. In Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI '91) (pp. 181-186). ACM Press. https://doi.org/10.1145/108844.108874",
     "CGI.br, NIC.br, & Cetic.br. (2025). Pesquisa sobre o uso das tecnologias de informacao e comunicacao nas escolas brasileiras: TIC Educacao 2024. Comite Gestor da Internet no Brasil. https://cetic.br/pesquisa/educacao/",
+    "Colasanti, M. (1982). A moca tecela. In Doze reis e a moca no labirinto do vento. Nordica.",
     "Gemma Team. (2024). Gemma 2: Improving open language models at a practical size. arXiv:2408.00118. https://doi.org/10.48550/arXiv.2408.00118",
     "Grattafiori, A., et al. (2024). The Llama 3 herd of models. arXiv:2407.21783. https://doi.org/10.48550/arXiv.2407.21783",
     "Kasneci, E., et al. (2023). ChatGPT for good? On opportunities and challenges of large language models for education. Learning and Individual Differences, 103, 102274. https://doi.org/10.1016/j.lindif.2023.102274",
     "Koch, I. G. V. (2018). A coesao textual (22nd ed.). Contexto. (Original work published 1989)",
     "Koch, I. G. V. (2020). Introducao a linguistica textual: trajetoria e grandes temas (2nd ed.). Contexto.",
     "Koch, I. G. V., & Elias, V. M. (2016). Escrever e argumentar. Contexto.",
+    "Landis, J. R., & Koch, G. G. (1977). The measurement of observer agreement for categorical data. Biometrics, 33(1), 159-174. https://doi.org/10.2307/2529310",
+    "Lima Barreto, A. H. de. (1956). O cemiterio dos vivos (F. de A. Barbosa, Ed.). In Obras de Lima Barreto. Brasiliense. (1a ed. em livro: Merito, 1953)",
     "Liu, Y., et al. (2025). Discerning minds or generic tutors? Evaluating instructional guidance capabilities in Socratic LLMs. arXiv:2508.06583. https://doi.org/10.48550/arXiv.2508.06583",
+    "Machado de Assis, J. M. (1882). O alienista. In Papeis Avulsos. Lombaerts & C.",
+    "Machado de Assis, J. M. (1896). A cartomante. In Varias Historias. Laemmert & C. (Publicado originalmente em 1884, Gazeta de Noticias)",
     "Macina, J., et al. (2025). MathTutorBench: A benchmark for measuring open-ended pedagogical capabilities of LLM tutors. In Proceedings of EMNLP 2025 (pp. 204-221). ACL. https://doi.org/10.18653/v1/2025.emnlp-main.11",
     "Nielsen, J. (1993). Usability engineering. Morgan Kaufmann.",
     "Paul, R., & Elder, L. (2007). Critical thinking: The art of Socratic questioning. Journal of Developmental Education, 31(1), 36-37.",
+    "Sabino, F. (1960). O homem nu. Editora do Autor.",
     "Tlili, A., et al. (2023). What if the devil is my guardian angel: ChatGPT as a case study of using chatbots in education. Smart Learning Environments, 10(1), 15. https://doi.org/10.1186/s40561-023-00237-x",
+    "Vygotsky, L. S. (1978). Mind in society: The development of higher psychological processes. Harvard University Press.",
+    "Wood, D., Bruner, J. S., & Ross, G. (1976). The role of tutoring in problem solving. Journal of Child Psychology and Psychiatry, 17(2), 89-100. https://doi.org/10.1111/j.1469-7610.1976.tb00381.x",
     "Wu, M., & Aji, A. F. (2023). Style over substance: Evaluation biases for large language models. arXiv:2307.03025. https://doi.org/10.48550/arXiv.2307.03025",
     "Yang, A., et al. (2024). Qwen2.5 technical report. arXiv:2412.15115. https://doi.org/10.48550/arXiv.2412.15115",
     "Zheng, L., et al. (2023). Judging LLM-as-a-judge with MT-bench and Chatbot Arena. In Advances in Neural Information Processing Systems 36 (NeurIPS 2023). arXiv:2306.05685. https://doi.org/10.48550/arXiv.2306.05685",
@@ -102,6 +124,22 @@ def first_braced(s, start_idx):
         i += 1
     return ''.join(out), i
 
+def strip_multicolumn(cell):
+    """\\multicolumn{N}{spec}{content} -> content (spec may contain braces)."""
+    cell = cell.strip()
+    if not cell.startswith(r'\multicolumn'):
+        return cell
+    try:
+        i = cell.index('{')
+        _, i = first_braced(cell, i)            # {N}
+        i = cell.index('{', i)
+        _, i = first_braced(cell, i)            # {spec}
+        i = cell.index('{', i)
+        content, _ = first_braced(cell, i)      # {content}
+        return content
+    except ValueError:
+        return cell
+
 def render_cite(keys, paren):
     parts = []
     for k in [x.strip() for x in keys.split(',')]:
@@ -115,7 +153,7 @@ def math_sub(m):
     s = m.group(1)
     s = (s.replace(r'\times', '×').replace(r'\geq', '≥')
            .replace(r'\leq', '≤').replace(r'\sigma', 'σ')
-           .replace(r'\mu', 'μ').replace(r'\alpha', 'α')
+           .replace(r'\mu', 'μ').replace(r'\alpha', 'α').replace(r'\kappa', 'κ')
            .replace(r'\approx', '≈').replace(r'\sim', '~')
            .replace(r'\chi^2', 'χ²').replace(r'\bullet', '•')
            .replace(r'\%', '%').replace(r'\,', ' '))
@@ -126,7 +164,7 @@ def preprocess(t):
     t = re.sub(r'\\href\{[^}]*\}\{([^}]*)\}', r'\1', t)
     t = re.sub(r'\\citet\{([^}]*)\}', lambda m: render_cite(m.group(1), False), t)
     t = re.sub(r'\\citep\{([^}]*)\}', lambda m: render_cite(m.group(1), True), t)
-    t = re.sub(r'~?\\ref\{([^}]*)\}', lambda m: REF.get(m.group(1), '?'), t)
+    t = re.sub(r'\\ref\{([^}]*)\}', lambda m: REF.get(m.group(1), '?'), t)
     t = re.sub(r'\\textsuperscript\{([^}]*)\}', lambda m: SUP.get(m.group(1), m.group(1)), t)
     t = re.sub(r'\$(.+?)\$', math_sub, t)
     t = t.replace(r'\noindent', '')
@@ -245,9 +283,32 @@ def build():
 def process_body(doc, body):
     lines = body.split('\n')
     mode = 'normal'
-    tbuf, caption, cbuf, qbuf = [], '', [], []
+    tbuf, caption, cbuf, qbuf, fbuf = [], '', [], [], []
     list_mode = None
     tcount = [0]
+    fcount = [0]
+
+    def flush_figure():
+        img, cap = None, ''
+        for ln in fbuf:
+            mi = re.search(r'\\includegraphics(?:\[[^\]]*\])?\{([^}]*)\}', ln)
+            if mi:
+                img = mi.group(1)
+            ls = ln.strip()
+            if ls.startswith(r'\caption{'):
+                cap, _ = first_braced(ls, ls.index('{'))
+        fcount[0] += 1
+        if img:
+            path = os.path.join(HERE, img)
+            if os.path.exists(path):
+                try:
+                    doc.add_picture(path, width=Inches(5.8))
+                except Exception:
+                    pass
+        if cap:
+            p = doc.add_paragraph()
+            p.add_run(f'Figure {fcount[0]}. ').bold = True
+            add_runs(p, fmt(cap))
 
     def flush_table():
         rows = []
@@ -256,7 +317,7 @@ def process_body(doc, body):
             if not s or s.startswith(r'\hline') or s.startswith('%'):
                 continue
             s = s.rstrip('\\').strip()
-            rows.append([c.strip() for c in s.split('&')])
+            rows.append([strip_multicolumn(c) for c in s.split('&')])
         if not rows:
             return
         tcount[0] += 1
@@ -297,6 +358,12 @@ def process_body(doc, body):
             else:
                 tbuf.append(raw)
             continue
+        if mode == 'figure':
+            if r'\end{figure' in s:
+                flush_figure(); fbuf = []; mode = 'normal'
+            else:
+                fbuf.append(raw)
+            continue
         if mode == 'quote':
             if r'\end{quotation' in s:
                 add_runs(doc.add_paragraph(style='Intense Quote'), fmt(' '.join(qbuf)))
@@ -312,6 +379,8 @@ def process_body(doc, body):
             mode = 'table'; tbuf = []; continue
         if s.startswith(r'\begin{quotation'):
             mode = 'quote'; qbuf = []; continue
+        if s.startswith(r'\begin{figure'):
+            mode = 'figure'; fbuf = []; continue
         if s.startswith(r'\caption{'):
             caption, _ = first_braced(s, s.index('{')); continue
         if s.startswith(r'\begin{itemize'):

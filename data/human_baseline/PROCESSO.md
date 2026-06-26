@@ -1,9 +1,20 @@
 # Processo do baseline humano (referência especializada)
 
-Documento-guia da coleta do padrão-ouro humano para a RQ2. Resume perfil, base ética,
-dados coletáveis, materiais e fluxo de ponta a ponta.
+Documento-guia da coleta da **referência especializada** (5 professores × 13 cenários =
+65 devolutivas). Resume perfil, base ética, dados coletáveis, materiais e fluxo de ponta
+a ponta. Para o processo de **análise** dessas devolutivas (codificação em Funções de
+Mediação, validação cega, κ, codificação do modelo), ver `PROCESSO_FM.md`.
 
-## 1. Por que e para quê
+> **Atualização (pós-pivô, 2026-06-24+).** Este documento descreve a *coleta*. O enquadramento
+> analítico mudou após orientação do Prof. Marcelo: a referência humana **não** é usada como
+> padrão-ouro/teto de desempenho contra o modelo (a convergência sobre o erro plantado é
+> circular). Ela é um **corpus empírico** do qual derivamos as Funções de Mediação (FM01–FM08)
+> que fundamentam a dimensão pedagógica do benchmark. A comparação deixa de ser "modelo ×
+> professor" e passa a ser "modelo × funções de mediação derivadas da prática". O perfil, a
+> base ética e o fluxo de coleta abaixo permanecem válidos; o *propósito* abaixo está preservado
+> apenas como registro histórico do desenho original.
+
+## 1. Por que e para quê (desenho original — preservado como histórico)
 
 A RQ2 do paper precisa de um **teto comparativo humano**: como professores experientes
 responderiam aos 13 cenários. Sem isso, a afirmação "a IA é pedagogicamente superficial
@@ -33,8 +44,9 @@ nesse enquadramento:
   formativo.
 - **Quantos:** 2 a 3. Dois é o mínimo (evita idiossincrasia de um só); três permite
   adjudicar divergências.
-- A **autora dos cenários** (especialista em Linguística Textual) pode ser anotadora e/ou
-  adjudicadora.
+- Os **13 cenários foram elaborados pelos autores** do estudo; os professores do painel
+  atuam como referência especializada independente (não confundir autoria dos cenários com
+  o painel que produz as devolutivas).
 - **Por que não qualquer matéria:** a rubrica é metalinguística (Koch); só um especialista
   em língua produz uma referência defensável. Um revisor rejeitaria um painel genérico.
 

@@ -8,8 +8,9 @@ from reportlab.lib.units import cm
 from reportlab.lib.enums import TA_JUSTIFY, TA_CENTER, TA_LEFT
 from reportlab.lib import colors
 from reportlab.platypus import (
-    SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak, KeepTogether, Preformatted
+    SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak, KeepTogether, Preformatted, Image
 )
+from reportlab.lib.utils import ImageReader
 
 SRC = Path(sys.argv[1] if len(sys.argv) > 1 else "paper/artigo_benchmark_slm.md")
 DST = Path(sys.argv[2] if len(sys.argv) > 2 else "paper/artigo_benchmark_slm.pdf")
@@ -111,6 +112,23 @@ def build(md_text: str) -> list:
         # Horizontal rule
         if stripped == "---":
             flow.append(Spacer(1, 0.2*cm))
+            i += 1; continue
+
+        # Imagem ![caption](path) — escala para a largura do conteudo
+        m_img = re.match(r"!\[([^\]]*)\]\(([^)]+)\)", stripped)
+        if m_img:
+            cap, path = m_img.group(1), m_img.group(2)
+            img_path = (SRC.parent / path).resolve() if not Path(path).is_absolute() else Path(path)
+            if img_path.exists():
+                iw, ih = ImageReader(str(img_path)).getSize()
+                max_w = 16 * cm
+                w = min(max_w, iw)
+                h = w * ih / iw
+                blk = [Spacer(1, 0.2*cm), Image(str(img_path), width=w, height=h)]
+                if cap:
+                    blk.append(Paragraph(md_inline(cap), S["caption"]))
+                blk.append(Spacer(1, 0.2*cm))
+                flow.append(KeepTogether(blk))
             i += 1; continue
 
         # Fenced code block ``` ... ```
