@@ -115,8 +115,10 @@ for i in range(data.shape[0]):
     for j in range(data.shape[1]):
         ax.text(j, i, f"{data[i, j]:.0f}", ha="center", va="center",
                 fontsize=8, color="black" if data[i, j] < 60 else "white")
-ax.set_title("Funcoes de mediacao por professor (% dos 13 cenarios)", fontsize=10)
 fig.colorbar(im, ax=ax, fraction=0.025, pad=0.02, label="%")
 fig.tight_layout()
-fig.savefig(ROOT / "analises" / "fm_frequencia.png", dpi=140)
+fig.savefig(ROOT / "analises" / "fm_frequencia.png", dpi=140, bbox_inches="tight")
+paper_dir = ROOT / "paper" / "jbcs"
+if paper_dir.exists():
+    fig.savefig(paper_dir / "fm_frequencia.png", dpi=140, bbox_inches="tight")
 print("\nFiguras e CSV salvos em analises/.")
