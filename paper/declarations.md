@@ -42,5 +42,5 @@ scripts) is released under the MIT License, and the data — the 13 canonical
 scenarios, the 312-record primary inference corpus, and the 80-record falsification
 corpus — under the Creative Commons Attribution 4.0 (CC BY 4.0) License. A permanent,
 citable archive of the release is deposited on Zenodo
-(DOI: 10.5281/zenodo.20388847), with the development repository hosted at
+(DOI: 10.5281/zenodo.20388846), with the development repository hosted at
 https://github.com/RandMelville/slm-writing-feedback-tutor-ptbr.
