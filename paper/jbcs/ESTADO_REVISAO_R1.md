@@ -1,10 +1,8 @@
-# Estado da revisão R1 (JBCS) — atualizado em 22/08/2026
+# Estado da revisão R1 (JBCS), atualizado em 11/09/2026
 
-> **➡️ O estado atual está na §10 (22/08): protocolo v0.4 congelado, guia do professor e planilhas
-> prontos. O aval está dado (parecer do Marcelo em 10/08, aceite da Rosa em 11/08). Falta só o
-> e-mail dos dois codificadores para compartilhar as planilhas e enviar os convites.** A §8 explica
-> o que caiu e a §9 registra o parecer que mudou o plano. Leia as três, nessa ordem, se estiver
-> retomando.
+> **➡️ O estado atual está na §13 (11/09): pareceres em mãos, carta fechada ponto a ponto, aval dos dois coautores. Falta: compilar no Overleaf, limpar o histórico local e dar push, release v1.6.0 (Zenodo), submeter. Prazo ~10/10/2026.** A §12 registra a codificação e o κ; as §§1 a 11 são histórico e devem
+> ser lidas como tal: a §8 explica o que caiu em agosto e a §11 registra o pacote v0.5 e o
+> recrutamento.
 
 > **⚠️ LEIA A §8 ANTES DE QUALQUER COISA.** Em 30/07 o Marcelo apontou que as duas
 > codificações comparadas no κ das FMs foram produzidas sob protocolos diferentes, o que
@@ -548,3 +546,232 @@ direto a contatos com o mesmo perfil e o mesmo valor, decidido no mesmo dia.
 - Zenodo: só a v1.5.0 de 29/06 está depositada, sem nada da R1. A Data Availability declara material que não está lá.
 - Decisão em aberto: as `.xlsx` do Marcelo, com as observações qualitativas linha a linha, vão para o repositório público?
 - A procedência da codificação por IA ainda precisa entrar no **texto do artigo** (§ método), não só no protocolo.
+
+---
+
+## 11. Revisão de Marcelo, pacote v0.5 e codificadoras (25 e 26/08/2026)
+
+### 11.1 Rosa fora desta etapa
+
+Rosa comunicou em 25/08 pela manhã que não conseguiria ler o material no tempo necessário, por cirurgia de familiar e cerca de três semanas de acompanhamento. Marcelo respondeu que ele e Randerson seguem sozinhos nos dois artigos. **Há um parecer, não dois.** O protocolo registra a manifestação dela como "não solicitada nesta etapa, em razão de indisponibilidade comunicada".
+
+### 11.2 A revisão: separar presença da FM de falso positivo
+
+Marcelo devolveu em 25/08 às 12h15 os cinco arquivos do benchmark revisados. A mudança é uma só e reorganiza o resto.
+
+Na v0.4, a regra "parece, mas não é" mandava marcar 0 quando o movimento estava presente na forma mas se apoiava em leitura errada do texto do aluno. Na revisão, o mesmo caso vira `FM = 1` e `FP = 1`: a presença fica numa coluna, a inadequação em outra.
+
+| | v0.4 | v0.5 |
+|---|---|---|
+| Decisões binárias por linha | 9 (FM01-08 + MTL) | **17** (FM01-08 + FP01-08 + MTL) |
+| Colunas da planilha | 13 | **37**, com evidência por FM e justificativa por FP |
+| MTL | objeto, com validade embutida | objeto puro; a inadequação vai para o FP |
+| Derivada | — | **VFM** = 1 quando FM = 1 e FP = 0 |
+| Codificação nº 4 | fora do κ | fora do κ e explicitamente incomparável |
+
+**Por que aceitar:** a regra antiga pedia duas decisões de naturezas diferentes dentro de um binário só, "o movimento está aqui?" e "o movimento se sustenta?". A primeira é quase objetiva, a segunda é interpretativa. Separadas, a hipótese de que a mistura explicava o κ = 0,14 passa a ser testável. E o FP vira achado por si.
+
+**Custo medido:** 2,77 FMs marcadas por devolutiva na codificação de julho, logo cerca de 108 colagens de evidência por codificador. Evidência é copiar e colar, não julgar.
+
+### 11.3 Os quatro ajustes, aprovados em 26/08 às 11h23
+
+1. A planilha passou a **impedir** `FM = 0` com `FP = 1`, por validação com fórmula, não só a sinalizar. Preferência dele: mudar o instrumento, não o texto do Protocolo.
+2. Linha de cabeçalho e colunas A a C congeladas nas duas planilhas.
+3. Parágrafo na §6 do Protocolo dizendo que a VFM é medida derivada **mais estrita** que a de julho: segmento misto ficava 1 e agora produz VFM = 0, logo comparações são exploratórias e as medidas não são equivalentes.
+4. `verifica_exemplos.py` reapontado para os arquivos do conjunto final e reexecutado, com o registro preservado.
+
+Todos executados. Resultado da verificação: **103 trechos, 16 do corpus humano (fonte permitida), 0 vindos das 39**, em `verificacao_exemplos_2026-08-26.log`.
+
+### 11.4 Duas ressalvas dele que precisam entrar na redação
+
+> "não devemos antecipar que o κ das FMs necessariamente subirá; isso será determinado pelas duas novas codificações"
+
+> "A frequência de FP poderá constituir um resultado relevante sobre o modelo e as condições avaliadas neste estudo. A generalização para modelos pequenos em geral dependeria de evidência mais ampla."
+
+As duas procedem e corrigem afirmações que estavam sendo feitas. A separação FM×FP é **hipótese a testar**, não resultado previsto. E o achado de FP é sobre `qwen2.5:3b-instruct` nas 39 devolutivas, não sobre SLMs ≤3B em geral. **Ajustar §7 e a discussão de acordo.**
+
+### 11.5 Onde está o pacote
+
+`data/codificacao_v04/`, sufixo `_v05`, com `README.md` próprio. A v0.4 foi movida para `_superado_v04/`. Os `.md` foram reconstruídos por pandoc a partir dos `.docx` revisados por Marcelo, preservados em `revisao_marcelo_2026-08-25/` junto da análise completa da revisão.
+
+`para_drive/` reúne só o que sai daqui: as duas planilhas, o guia em PDF e o `LEIA_ANTES_DE_IMPORTAR.md` com as quatro checagens pós-conversão no Google Sheets, onde a validação de recusa pode virar simples aviso.
+
+Commits: `c6ddba1` (pacote) e `43ce809` (correção de um laço infinito em `paper/md_to_pdf.py` diante de linha horizontal, que aparecia agora porque os `.md` vêm de conversão de `.docx`).
+
+### 11.6 Codificadoras escolhidas
+
+Três candidatas no formulário. **Escolhidas: as codificadoras A e B.** A terceira candidata fica como reserva. Randerson envia os convites. (Os nomes ficam fora deste arquivo, que é público: a Declaration do artigo as identifica só como *coder A* e *coder B*.)
+
+Perfil que entra no método do artigo, sem nome:
+
+- Licenciatura em Letras e mestrado em Linguística Aplicada; 6 a 10 anos de Ensino Fundamental II; atua hoje em 8º e 9º; rede pública municipal; corrige produção textual com devolutiva escrita; pesquisou avaliação textual na Olimpíada de Língua Portuguesa e faz o curso de avaliadores de redação do ENEM.
+- Licenciatura em Letras e mestrado em Linguística Aplicada; mais de 10 anos de Ensino Fundamental II; rede pública municipal; experiência de correção de redação em vestibulares e no ENEM.
+
+Critério do desempate: o §1 do `RECRUTAMENTO.md` exige perfil equivalente entre as duas na experiência com produção textual. A reserva tem mais tempo de sala mas nenhuma experiência com rubrica, e pareá-la com a segunda produziria divergência por diferença de calibragem, não por defeito do instrumento.
+
+Verificado: nenhuma das três está entre os professores do corpus humano.
+
+### 11.7 Riscos abertos no recrutamento
+
+1. **O formulário publicado perdeu os campos 13 e 14 do `RECRUTAMENTO.md` §8.** Ninguém declarou disponibilidade, e ninguém respondeu à pergunta de contato prévio com o estudo, que o documento marca como "o filtro de independência e não pode faltar" e que é o que sustenta a afirmação de independência no artigo. Precisa ir na mensagem de convite.
+2. **Os links do Sheets em `EMAIL_convite_codificador.md` são de 22/08 e apontam para a v0.4**, com 13 colunas e sem FP. Substituir pela importação das planilhas v0.5.
+3. **Valor contraditório dentro do `RECRUTAMENTO.md`:** §2 sugere R$ 700 por pessoa, §7 traz tabela de R$ 300 a R$ 500. E a v0.5 aumentou o trabalho de 9 para 17 decisões por linha. Fechar um número antes de escrever.
+4. O convite foi reescrito para a tarefa nova, com as horas e o prazo marcados como `[X]` e `[DATA]`, à espera dessas decisões.
+
+### 11.8 O que continua valendo da §10
+
+`analises/kappa_v04.py` ainda não existe e precisa ser adaptado para o par A × B, agora com FP e VFM além de FM e MTL. O depósito no Zenodo continua sem nada da R1. E a procedência da codificação por IA ainda precisa entrar no texto do artigo, não só no protocolo.
+
+---
+
+## 12. Codificação concluída, κ calculado e §7 reescrita (04–10/09/2026)
+
+**Esta é a seção de retomada. As §§1 a 11 são histórico.**
+
+### 12.1 As duas codificações
+
+A codificadora A entregou em 04/09, a B em 07/09. A auditoria de 08/09 achou
+pendências nas duas, cada uma foi consultada por escrito apenas sobre as próprias células, sem
+que nenhuma classificação alheia fosse revelada e sem pedido de revisão de julgamento, e as
+duas editaram a própria planilha em 08 e 09/09.
+
+**A dúvida que decidia o κ foi resolvida por escrito**, não por suposição. B: *"Eram realmente 0,
+entendi que FP eu apenas preencheria quando 1. Mas já consertei, colocando zero nas faltantes."*
+
+Há duas capturas em `data/codificacao_v05_respostas/`, e **a de 10/09 é a que vale**: passa na
+auditoria sem célula vazia, sem valor fora de `{0,1}` e sem violação da regra 3.0 nas duas
+planilhas. A de 08/09 fica preservada como registro do estado anterior. `PROCEDENCIA.md`
+explica as duas e por quê. Os scripts sempre usam a captura mais recente, e o relatório de
+concordância leva a data da captura no nome.
+
+### 12.2 Contratos e pagamento
+
+Contrato de uma página que serve também de recibo, gerado por
+`data/codificacao_v05_respostas/contratos/gera_contrato.py` (pasta no `.gitignore`, tem CPF e
+chave Pix). R$ 300 por pessoa, valor fechado, preso à entrega e não a resultado, do bolso do
+pesquisador. **A: paga em 10/09**, contrato e comprovante enviados. **B: pendente**,
+esperando os dados para o contrato e o Pix; há rascunho no Gmail pedindo isso.
+
+### 12.3 Resultado (`analises/kappa_codificacao_v05.py`, relatório de 10/09)
+
+Sem média de κ, por pré-registro. Três camadas:
+
+| | funções | leitura |
+|---|---|---|
+| Confiável | FM01 κ=0,64; FM03 κ=0,57; MTL κ=0,72 | sustentam descrição quantitativa |
+| Não estimável | FM02, FM04, FM06 | 1 a 5 ocorrências em 39; bruta 87–92%, PABAK 0,74–0,85, κ desaba |
+| Ausente | FM05, FM08 | 0 de 39 nas duas |
+
+FM07 é o caso à parte: κ=0,34 com A marcando 24 e B marcando 12.
+
+**Falso positivo não converge e nenhuma taxa sai dele.** FP01, o maior denominador, dá κ=0,21.
+Testado no nível da devolutiva, ignorando em qual função o FP foi registrado: κ=0,18, com A
+sinalizando 13 e B 27. É diferença de severidade, não de arrumação. Só o piso é publicável: as
+duas concordam em 11 das 39.
+
+**RQ2:** as duas humanas concordam entre si em 0,72 e com a régua lexical em 0,28 e 0,43. A
+régua credita 51,3% onde elas creditam 66,7% e 64,1%, ou seja, **subdetecta**. O juízo humano
+passa a ser a medida da RQ2 e a régua vira piso.
+
+### 12.4 O achado que organiza a §7 (`analises/divergencias_codificacao_v05.py`)
+
+**31 dos 35 desacordos sobre FM são o mesmo trecho classificado em outra função**, por critério
+objetivo (80% dos vocábulos da evidência mais curta contidos na mais longa). Só 4 são divergência
+sobre a existência do movimento, e em 2 deles B registrou na hora não saber classificar.
+
+Concentram-se em três fronteiras: FM03×FM07 (14), FM04×FM07 (5), FM02×FM06 (4). A dominante tem
+mecanismo identificável e **replicou**: a rodada de julho já a tinha apontado, a v0.5 consertou a
+fronteira vizinha adotando o critério ampliado de FM03, o conserto pegou (as duas registram FM03
+em 30/39 cada) e a fronteira ao lado quebrou. Não se recalcula κ com as categorias fundidas.
+
+### 12.5 Edições no `main.tex`
+
+- **§7.5 reescrita**, agora com as duas codificadoras externas, e **Tabela 9** com prevalência de
+  cada uma no lugar da dupla retirada.
+- **§7.6 nova**, "Independent Double Coding by Two External Teachers", declarando a retirada do
+  κ=0,14 com o motivo técnico, o desenho da rodada, o recrutamento, os quatro impedimentos, os
+  perfis das duas e o regime de pagamento. **Tabela 10 nova**: κ, bruta, prevalência A e B,
+  PABAK e banda, por FM01–08 e MTL.
+- **Figura 2 refeita** (`fig_fm_v05.py` → `fm_modelo_v05.png`): intervalo entre as duas
+  codificadoras em vez de barra única, marca partida onde coincidem, losango cinza para a
+  referência dos especialistas.
+- **§5** (validade de construto da régua) reescrita com os números novos e a admissão de que a
+  régua subdetecta.
+- **Abstract, conclusão e ameaças à validade** ajustados; `κ=0,14` e `κ=0,54` não existem mais
+  no arquivo.
+- **Declarations:** parágrafo de ética sobre as duas codificadoras, agradecimento, financiamento
+  (honorários do bolso do primeiro autor) e material liberado. **CRediT corrigido**: a
+  contribuição do Marcelo era descrita como cobrindo as duas rodadas e a validação da RQ2, o que
+  deixou de ser verdade.
+
+### 12.6 Response letter
+
+`RESPOSTA_REVISORES_R1.md`, `.docx` e `.pdf`. Reescrita em quatro seções, objetiva, sem citar
+arquivo interno nenhum. A lista final de itens pendentes de casamento com o texto verbatim dos
+pareceres **foi removida a pedido**, e com ela saíram do documento oito mudanças reais desta
+rodada (isolamento E3, contagem 80→100, reanálise por cenário da RQ2, abrandamento causal,
+fronteira de generalização, quatro referências novas, DOIs, Tabela 5). Elas continuam no artigo
+e vão precisar reaparecer quando os pareceres forem colados.
+
+### 12.7 Defeitos de conversão corrigidos, que não eram de conteúdo
+
+1. A nota da Tabela 10 saía como texto solto (`vspace4pt`, `beginminipagetextwidth`): o
+   conversor não entende `minipage`. **O mesmo defeito estava nos arquivos enviados em julho.**
+2. **O bloco "Ethics and consent" nunca apareceu no `.docx` nem no `.pdf`**: os conversores só
+   processavam os cinco ambientes nomeados das Declarations. Corrigido em `tex_to_docx.py` e
+   `tex_to_pdf.py`, que agora percorrem a seção em ordem de documento.
+3. `md_to_docx.py` convertia por `textutil`, que **descarta a estrutura das tabelas** e inflava
+   a fonte em 4/3. Passou a usar pandoc com documento de referência próprio
+   (`paper/build_reference_docx.py` → `paper/reference.docx`): corpo Calibri 11pt justificado,
+   tabela com grade cinza e cabeçalho sombreado.
+4. `tex_to_docx.py` ganhou a mesma identidade visual, no lugar de Times sem justificação com
+   títulos no azul do Word.
+
+Ressalva: o `.docx` foi conferido no XML, não em tela, porque não há Word nem LibreOffice na
+máquina. O `textutil` não serve de conferência, porque não lê estilo de parágrafo.
+
+### 12.8 O que falta
+
+1. **Dados da codificadora B**, para contrato e pagamento, e o perfil dela já entrou no artigo pelo
+   formulário de inscrição.
+2. ~~Os pareceres verbatim~~ **Chegaram em 11/09** (encaminhados da caixa da UFRGS); ver §13.
+3. **Prazo**: prorrogação de 30 dias pedida em 08/09, nova data ~10/10/2026.
+4. Depósito no Zenodo do material da R1: sai sozinho da release `v1.6.0` no GitHub (integração
+   ativa desde a v1.2.0; as versões v1.2.0 a v1.5.0 estão no registro conceitual).
+
+## 13. Pareceres em mãos, carta fechada, aval dos coautores (11/09/2026)
+
+**Esta é a seção de retomada.**
+
+- **Os coautores aprovaram.** Rosa (11/09, manhã): "as respostas estão boas". Marcelo (11/09,
+  tarde): "Concordo com a Rosa", com a ressalva, correta, de que a nova rodada fortalece a
+  resposta mas não garante aceitação. Os dois perguntaram se a revista exige página/linha das
+  alterações: **não exige**. A carta de decisão pede "a detailed response letter outlining the
+  changes made" e as diretrizes de submissão da JBCS não falam em linha numerada nem em versão
+  marcada. A diretriz de DOI diz "unless when unavailable", o que cobre o Barbosa e Mauá (PROPOR
+  2026, sem DOI na ACL Anthology).
+- **Pareceres verbatim** em `PARECERES_R1_verbatim.md` (local, no `.gitignore`). Decisão de
+  27/07/2026 assinada pelos Editors-in-Chief; *reply-to* Altigran Soares da Silva. Revisor A:
+  "Revisions Required", seis pontos. Revisor C: "Resubmit for Review", dez pontos.
+- **Response letter refeita ponto a ponto** (`RESPOSTA_REVISORES_R1.{md,docx,pdf}`): cada
+  comentário citado verbatim, resposta e localização na versão revisada (A1–A6, C1–C10), mais os
+  três ajustes não pedidos (independência do anotador, ética e material, Figura 2) e uma tabela de
+  resumo. Todas as afirmações da carta foram conferidas no `main.tex` antes de escrever. Admite
+  que o artigo ficou mais longo e oferece mover parte da §7.6 para apêndice se o editor preferir.
+- **Checagem estática do `main.tex`**: nenhum `\ref` sem `\label`, nenhuma citação sem entrada,
+  ambientes e chaves balanceados, `0.14` e `0.54` ausentes, "80 calls" ausente. Só
+  `paulelder2007socratic` segue na bib sem citação (inócuo). Compilação real só no Overleaf: o
+  template da JBCS não é baixável sem login e a classe não está na máquina.
+- **Pacote para o Overleaf**: `overleaf_R1_2026-09-11.zip` (main.tex, references.bib,
+  fm_frequencia.png, fm_modelo_v05.png; `.gitignore`). A revista compila em XeLaTeX.
+- **Repositório**: os READMEs (EN e PT) ganharam a seção que mapeia o material de confiabilidade
+  liberado e a contagem de 100 chamadas. Os `.xlsx` de `para_drive` foram commitados com o rótulo
+  "guia v0.5", que é o que as codificadoras receberam em 02/09. Varredura de PII nos arquivos
+  rastreados: limpa (nenhum nome, e-mail ou metadado de autor de codificadora). **Os nomes só
+  existiam neste arquivo**, em três commits locais nunca enviados ao GitHub; foram removidos do
+  texto, mas **o histórico local ainda os carrega** (commits `abc9e05`, `69912dc`, `bfdc04f`).
+  Antes do push, reescrever esses commits ou esmagar os locais num só.
+- **Sequência de envio**: (1) subir o zip no Overleaf e compilar, conferir Tabela 5, os DOIs dos
+  oito `@misc` e as quatro referências novas; (2) limpar o histórico e dar push do branch;
+  (3) merge em `main`, release `v1.6.0` (o Zenodo versiona sozinho); (4) submeter no OJS o PDF do
+  Overleaf e a response letter em PDF.

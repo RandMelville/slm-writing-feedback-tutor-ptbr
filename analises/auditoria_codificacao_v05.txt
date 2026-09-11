@@ -1,0 +1,51 @@
+========================================================================
+CODIFICADORA A  --  codificacao_A_2026-09-10.xlsx
+========================================================================
+[cabeçalho] 37 colunas esperadas presentes
+[cobertura] 39 linhas de dados
+[cobertura] OK, R01 a R39 sem falta nem repetição
+[domínio] valores fora de {0, 1, vazio}: 0
+[vazios] FM: 0  |  FP: 0  |  MTL: 0  (de 39 linhas x 17 decisões)
+[regra 3.0] FP = 1 com FM != 1: 0
+[evidência] FM = 1 sem trecho copiado: 0
+[justificativa] FP = 1 sem justificativa: 0
+[MTL] linhas sem MTL: 0
+[observações] linhas com registro: 0
+
+========================================================================
+CODIFICADORA B  --  codificacao_B_2026-09-10.xlsx
+========================================================================
+[cabeçalho] 37 colunas esperadas presentes
+[cobertura] 39 linhas de dados
+[cobertura] OK, R01 a R39 sem falta nem repetição
+[domínio] valores fora de {0, 1, vazio}: 0
+[vazios] FM: 0  |  FP: 0  |  MTL: 0  (de 39 linhas x 17 decisões)
+[regra 3.0] FP = 1 com FM != 1: 0
+[evidência] FM = 1 sem trecho copiado: 0
+[justificativa] FP = 1 sem justificativa: 0
+[MTL] linhas sem MTL: 0
+[observações] linhas com registro: 8
+              R01: É difícil, pelo trecho, delimitar se as situações e personagens são bem definidos (porque isso poderia ser resolvido em outros trechos). Com isso, fiquei na dúvida se FM01 seria caso de FP.
+              R04: Quanto a FM03, o texto diz que foi esvaziada porque não fazia mais sentido. Mas a pergunta "por quê?" pode se referir justamente a por que não fazia mais sentido.
+              R05: Apesar do uso estranho de "desfechar", considerei que a devolutiva quis dizer "desfazer". Não considerei como um falso positivo.
+              R08: Quanto a FM01, entenderei que "várias repetições verbais" dizem respeito ao tempo verbal pretérito perfeito que se repete. Por isso, não considerei esse trecho como FP. Não soube como classificar o movimento destas questões: 1. Você notou como o narrador usa 'tava' em vez de 'estava'? Por que isso pode ser interessante?
+
+2. O texto tem muitos sujeitos 'ele'. Como isso contribui para a coesão do relato? A primeira talvez seja uma FM03. A segunda deveria ser uma FM02 ou FM04, mas parece uma FM03...
+              R14: Não sei como classificar o movimento da questão "1. Como você pode usar os marcadores temporais no seu próprio relato de uma situação?" - a que próprio relato a devolutiva se refere?
+              R26: Fiquei com bastante dúvida se pedir para melhorar a coerência e coesão era FM02 ou FM06. Considerando que, explicitamente, não foi dito que a coerência e coesão estavam inadequadas, optei por entender que o movimento de melhorá-la seria um pedido de reescrita, em que o aluno precisaria reorganizar seu texto.
+              R38: Há um problema em relação à questão 2 da devolutiva. A devolutiva questiona se o autor percebeu alguma repetição. Do ponto de vista da avaliação textual, a repetição (salvo contextos específicos) é um ponto negativo. Nesse ponto de vista, a pergunta pede para o autor revisar um problema que não tem no seu texto, por isso marquei como FP02. No entanto, do ponto de vista do criador dessas devolutivas, a repetição parece ser colocada (erroneamente) sempre como algo positivo para a coesão textual. Nessa perspectiva "peculiar", pode-se entender que a pergunta sugere que o autor errou ao não repetir e pede que ele utilize mais repetições. Por fim, optei por partir do ponto de vista mais tradicional (com o qual concordo) para analisar a questão como FM02/FP02.
+              R39: Na FM06, aceitarei que "contraditório" se refere aos conectivos de oposição/adversativos.
+
+========================================================================
+RESUMO
+========================================================================
+                                 A       B
+linhas de dados                 39      39
+valores inválidos                0       0
+FM vazias                        0       0
+FP vazias                        0       0
+MTL vazias                       0       0
+FP=1 com FM!=1                   0       0
+FM=1 sem evidência               0       0
+FP=1 sem justificativa           0       0
+linhas com observação            0       8

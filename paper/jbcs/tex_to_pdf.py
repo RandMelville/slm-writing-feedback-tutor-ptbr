@@ -16,7 +16,7 @@ import re, os
 # tex_to_docx.py guarda toda execucao/IO sob `if __name__ == "__main__":`,
 # entao importar nao dispara conversao alguma; so traz dicts + helpers.
 from tex_to_docx import (
-    CITE, REF, REFERENCES, DECL_TITLES,
+    CITE, REF, REFERENCES, DECL_TITLES, decl_blocks,
     first_braced, render_cite, math_sub, preprocess,
     fmt, plain, strip_multicolumn, split_row, strip_comments,
     HERE, TEX,
@@ -191,11 +191,10 @@ def build():
 
     # declaracoes
     flow.append(P_markup("Declarations", S["h1"]))
-    for env, label in DECL_TITLES.items():
-        md = re.search(r"\\begin\{" + env + r"\}(.*?)\\end\{" + env + r"\}", src, re.S)
-        if md:
-            flow.append(P_markup("<b>%s</b>" % esc(label), S["h2"]))
-            flow.append(P(strip_comments(md.group(1)).strip(), S["body"]))
+    for label, paras in decl_blocks(src):
+        flow.append(P_markup("<b>%s</b>" % esc(label), S["h2"]))
+        for texto in paras:
+            flow.append(P(texto, S["body"]))
 
     # referencias
     flow.append(P_markup("References", S["h1"]))

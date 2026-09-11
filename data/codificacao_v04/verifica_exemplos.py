@@ -24,7 +24,7 @@ from pathlib import Path
 
 AQUI = Path(__file__).resolve().parent
 ROOT = AQUI.parents[1]
-DOCS = [AQUI / "PROTOCOLO_v04.md", AQUI / "ANEXO_CALIBRACAO.md", AQUI / "GUIA_PROFESSOR.md"]
+DOCS = [AQUI / "PROTOCOLO_v05.md", AQUI / "ANEXO_ALINHAMENTO_v05.md", AQUI / "GUIA_PROFESSOR_v05.md"]
 PACOTE = ROOT / "data" / "segunda_codificacao_cega" / "codificacao_cega_v02.csv"
 HUMANO = ROOT / "data" / "baseline_humano" / "respostas_professores.jsonl"
 

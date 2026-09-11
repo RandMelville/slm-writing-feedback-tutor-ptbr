@@ -2,7 +2,33 @@
 
 > Memória de trabalho para assistentes Claude operando neste diretório.
 > Pesquisador: Randerson Melville Rebouças (UFRGS) — randerson.melville@gmail.com
-> Última revisão: 2026-05-25 — benchmark concluído, paper em EN, contra-experimento Llama 3.2 executado e integrado (§5.3 do paper), Fisher exact rodado (§5.4 do paper), reorganização do repo para padrão de publicação aberta concluída. Estrutura pública atual em §2.
+> Última revisão: 2026-08-26.
+
+## ⚠️ Estado atual, leia antes de qualquer coisa
+
+O paper foi **submetido ao JBCS em 29/06/2026** e está em **revisão R1, com prazo em 10/09/2026**.
+O eixo do trabalho hoje não é o benchmark de latência (§5, concluído em 2026-05-24 e ainda válido),
+e sim a **confiabilidade da codificação das Funções de Mediação**, que é o que os pareceristas
+exigiram.
+
+**Estado detalhado e cronograma vivo: `paper/jbcs/ESTADO_REVISAO_R1.md`.** As seções §§1 a 8 deste
+CLAUDE.md descrevem o projeto até maio de 2026 e continuam corretas como histórico, mas **não** como
+estado de execução.
+
+Em uma frase: o instrumento de codificação está congelado na **v0.5**, em
+`data/codificacao_v04/` (com `README.md` próprio), duas codificadoras foram escolhidas, e o que falta
+é a codificação, o κ e a reescrita das seções do artigo.
+
+Três decisões que não devem ser reabertas sem consulta:
+
+- **Presença da FM e falso positivo são colunas diferentes** desde a v0.5. Movimento presente na
+  forma mas apoiado em leitura errada é `FM = 1` e `FP = 1`, não `FM = 0`.
+- **A separação FM×FP é hipótese a testar, não resultado previsto.** Não afirmar que o κ vai subir.
+- **Os achados de FP valem para `qwen2.5:3b-instruct` nas 39 devolutivas deste estudo**, não para
+  SLMs ≤3B em geral.
+
+A fonte de verdade do texto é `paper/jbcs/main.tex`. A RSL do doutorado vive em
+`~/Documents/doutorado/rsl/` e foi reconstruída em 25/08; não confundir os dois projetos.
 
 ---
 

@@ -8,7 +8,7 @@ from reportlab.lib.units import cm
 from reportlab.lib.enums import TA_JUSTIFY, TA_CENTER, TA_LEFT
 from reportlab.lib import colors
 from reportlab.platypus import (
-    SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak, KeepTogether, Preformatted, Image
+    SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak, KeepTogether, Preformatted, Image, HRFlowable,
 )
 from reportlab.lib.utils import ImageReader
 
@@ -202,6 +202,14 @@ def build(md_text: str) -> list:
         # Email/affiliation simples
         if stripped.startswith("**") and stripped.endswith("**") and len(stripped) < 80:
             flow.append(Paragraph(md_inline(stripped), S["author"]))
+            i += 1; continue
+
+        # Régua horizontal do pandoc (---, ***, ___). Sem este ramo o acumulador de
+        # parágrafo abaixo devolve lista vazia sem avançar i, e build() entra em laço infinito.
+        if len(stripped) >= 3 and set(stripped) <= {"-", "*", "_"}:
+            flow.append(Spacer(1, 0.2*cm))
+            flow.append(HRFlowable(width="100%", thickness=0.5, color=colors.grey))
+            flow.append(Spacer(1, 0.2*cm))
             i += 1; continue
 
         # Parágrafo (acumula linhas até linha vazia)

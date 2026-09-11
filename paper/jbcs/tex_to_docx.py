@@ -11,11 +11,100 @@ Saida: paper/jbcs/benchmark_slm_jbcs.docx
 """
 import re, os
 from docx import Document
+from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.oxml.ns import qn
+from docx.oxml import OxmlElement
 from docx.shared import Pt, RGBColor, Inches
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 TEX = os.path.join(HERE, "main.tex")
 OUT = os.path.join(HERE, "benchmark_slm_jbcs.docx")
+
+# --- identidade visual do .docx ------------------------------------------
+# Mesma formatacao do documento de referencia usado nas cartas (paper/reference.docx):
+# corpo Calibri 11pt justificado, titulos pretos, tabela com grade e cabecalho
+# sombreado. Antes daqui o arquivo saia em Times sem justificacao e com os titulos
+# no azul do tema do Word.
+TINTA = RGBColor(0x1A, 0x1A, 0x19)
+CINZA = RGBColor(0x5C, 0x5C, 0x57)
+FUNDO_CABECALHO = "EFEEEA"
+BORDA = "9A9A95"
+
+
+def aplica_estilos(doc):
+    normal = doc.styles["Normal"]
+    normal.font.name = "Calibri"
+    normal.font.size = Pt(11)
+    normal.font.color.rgb = TINTA
+    normal.element.rPr.rFonts.set(qn("w:eastAsia"), "Calibri")
+    pf = normal.paragraph_format
+    pf.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    pf.line_spacing = 1.15
+    pf.space_after = Pt(6)
+
+    for nome, tamanho, antes in (("Title", 20, 0), ("Heading 1", 15, 16),
+                                 ("Heading 2", 12.5, 14), ("Heading 3", 11.5, 12)):
+        try:
+            st = doc.styles[nome]
+        except KeyError:
+            continue
+        st.font.name = "Calibri"
+        st.font.size = Pt(tamanho)
+        st.font.bold = True
+        st.font.color.rgb = TINTA
+        st.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
+        st.paragraph_format.space_before = Pt(antes)
+        st.paragraph_format.space_after = Pt(6)
+        st.paragraph_format.keep_with_next = True
+
+    for nome in ("List Bullet", "List Number", "Intense Quote"):
+        try:
+            doc.styles[nome].paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
+        except KeyError:
+            pass
+
+
+def sombreia(celula, cor):
+    shd = OxmlElement("w:shd")
+    shd.set(qn("w:val"), "clear")
+    shd.set(qn("w:color"), "auto")
+    shd.set(qn("w:fill"), cor)
+    celula._tc.get_or_add_tcPr().append(shd)
+
+
+def borda_cinza(tabela):
+    """Troca a grade preta do estilo Table Grid pela mesma borda cinza do
+    documento de referencia das cartas."""
+    tbl_pr = tabela._tbl.tblPr
+    for antigo in tbl_pr.findall(qn("w:tblBorders")):
+        tbl_pr.remove(antigo)
+    bordas = OxmlElement("w:tblBorders")
+    for lado in ("top", "left", "bottom", "right", "insideH", "insideV"):
+        el = OxmlElement(f"w:{lado}")
+        el.set(qn("w:val"), "single")
+        el.set(qn("w:sz"), "4")
+        el.set(qn("w:space"), "0")
+        el.set(qn("w:color"), BORDA)
+        bordas.append(el)
+    tbl_pr.append(bordas)
+
+
+def formata_tabela(tabela, com_cabecalho=True):
+    """Grade cinza, cabecalho sombreado e celula em 10pt alinhada a esquerda.
+    Texto curto justificado dentro de celula estreita abre buracos, por isso a
+    celula nunca herda a justificacao do corpo."""
+    borda_cinza(tabela)
+    for ri, linha in enumerate(tabela.rows):
+        for celula in linha.cells:
+            if com_cabecalho and ri == 0:
+                sombreia(celula, FUNDO_CABECALHO)
+            for par in celula.paragraphs:
+                par.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
+                par.paragraph_format.space_after = Pt(2)
+                par.paragraph_format.line_spacing = 1.0
+                for run in par.runs:
+                    run.font.size = Pt(10)
+
 
 # --- mapas de citacao e referencia ---------------------------------------
 CITE = {
@@ -108,6 +197,33 @@ DECL_TITLES = {
     "funding": "Funding",
     "materials": "Availability of Data and Materials",
 }
+
+# Blocos da secao Declarations, em ordem de documento. Alem dos ambientes
+# conhecidos, recolhe os paragrafos soltos no formato "\noindent\textbf{Titulo.}",
+# que antes sumiam da conversao: era o caso do bloco "Ethics and consent", presente
+# no main.tex e ausente do .docx e do .pdf gerados.
+_DECL_SOLTO = re.compile(r"(?m)^\\noindent\\textbf\{([^}]+)\}")
+
+
+def decl_blocks(src):
+    regiao = src[src.index(r"\section*{Declarations}"):]
+    achados = []
+    for env, label in DECL_TITLES.items():
+        m = re.search(r"\\begin\{" + env + r"\}(.*?)\\end\{" + env + r"\}", regiao, re.S)
+        if m:
+            achados.append((m.start(), label, [strip_comments(m.group(1)).strip()]))
+    marcas = [m for m in _DECL_SOLTO.finditer(regiao)]
+    for i, m in enumerate(marcas):
+        limites = [x.start() for x in marcas[i + 1:]]
+        limites += [k for k in (regiao.find(r"\begin{" + e, m.end()) for e in DECL_TITLES) if k > 0]
+        fim = min(limites) if limites else len(regiao)
+        corpo = strip_comments(regiao[m.end():fim]).strip()
+        paras = [re.sub(r"^\\noindent\s*", "", x).strip()
+                 for x in re.split(r"\n\s*\n", corpo) if x.strip()]
+        achados.append((m.start(), m.group(1).strip().rstrip("."), paras))
+    achados.sort(key=lambda x: x[0])
+    return [(label, paras) for _, label, paras in achados]
+
 
 # --- helpers de texto ----------------------------------------------------
 def first_braced(s, start_idx):
@@ -252,8 +368,7 @@ def add_runs(par, runs, base_bold=False):
 def build():
     src = open(TEX, encoding='utf-8').read()
     doc = Document()
-    doc.styles['Normal'].font.name = 'Times New Roman'
-    doc.styles['Normal'].font.size = Pt(11)
+    aplica_estilos(doc)
 
     # titulo
     m = re.search(r'\\title(?:\[[^\]]*\])?\{(.+?)\}\s*\n', src, re.S)
@@ -288,11 +403,10 @@ def build():
 
     # declaracoes
     doc.add_heading('Declarations', level=1)
-    for env, label in DECL_TITLES.items():
-        md = re.search(r'\\begin\{' + env + r'\}(.*?)\\end\{' + env + r'\}', src, re.S)
-        if md:
-            doc.add_heading(label, level=2)
-            add_runs(doc.add_paragraph(), fmt(strip_comments(md.group(1)).strip()))
+    for label, paras in decl_blocks(src):
+        doc.add_heading(label, level=2)
+        for texto in paras:
+            add_runs(doc.add_paragraph(), fmt(texto))
 
     # referencias
     doc.add_heading('References', level=1)
@@ -360,6 +474,7 @@ def process_body(doc, body):
                 cell.paragraphs[0].text = ''
                 txt = row[ci] if ci < len(row) else ''
                 add_runs(cell.paragraphs[0], fmt(txt), base_bold=(ri == 0))
+        formata_tabela(table)
 
     def flush_code():
         p = doc.add_paragraph()
