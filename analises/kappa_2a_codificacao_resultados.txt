@@ -1,0 +1,66 @@
+==============================================================================
+ANÁLISE (A) — Confiabilidade da codificação das FMs (Tabela 9 do artigo)
+anotador 1: fm_coding_model.py (codebook v0.2) | anotador 2: passada cega v0.2-Q
+==============================================================================
+FM      kappa   bruta   prev1  prev2   PABAK  banda
+FM01   +0.000    92.3%   39/39  36/39  +0.846  slight
+FM02   +0.374    92.3%    1/39   4/39  +0.846  fair
+FM03   +0.082    51.3%    4/39  21/39  +0.026  slight
+FM04   +0.226    74.4%    6/39  10/39  +0.487  fair
+FM05     n/d    100.0%    0/39   0/39  +1.000  indefinido
+FM06   +0.000    94.9%    0/39   2/39  +0.897  slight
+FM07   +0.147    51.3%   16/39  35/39  +0.026  slight
+FM08     n/d    100.0%    0/39   0/39  +1.000  indefinido
+
+κ médio (só categorias definidas, n=6): +0.138
+κ médio (indefinidos tratados como 0, n=8): +0.104
+núcleo corretivo humano (FM02/FM04/FM06): FM02=+0.374, FM04=+0.226, FM06=+0.000
+concordância bruta média: 82.1%
+
+==============================================================================
+ANÁLISE (B) — Validade de construto da métrica da RQ2
+régua lexical (metalinguistic_adherence.py) vs. coluna MTL (juízo especialista)
+==============================================================================
+        kappa   bruta   régua    MTL   PABAK  banda
+RQ2    +0.538    76.9%   20/39  21/39  +0.538  moderate
+
+taxa régua lexical: 51.3% (20/39)
+taxa juízo especialista (MTL): 53.8% (21/39)
+
+matriz de confusão régua × MTL:
+MTL     0   1
+régua        
+0      14   5
+1       4  16
+
+==============================================================================
+DISCORDÂNCIAS POR ITEM (para o confronto qualitativo)
+==============================================================================
+FM01 (3): R33(c8r1: a1=1→a2=0), R16(c8r2: a1=1→a2=0), R05(c8r3: a1=1→a2=0)
+FM02 (3): R13(c4r1: a1=0→a2=1), R39(c7r3: a1=0→a2=1), R36(c9r3: a1=0→a2=1)
+FM03 (19): R37(c1r2: a1=0→a2=1), R30(c1r3: a1=0→a2=1), R19(c3r3: a1=1→a2=0), R13(c4r1: a1=0→a2=1), R01(c4r2: a1=0→a2=1), R26(c4r3: a1=0→a2=1), R02(c5r1: a1=0→a2=1), R12(c5r2: a1=0→a2=1), R06(c5r3: a1=0→a2=1), R05(c8r3: a1=0→a2=1), R31(c9r2: a1=0→a2=1), R24(c10r1: a1=0→a2=1), R10(c10r2: a1=0→a2=1), R03(c11r1: a1=0→a2=1), R09(c11r3: a1=0→a2=1), R18(c12r1: a1=0→a2=1), R15(c12r2: a1=0→a2=1), R21(c12r3: a1=0→a2=1), R14(c13r3: a1=0→a2=1)
+FM04 (10): R26(c4r3: a1=1→a2=0), R20(c6r1: a1=0→a2=1), R35(c6r2: a1=0→a2=1), R04(c6r3: a1=0→a2=1), R33(c8r1: a1=0→a2=1), R31(c9r2: a1=0→a2=1), R03(c11r1: a1=1→a2=0), R21(c12r3: a1=0→a2=1), R29(c13r2: a1=0→a2=1), R14(c13r3: a1=1→a2=0)
+FM06 (2): R39(c7r3: a1=0→a2=1), R36(c9r3: a1=0→a2=1)
+FM07 (19): R32(c1r1: a1=0→a2=1), R37(c1r2: a1=0→a2=1), R30(c1r3: a1=0→a2=1), R17(c2r1: a1=0→a2=1), R34(c2r2: a1=0→a2=1), R22(c2r3: a1=0→a2=1), R23(c3r1: a1=0→a2=1), R38(c3r2: a1=0→a2=1), R19(c3r3: a1=0→a2=1), R02(c5r1: a1=0→a2=1), R12(c5r2: a1=0→a2=1), R06(c5r3: a1=0→a2=1), R20(c6r1: a1=0→a2=1), R35(c6r2: a1=0→a2=1), R04(c6r3: a1=0→a2=1), R33(c8r1: a1=0→a2=1), R31(c9r2: a1=0→a2=1), R25(c10r3: a1=0→a2=1), R15(c12r2: a1=0→a2=1)
+
+RQ2 régua×MTL (9): R30(c1r3: régua=1→MTL=0), R13(c4r1: régua=0→MTL=1), R01(c4r2: régua=1→MTL=0), R12(c5r2: régua=1→MTL=0), R06(c5r3: régua=0→MTL=1), R16(c8r2: régua=1→MTL=0), R10(c10r2: régua=0→MTL=1), R09(c11r3: régua=0→MTL=1), R18(c12r1: régua=0→MTL=1)
+
+==============================================================================
+DIRECIONALIDADE DO DESACORDO
+==============================================================================
+anotador 2 CREDITA função que o anotador 1 não marcou: 49/56 (87.5%)
+anotador 2 RETIRA função que o anotador 1 marcou:      7/56 (12.5%)
+FMs por devolutiva — anotador 1: 1.69  |  anotador 2: 2.77  (humanos, ref.: 3.8)
+
+==============================================================================
+ROBUSTEZ DA CONCLUSÃO: núcleo corretivo sob as DUAS codificações
+==============================================================================
+FM      anot.1  anot.2  humano   gap a1  gap a2
+FM01      100%     92%     69%     +31    +23
+FM02        3%     10%     80%     -77    -70  <-- núcleo
+FM03       10%     54%     34%     -24    +20
+FM04       15%     26%     69%     -54    -43  <-- núcleo
+FM05        0%      0%      9%      -9     -9
+FM06        0%      5%     57%     -57    -52  <-- núcleo
+FM07       41%     90%     32%      +9    +58
+FM08        0%      0%     32%     -32    -32

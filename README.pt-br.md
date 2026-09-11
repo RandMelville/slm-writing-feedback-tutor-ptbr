@@ -80,8 +80,9 @@ ollama pull qwen2.5:1.5b-instruct qwen2.5:3b-instruct \
 # Benchmark principal — 8 modelos × 13 cenários × 3 repetições = 312 chamadas
 python src/benchmark_local.py
 
-# Protocolo de falsificação para a família Llama 3.2 — 4 isolamentos, 80 chamadas
-python src/counter_experiment_llama32.py
+# Protocolo de falsificação para a família Llama 3.2: 4 isolamentos, 100 chamadas
+python src/counter_experiment_llama32.py      # E1, E2, E2b (74 chamadas)
+python src/counter_experiment_e3_curl.py      # E3, isolamento da camada de cliente via curl (26 chamadas)
 
 # Testes exatos de Fisher e IC Wilson 95 %
 python src/inferential_statistics.py
@@ -96,6 +97,24 @@ data/       Cenários canônicos + resultados brutos de inferência
 analises/   Artefatos gerados (CSV, JSON, figuras)
 report/     Relatório HTML interativo auto-contido
 ```
+
+## Material de confiabilidade da codificação das Funções de Mediação (revisão R1)
+
+A dupla codificação independente das 39 devolutivas do `qwen2.5:3b-instruct` por duas
+professoras externas (Subseção 7.6 do artigo) está liberada na íntegra. As codificadoras são
+identificadas apenas como A e B; nenhum identificador pessoal aparece nestes arquivos.
+
+| O quê | Onde |
+|---|---|
+| Protocolo de codificação v0.5 (congelado em 26/08/2026), com o plano de análise datado na Seção 6 | `data/codificacao_v04/PROTOCOLO_v05.{md,pdf}` |
+| Guia do professor de quatro páginas, único documento instrucional entregue às codificadoras | `data/codificacao_v04/GUIA_PROFESSOR_v05.{md,pdf}` |
+| Pacotes de anotação tal como entregues (embaralhados, ordens distintas) | `data/codificacao_v04/para_drive/pacote_v05_codificador_{A,B}.xlsx` |
+| Codificações completas, com evidência citada, justificativa dos falsos positivos e notas | `data/codificacao_v05_respostas/codificacao_{A,B}_2026-09-10.xlsx` |
+| Registro de procedência das capturas (o que mudou entre 08 e 10/09) | `data/codificacao_v05_respostas/PROCEDENCIA.md` |
+| Auditoria de completude, rodada antes de qualquer coeficiente | `analises/audita_codificacao_v05.py`, `analises/auditoria_codificacao_v05.txt` |
+| Análise de concordância (Tabela 10 do artigo) | `analises/kappa_codificacao_v05.py`, `analises/kappa_codificacao_v05_2026-09-10.txt` |
+| Dossiê de divergências item a item | `analises/divergencias_codificacao_v05.py`, `analises/divergencias_v05_2026-09-10.md` |
+| Figura 2 do artigo | `analises/fig_fm_v05.py`, `paper/jbcs/fm_modelo_v05.png` |
 
 ## Como citar
 

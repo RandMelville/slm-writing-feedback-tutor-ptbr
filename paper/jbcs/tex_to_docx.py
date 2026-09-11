@@ -11,11 +11,100 @@ Saida: paper/jbcs/benchmark_slm_jbcs.docx
 """
 import re, os
 from docx import Document
+from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.oxml.ns import qn
+from docx.oxml import OxmlElement
 from docx.shared import Pt, RGBColor, Inches
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 TEX = os.path.join(HERE, "main.tex")
 OUT = os.path.join(HERE, "benchmark_slm_jbcs.docx")
+
+# --- identidade visual do .docx ------------------------------------------
+# Mesma formatacao do documento de referencia usado nas cartas (paper/reference.docx):
+# corpo Calibri 11pt justificado, titulos pretos, tabela com grade e cabecalho
+# sombreado. Antes daqui o arquivo saia em Times sem justificacao e com os titulos
+# no azul do tema do Word.
+TINTA = RGBColor(0x1A, 0x1A, 0x19)
+CINZA = RGBColor(0x5C, 0x5C, 0x57)
+FUNDO_CABECALHO = "EFEEEA"
+BORDA = "9A9A95"
+
+
+def aplica_estilos(doc):
+    normal = doc.styles["Normal"]
+    normal.font.name = "Calibri"
+    normal.font.size = Pt(11)
+    normal.font.color.rgb = TINTA
+    normal.element.rPr.rFonts.set(qn("w:eastAsia"), "Calibri")
+    pf = normal.paragraph_format
+    pf.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    pf.line_spacing = 1.15
+    pf.space_after = Pt(6)
+
+    for nome, tamanho, antes in (("Title", 20, 0), ("Heading 1", 15, 16),
+                                 ("Heading 2", 12.5, 14), ("Heading 3", 11.5, 12)):
+        try:
+            st = doc.styles[nome]
+        except KeyError:
+            continue
+        st.font.name = "Calibri"
+        st.font.size = Pt(tamanho)
+        st.font.bold = True
+        st.font.color.rgb = TINTA
+        st.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
+        st.paragraph_format.space_before = Pt(antes)
+        st.paragraph_format.space_after = Pt(6)
+        st.paragraph_format.keep_with_next = True
+
+    for nome in ("List Bullet", "List Number", "Intense Quote"):
+        try:
+            doc.styles[nome].paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
+        except KeyError:
+            pass
+
+
+def sombreia(celula, cor):
+    shd = OxmlElement("w:shd")
+    shd.set(qn("w:val"), "clear")
+    shd.set(qn("w:color"), "auto")
+    shd.set(qn("w:fill"), cor)
+    celula._tc.get_or_add_tcPr().append(shd)
+
+
+def borda_cinza(tabela):
+    """Troca a grade preta do estilo Table Grid pela mesma borda cinza do
+    documento de referencia das cartas."""
+    tbl_pr = tabela._tbl.tblPr
+    for antigo in tbl_pr.findall(qn("w:tblBorders")):
+        tbl_pr.remove(antigo)
+    bordas = OxmlElement("w:tblBorders")
+    for lado in ("top", "left", "bottom", "right", "insideH", "insideV"):
+        el = OxmlElement(f"w:{lado}")
+        el.set(qn("w:val"), "single")
+        el.set(qn("w:sz"), "4")
+        el.set(qn("w:space"), "0")
+        el.set(qn("w:color"), BORDA)
+        bordas.append(el)
+    tbl_pr.append(bordas)
+
+
+def formata_tabela(tabela, com_cabecalho=True):
+    """Grade cinza, cabecalho sombreado e celula em 10pt alinhada a esquerda.
+    Texto curto justificado dentro de celula estreita abre buracos, por isso a
+    celula nunca herda a justificacao do corpo."""
+    borda_cinza(tabela)
+    for ri, linha in enumerate(tabela.rows):
+        for celula in linha.cells:
+            if com_cabecalho and ri == 0:
+                sombreia(celula, FUNDO_CABECALHO)
+            for par in celula.paragraphs:
+                par.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
+                par.paragraph_format.space_after = Pt(2)
+                par.paragraph_format.line_spacing = 1.0
+                for run in par.runs:
+                    run.font.size = Pt(10)
+
 
 # --- mapas de citacao e referencia ---------------------------------------
 CITE = {
@@ -30,6 +119,8 @@ CITE = {
     "koch2018coesao": ("Koch", "2018"),
     "koch2020introducao": ("Koch", "2020"),
     "kochelias2016escrever": ("Koch & Elias", "2016"),
+    "byrt1993bias": ("Byrt et al.", "1993"),
+    "feinstein1990high": ("Feinstein & Cicchetti", "1990"),
     "landis1977measurement": ("Landis & Koch", "1977"),
     "liu2025socratic": ("Liu et al.", "2025"),
     "macina2025mathtutorbench": ("Macina et al.", "2025"),
@@ -55,10 +146,12 @@ REF = {
     "sec:instrument": "3.2", "sec:protocol": "3.3", "sec:validation": "3.4",
     "sec:criteria": "3.6", "sec:falsification": "3.8", "sec:llama-failure": "5.1",
     "sec:phi3": "5.2", "sec:robustness": "5.3", "sec:fm-kappa": "7.4",
-    "sec:fm-model": "7.5", "sec:fm-role": "7.6", "app:stats": "A", "app:impl": "B",
+    "sec:fm-model": "7.5", "sec:fm-blind": "7.6", "sec:fm-role": "7.7",
+    "app:stats": "A", "app:impl": "B",
     "tab:scenarios": "1", "tab:efficiency": "2", "tab:conformance": "3",
     "tab:robustness": "4", "tab:metalinguistic": "5", "tab:fm-freq": "6",
     "tab:fm-profiles": "7", "tab:fm-kappa": "8", "tab:fm-model": "9",
+    "tab:fm-kappa-model": "10",
     "fig:fm": "1", "fig:fm-model": "2",
 }
 SUP = {"1": "¹", "2": "²", "3": "³", "***": "***", "*": "*",
@@ -69,9 +162,11 @@ REFERENCES = [
     "Almeida, L. M. de. (1975). O caso da borboleta Atiria (Serie Vaga-Lume). Atica. (Originalmente publicado em 1951 como Atiria, a borboleta, Melhoramentos)",
     "Brasil. (2018). Lei no 13.709, de 14 de agosto de 2018: Lei Geral de Protecao de Dados Pessoais (LGPD). Presidencia da Republica.",
     "Brasil. (2025). Lei no 15.211, de 22 de setembro de 2025: Estatuto Digital da Crianca e do Adolescente (ECA Digital). Presidencia da Republica.",
+    "Byrt, T., Bishop, J., & Carlin, J. B. (1993). Bias, prevalence and kappa. Journal of Clinical Epidemiology, 46(5), 423-429. https://doi.org/10.1016/0895-4356(93)90018-V",
     "Card, S. K., Robertson, G. G., & Mackinlay, J. D. (1991). The information visualizer, an information workspace. In Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI '91) (pp. 181-186). ACM Press. https://doi.org/10.1145/108844.108874",
     "CGI.br, NIC.br, & Cetic.br. (2025). Pesquisa sobre o uso das tecnologias de informacao e comunicacao nas escolas brasileiras: TIC Educacao 2024. Comite Gestor da Internet no Brasil. https://cetic.br/pesquisa/educacao/",
     "Colasanti, M. (1982). A moca tecela. In Doze reis e a moca no labirinto do vento. Nordica.",
+    "Feinstein, A. R., & Cicchetti, D. V. (1990). High agreement but low kappa: I. The problems of two paradoxes. Journal of Clinical Epidemiology, 43(6), 543-549. https://doi.org/10.1016/0895-4356(90)90158-L",
     "Gemma Team. (2024). Gemma 2: Improving open language models at a practical size. arXiv:2408.00118. https://doi.org/10.48550/arXiv.2408.00118",
     "Grattafiori, A., et al. (2024). The Llama 3 herd of models. arXiv:2407.21783. https://doi.org/10.48550/arXiv.2407.21783",
     "Kasneci, E., et al. (2023). ChatGPT for good? On opportunities and challenges of large language models for education. Learning and Individual Differences, 103, 102274. https://doi.org/10.1016/j.lindif.2023.102274",
@@ -103,6 +198,33 @@ DECL_TITLES = {
     "materials": "Availability of Data and Materials",
 }
 
+# Blocos da secao Declarations, em ordem de documento. Alem dos ambientes
+# conhecidos, recolhe os paragrafos soltos no formato "\noindent\textbf{Titulo.}",
+# que antes sumiam da conversao: era o caso do bloco "Ethics and consent", presente
+# no main.tex e ausente do .docx e do .pdf gerados.
+_DECL_SOLTO = re.compile(r"(?m)^\\noindent\\textbf\{([^}]+)\}")
+
+
+def decl_blocks(src):
+    regiao = src[src.index(r"\section*{Declarations}"):]
+    achados = []
+    for env, label in DECL_TITLES.items():
+        m = re.search(r"\\begin\{" + env + r"\}(.*?)\\end\{" + env + r"\}", regiao, re.S)
+        if m:
+            achados.append((m.start(), label, [strip_comments(m.group(1)).strip()]))
+    marcas = [m for m in _DECL_SOLTO.finditer(regiao)]
+    for i, m in enumerate(marcas):
+        limites = [x.start() for x in marcas[i + 1:]]
+        limites += [k for k in (regiao.find(r"\begin{" + e, m.end()) for e in DECL_TITLES) if k > 0]
+        fim = min(limites) if limites else len(regiao)
+        corpo = strip_comments(regiao[m.end():fim]).strip()
+        paras = [re.sub(r"^\\noindent\s*", "", x).strip()
+                 for x in re.split(r"\n\s*\n", corpo) if x.strip()]
+        achados.append((m.start(), m.group(1).strip().rstrip("."), paras))
+    achados.sort(key=lambda x: x[0])
+    return [(label, paras) for _, label, paras in achados]
+
+
 # --- helpers de texto ----------------------------------------------------
 def first_braced(s, start_idx):
     """Retorna (conteudo, indice_apos_fecha) do grupo {..} que comeca em start_idx."""
@@ -124,21 +246,37 @@ def first_braced(s, start_idx):
         i += 1
     return ''.join(out), i
 
-def strip_multicolumn(cell):
-    """\\multicolumn{N}{spec}{content} -> content (spec may contain braces)."""
+def multicolumn_span(cell):
+    """\\multicolumn{N}{spec}{content} -> (content, N). Caso contrario (cell, 1)."""
     cell = cell.strip()
     if not cell.startswith(r'\multicolumn'):
-        return cell
+        return cell, 1
     try:
         i = cell.index('{')
-        _, i = first_braced(cell, i)            # {N}
+        n, i = first_braced(cell, i)            # {N}
         i = cell.index('{', i)
         _, i = first_braced(cell, i)            # {spec}
         i = cell.index('{', i)
         content, _ = first_braced(cell, i)      # {content}
-        return content
+        return content, max(1, int(n.strip()))
     except ValueError:
-        return cell
+        return cell, 1
+
+
+def strip_multicolumn(cell):
+    """\\multicolumn{N}{spec}{content} -> content (spec may contain braces)."""
+    return multicolumn_span(cell)[0]
+
+
+def split_row(s):
+    """Divide a linha em celulas expandindo \\multicolumn para N colunas, de modo
+    que as celulas seguintes caiam no indice correto (ex.: linhas de media)."""
+    out = []
+    for c in s.split('&'):
+        content, n = multicolumn_span(c)
+        out.append(content)
+        out.extend([''] * (n - 1))
+    return out
 
 def render_cite(keys, paren):
     parts = []
@@ -230,8 +368,7 @@ def add_runs(par, runs, base_bold=False):
 def build():
     src = open(TEX, encoding='utf-8').read()
     doc = Document()
-    doc.styles['Normal'].font.name = 'Times New Roman'
-    doc.styles['Normal'].font.size = Pt(11)
+    aplica_estilos(doc)
 
     # titulo
     m = re.search(r'\\title(?:\[[^\]]*\])?\{(.+?)\}\s*\n', src, re.S)
@@ -266,11 +403,10 @@ def build():
 
     # declaracoes
     doc.add_heading('Declarations', level=1)
-    for env, label in DECL_TITLES.items():
-        md = re.search(r'\\begin\{' + env + r'\}(.*?)\\end\{' + env + r'\}', src, re.S)
-        if md:
-            doc.add_heading(label, level=2)
-            add_runs(doc.add_paragraph(), fmt(strip_comments(md.group(1)).strip()))
+    for label, paras in decl_blocks(src):
+        doc.add_heading(label, level=2)
+        for texto in paras:
+            add_runs(doc.add_paragraph(), fmt(texto))
 
     # referencias
     doc.add_heading('References', level=1)
@@ -321,7 +457,7 @@ def process_body(doc, body):
             if not s or s.startswith(r'\hline') or s.startswith('%'):
                 continue
             s = s.rstrip('\\').strip()
-            rows.append([strip_multicolumn(c) for c in s.split('&')])
+            rows.append(split_row(s))
         if not rows:
             return
         tcount[0] += 1
@@ -338,6 +474,7 @@ def process_body(doc, body):
                 cell.paragraphs[0].text = ''
                 txt = row[ci] if ci < len(row) else ''
                 add_runs(cell.paragraphs[0], fmt(txt), base_bold=(ri == 0))
+        formata_tabela(table)
 
     def flush_code():
         p = doc.add_paragraph()

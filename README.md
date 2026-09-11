@@ -81,8 +81,9 @@ ollama pull qwen2.5:1.5b-instruct qwen2.5:3b-instruct \
 # Main benchmark — 8 models × 13 scenarios × 3 repetitions = 312 calls
 python src/benchmark_local.py
 
-# Falsification protocol on the Llama 3.2 family — 4 isolations, 80 calls
-python src/counter_experiment_llama32.py
+# Falsification protocol on the Llama 3.2 family: 4 isolations, 100 calls
+python src/counter_experiment_llama32.py      # E1, E2, E2b (74 calls)
+python src/counter_experiment_e3_curl.py      # E3, client-layer isolation via curl (26 calls)
 
 # Fisher's exact tests and Wilson 95 % CIs
 python src/inferential_statistics.py
@@ -97,6 +98,26 @@ data/       Canonical scenarios + raw inference results
 analises/   Generated artifacts (CSV, JSON, figures)
 report/     Self-contained interactive HTML report
 ```
+
+## Reliability material of the mediation-function coding (revision R1)
+
+The independent double coding of the 39 turns of `qwen2.5:3b-instruct` by two external
+teachers (Subsection 7.6 of the article) is released in full. The coders are identified
+only as A and B; no personal identifier appears in any of these files.
+
+| What | Where |
+|---|---|
+| Coding protocol v0.5 (frozen 26 Aug 2026), with the dated analysis plan in its Section 6 | `data/codificacao_v04/PROTOCOLO_v05.{md,pdf}` |
+| Four-page coder's guide, the only instructional document the coders received | `data/codificacao_v04/GUIA_PROFESSOR_v05.{md,pdf}` |
+| Annotation packages as delivered to each coder (shuffled, separate orders) | `data/codificacao_v04/para_drive/pacote_v05_codificador_{A,B}.xlsx` |
+| Completed codings, with quoted evidence, false-positive justifications and coder notes | `data/codificacao_v05_respostas/codificacao_{A,B}_2026-09-10.xlsx` |
+| Provenance record of the captured spreadsheets (what changed between 08 and 10 Sep) | `data/codificacao_v05_respostas/PROCEDENCIA.md` |
+| Completeness audit run before any coefficient is computed | `analises/audita_codificacao_v05.py`, `analises/auditoria_codificacao_v05.txt` |
+| Agreement analysis (Table 10 of the article) | `analises/kappa_codificacao_v05.py`, `analises/kappa_codificacao_v05_2026-09-10.txt` |
+| Item-by-item divergence dossier | `analises/divergencias_codificacao_v05.py`, `analises/divergencias_v05_2026-09-10.md` |
+| Figure 2 of the article | `analises/fig_fm_v05.py`, `paper/jbcs/fm_modelo_v05.png` |
+
+Protocol, guide and notes are in Portuguese, the working language of the coders.
 
 ## Citation
 

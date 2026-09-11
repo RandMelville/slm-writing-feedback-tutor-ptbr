@@ -1,0 +1,97 @@
+{
+  "modelo": "qwen2.5:3b-instruct",
+  "por_cenario": {
+    "S1": [
+      0,
+      1,
+      1
+    ],
+    "S2": [
+      0,
+      0,
+      0
+    ],
+    "S3": [
+      1,
+      1,
+      0
+    ],
+    "S4": [
+      0,
+      1,
+      1
+    ],
+    "S5": [
+      0,
+      1,
+      0
+    ],
+    "S6": [
+      1,
+      0,
+      1
+    ],
+    "S7": [
+      1,
+      0,
+      1
+    ],
+    "S8": [
+      0,
+      1,
+      0
+    ],
+    "S9": [
+      0,
+      0,
+      1
+    ],
+    "S10": [
+      1,
+      0,
+      0
+    ],
+    "S11": [
+      1,
+      0,
+      0
+    ],
+    "S12": [
+      0,
+      1,
+      1
+    ],
+    "S13": [
+      1,
+      1,
+      1
+    ]
+  },
+  "n_respostas": 39,
+  "n_cenarios": 13,
+  "reps_por_cenario": 3,
+  "aderentes": 20,
+  "proporcao_agregada": 0.5128205128205128,
+  "media_proporcoes_por_cenario": 0.5128205128205128,
+  "cenarios_sempre": 1,
+  "cenarios_nunca": 1,
+  "cenarios_ao_menos_uma": 12,
+  "cenarios_instaveis": 11,
+  "icc": -0.10614525139664796,
+  "deff": 0.787709497206704,
+  "n_efetivo": 49.51063829787233,
+  "ic_wilson_ingenuo": [
+    0.3619936288121113,
+    0.661348246732866
+  ],
+  "ic_wilson_n_efetivo": [
+    0.3777723834558875,
+    0.6460224365159519
+  ],
+  "ic_bootstrap_cluster": [
+    0.38461538461538464,
+    0.6410256410256411
+  ],
+  "bootstrap_B": 20000,
+  "seed": 20260727
+}

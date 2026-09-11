@@ -44,3 +44,26 @@ benchmark_slm_reboucas_foohs_v*.docx
 
 # Respostas brutas do baseline (contêm nomes reais — PII, não publicar)
 /Refer*respostas*.xlsx
+
+# Chave de decegamento da 2a codificacao (mesma politica do commit e679470,
+# que retirou a chave da 1a rodada de kappa do repo publico).
+data/segunda_codificacao_cega/chave_cega.csv
+
+# Material de recrutamento (valores, dados de contato): fica local
+data/codificacao_v04/RECRUTAMENTO.*
+
+# Correspondência com as codificadoras (nomes e e-mails reais): fica local
+data/codificacao_v05_respostas/EMAIL_pendencias_*.md
+
+# Contratos e recibos das codificadoras (nome, CPF, chave Pix): fica local
+data/codificacao_v05_respostas/contratos/
+
+# Pareceres verbatim da revista (material editorial, fica local)
+/paper/jbcs/PARECERES_R1_verbatim.md
+/paper/jbcs/EMAIL_prorrogacao_JBCS_2026-09-08.md
+
+# Pacote regeneravel para upload no Overleaf
+/paper/jbcs/overleaf_R1_*.zip
+
+# Correspondencia de selecao das codificadoras (nomes e contatos): fica local
+data/codificacao_v04/EMAIL_selecao_codificadoras.md
